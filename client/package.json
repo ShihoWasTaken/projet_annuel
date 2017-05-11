@@ -1,0 +1,11 @@
+{
+  "main": "index.html",
+  "name": "Client",
+  "window": {
+    "toolbar": false,
+    "frame": false
+  },
+  "dependencies": {
+    
+  }
+}
