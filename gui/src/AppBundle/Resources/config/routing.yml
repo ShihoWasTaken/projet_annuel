@@ -1,0 +1,9 @@
+app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Static:homepage }
+    methods:  [GET]
+
+app_display:
+    path:     /display/
+    defaults: { _controller: AppBundle:Static:display }
+    methods:  [GET]

@@ -1,0 +1,82 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock title %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@bootstrap_css' output='css/bootstrap.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+    {% stylesheets 'bundles/app/css/*' filter='cssrewrite, uglifycss' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}"/>
+{% endblock stylesheets %}
+
+{% block javascripts_head %}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+{% endblock javascripts_head %}
+
+{% block javascripts_body %}
+    {{ parent() }}
+    {% javascripts '@bootstrap_js' output='js/bootstrap.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script src="{{ asset('bundles/app/js/main.js') }}"></script>
+{% endblock javascripts_body %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for video in files %}
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{ video }}</div>
+                        <div class="panel-body">
+                            <video id="video-{{ loop.index }}" width="320" height="240" controls preload="metadata">
+                                <source src="{{ app.request.getSchemeAndHttpHost() ~ asset(video) }}" type="video/mp4">
+                                Votre navigateur ne supporte pas le HTML 5
+                            </video>
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-default" onclick="playVideo('video-{{ loop.index }}')">Play/Pause Video</button>
+                            <button class="btn btn-default" onclick="jump('video-{{ loop.index }}', 5)">Jump to 5</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% for event in events %}
+                <br><span class="label label-success">{{ event.computerName }} - {{ event.description }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+
+        function jump(id, value)
+        {
+            var element = document.getElementById(id);
+            element.play();
+            element.pause();
+            element.currentTime = value;
+            element.play();
+        }
+        // only in to demonstrate video
+        function playVideo(id)
+        {
+            var element = document.getElementById(id);
+            if (element.paused) {
+                element.play();
+            } else {
+                element.pause();
+            }
+        }
+    </script>
+{% endblock body %}

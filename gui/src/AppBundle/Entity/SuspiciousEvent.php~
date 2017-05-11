@@ -1,0 +1,48 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="suspicious_event")
+ */
+class SuspiciousEvent
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="int")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=8)
+     */
+    private $computerName;
+
+    /**
+     * @ORM\Column(type="string", length=24)
+     */
+    private $examName;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
+     * @ORM\Column(type="string", length=1024)
+     */
+    private $description;
+
+    public function __construct($computerName, $examName, $date, $description)
+    {
+        $this->computerName = $computerName;
+        $this->examName = $examName;
+        $this->date = $date;
+        $this->description = $description;
+    }
+
+}
