@@ -22,88 +22,31 @@ class StaticController extends Controller
     public function homepageAction()
     {
         $videoService = $this->container->get('app.video_service');
-        $events = array();
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-
-        $files = $videoService->listFiles();
+        $exams = $videoService->listExams();
         return $this->render('AppBundle:Static:homepage.html.twig', array(
-            'events' => $events,
-            'files' => $files
+            'exams' => $exams
         ));
     }
 
     public function displayAction()
     {
+
         $videoService = $this->container->get('app.video_service');
-        $events = array();
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 2, "toto");
-        $events[] = new SuspiciousEvent("HP7", "CUDA", 4, "toto 2");
+        try {
+            $videoService->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/cuda_101017/database.sqlite');
+        } catch (\Exception $e) {
+            return $this->render('AppBundle:Static:error_database_file_not_found.html.twig', array(
+                'path' => $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/cuda_101017/database.sqlite'
+            ));
+        }
+
+        $repository = $this->getDoctrine()->getRepository('AppBundle:SuspiciousEvent');
+
+        $events = $repository->findAll();
 
         $files = $videoService->listFiles();
         return $this->render('AppBundle:Static:display.html.twig', array(
-            'events' => $events,
-            'files' => $files
+            'events' => $events
         ));
     }
 }

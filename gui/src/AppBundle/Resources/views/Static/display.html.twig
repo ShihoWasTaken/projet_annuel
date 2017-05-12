@@ -57,7 +57,7 @@
             </div>
             <div class="col-md-3">
                 {% for event in events %}
-                    <div class="label label-info" onclick="jump('video-1', {{ event.date }})">{{ event.date }} - {{ event.description }}</div>
+                    <div class="label label-info" onclick="jump('video-1', {{ event.moment }})">{{ event.moment }} - {{ event.description }}</div>
                 {% endfor %}
             </div>
             <div class="col-md-12">
@@ -65,25 +65,4 @@
             </div>
         </div>
     </div>
-    <script>
-
-        function jump(id, value)
-        {
-            var element = document.getElementById(id);
-            element.play();
-            element.pause();
-            element.currentTime = value;
-            element.play();
-        }
-        // only in to demonstrate video
-        function playVideo(id)
-        {
-            var element = document.getElementById(id);
-            if (element.paused) {
-                element.play();
-            } else {
-                element.pause();
-            }
-        }
-    </script>
 {% endblock body %}

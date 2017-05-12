@@ -28,42 +28,43 @@
 {% block javascripts_body %}
     {{ parent() }}
     {% javascripts '@bootstrap_js' output='js/bootstrap.js' %}
-        <script src="{{ asset_url }}"></script>
+    <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script src="{{ asset('bundles/app/js/main.js') }}"></script>
 {% endblock javascripts_body %}
 
 {% block body %}
     <div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
         <div class="row">
-            {% for exam in exams %}
-                <a>
-
-                </a>
-                <div class="col-md-3">
-                    <h2>{{ exam.name }}</h2>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="text-center">
+                            <i class="fa fa-frown-o" aria-hidden="true"></i> <b>Fichier SQLite non trouvé</b>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Le fichier de base de donnéees SQLite n'a pas été trouvé au chemin attendu.</p>
+                        <p>Veuillez vous assurez que le fichier se trouve bien au chemin suivant : </p>
+                        <p>{{ path }}</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a class="btn btn-default btn-block" href="{{ url('app_homepage') }}"><i class="fa fa-home"
+                                                                                                      aria-hidden="true"></i> Accueil
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
-            {#
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Etudiant</th>
-                        <th>Nombre évènements</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for video in files %}
-                        <tr>
-                            <td>{{ video.username }}</td>
-                            <td> évènements(s)</td>
-                            <td><a class="btn btn-default" href="{{ path('app_display') }}"><i class="fa fa-file-video-o" aria-hidden="true"></i> Voir vidéo</a></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            #}
+            </div>
+            <div class="col-md-2">
+
+            </div>
         </div>
     </div>
 {% endblock body %}

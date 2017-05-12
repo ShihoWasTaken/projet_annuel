@@ -7,3 +7,4 @@ app_display:
     path:     /display/
     defaults: { _controller: AppBundle:Static:display }
     methods:  [GET]
+

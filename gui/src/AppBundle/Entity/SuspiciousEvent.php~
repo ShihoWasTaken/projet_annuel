@@ -6,43 +6,28 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="suspicious_event")
+ * @ORM\Table(name="evenement")
  */
 class SuspiciousEvent
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="int")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=8)
-     */
-    private $computerName;
-
-    /**
      * @ORM\Column(type="string", length=24)
      */
-    private $examName;
+    private $username;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="integer")
      */
-    private $date;
+    private $moment;
 
     /**
      * @ORM\Column(type="string", length=1024)
      */
     private $description;
-
-    public function __construct($computerName, $examName, $date, $description)
-    {
-        $this->computerName = $computerName;
-        $this->examName = $examName;
-        $this->date = $date;
-        $this->description = $description;
-    }
-
 }

@@ -6,50 +6,49 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="suspicious_event")
+ * @ORM\Table(name="evenement")
  */
 class SuspiciousEvent
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="int")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=8)
-     */
-    private $computerName;
-
-    /**
      * @ORM\Column(type="string", length=24)
      */
-    private $examName;
+    private $username;
 
     /**
-     * @ORM\Column(type="int")
+     * @ORM\Column(type="integer")
      */
-    private $date;
+    private $moment;
 
     /**
      * @ORM\Column(type="string", length=1024)
      */
     private $description;
 
-    public function __construct($computerName, $examName, $date, $description)
+    /**
+     * Set id
+     *
+     * @param integer $id
+     *
+     * @return SuspiciousEvent
+     */
+    public function setId($id)
     {
-        $this->computerName = $computerName;
-        $this->examName = $examName;
-        $this->date = $date;
-        $this->description = $description;
-    }
+        $this->id = $id;
 
+        return $this;
+    }
 
     /**
      * Get id
      *
-     * @return \int
+     * @return integer
      */
     public function getId()
     {
@@ -57,75 +56,51 @@ class SuspiciousEvent
     }
 
     /**
-     * Set computerName
+     * Set username
      *
-     * @param string $computerName
+     * @param string $username
      *
      * @return SuspiciousEvent
      */
-    public function setComputerName($computerName)
+    public function setUsername($username)
     {
-        $this->computerName = $computerName;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get computerName
+     * Get username
      *
      * @return string
      */
-    public function getComputerName()
+    public function getUsername()
     {
-        return $this->computerName;
+        return $this->username;
     }
 
     /**
-     * Set examName
+     * Set moment
      *
-     * @param string $examName
+     * @param integer $moment
      *
      * @return SuspiciousEvent
      */
-    public function setExamName($examName)
+    public function setMoment($moment)
     {
-        $this->examName = $examName;
+        $this->moment = $moment;
 
         return $this;
     }
 
     /**
-     * Get examName
+     * Get moment
      *
-     * @return string
+     * @return integer
      */
-    public function getExamName()
+    public function getMoment()
     {
-        return $this->examName;
-    }
-
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return SuspiciousEvent
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
+        return $this->moment;
     }
 
     /**
