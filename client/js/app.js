@@ -7,6 +7,10 @@ var BROADCAST_PORT = 6024;
 var BROADCAST_ADDR = "192.168.99.255";
 var HOST = '0.0.0.0';
 var PORT = 6969;
+
+var FILEPATH = global.__dirname+'/output/output.txt';
+var WATCHED_DIRECTORY = '/home/etudiant/client/projet_annuel/client';
+
 var arrayIpOfServers = [];
 var arrayNameOfServers = [];
 var isConnectedToServer = false;
@@ -26,66 +30,84 @@ var callback = function(event) {
     } else {
         type += ' ';
     }
+
  
     if (mask & Inotify.IN_ACCESS) {
-        console.log(type + ' was accessed ');
+        /*fs.appendFile(global.__dirname+'/output/output.txt', type + ' was accessed\n', function (err) {
+            if (err) { console.log(err); }
+        });
+        console.log(type + ' was accessed');*/
     } else if (mask & Inotify.IN_MODIFY) {
-        console.log(type + ' was modified ');
+        console.log(WATCHED_DIRECTORY + "/" + type + ' was modified');
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' was modified\n', function (err) {
+            if (err) { console.log(err); }
+        });
     } else if (mask & Inotify.IN_OPEN) {
-        console.log(type + ' was opened ');
+        /*console.log(WATCHED_DIRECTORY + "/" + type + " was opened");
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' was opened\n', function (err) {
+            if (err) { console.log(err); }
+        });*/
     } else if (mask & Inotify.IN_CLOSE_NOWRITE) {
-        console.log(type + ' opened for reading was closed ');
+        /*console.log(WATCHED_DIRECTORY + "/" + type + ' opened for reading was closed');
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' opened for reading was closed\n', function (err) {
+            if (err) { console.log(err); }
+        });*/
     } else if (mask & Inotify.IN_CLOSE_WRITE) {
-        console.log(type + ' opened for writing was closed ');
+        console.log(WATCHED_DIRECTORY + "/" + type + ' openend for writing was closed');
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' opened for writing was closed\n', function (err) {
+            if (err) { console.log(err); }
+        });
     } else if (mask & Inotify.IN_ATTRIB) {
-        console.log(type + ' metadata changed ');
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' metadata changed\n', function (err) {
+            if (err) { console.log(err); }
+        });
+        console.log(type + ' metadata changed');
     } else if (mask & Inotify.IN_CREATE) {
         console.log(type + ' created');
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' created\n', function (err) {
+            if (err) { console.log(err); }
+        });
     } else if (mask & Inotify.IN_DELETE) {
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' deleted\n', function (err) {
+            if (err) { console.log(err); }
+        });
         console.log(type + ' deleted');
     } else if (mask & Inotify.IN_DELETE_SELF) {
-        console.log(type + ' watched deleted ');
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' watched deleted\n', function (err) {
+            if (err) { console.log(err); }
+        });
+        console.log(type + ' watched deleted');
     } else if (mask & Inotify.IN_MOVE_SELF) {
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' watched moved\n', function (err) {
+            if (err) { console.log(err); }
+        });
         console.log(type + ' watched moved');
     } else if (mask & Inotify.IN_IGNORED) {
-        console.log(type + ' watch was removed');
+        fs.appendFile(global.__dirname+'/output/output.txt', type + ' watch was moved\n', function (err) {
+            if (err) { console.log(err); }
+        });
+        console.log(type + ' watch was moved');
     } else if (mask & Inotify.IN_MOVED_FROM) {
         data = event;
         data.type = type;
     } else if (mask & Inotify.IN_MOVED_TO) {
         if ( Object.keys(data).length &&
             data.cookie === event.cookie) {
-            console.log(type + ' moved to ' + data.type);
-            data = {};
+                fs.appendFile(FILEPATH, type + ' moved to ' + data.type + '\n', function (err) {
+                    if (err) { console.log(err); }
+                });
+                data = {};
         }
     }
 }
  
 var home2_dir = {
-    // Change this for a valid directory in your machine 
-    path:      '/home/etudiant/client',
+    path:      WATCHED_DIRECTORY,
     watch_for: Inotify.IN_ALL_EVENTS,
     callback:  callback
 };
         
 var home2_wd = inotify.addWatch(home2_dir);
-
-var serializer = new (require('xmldom')).XMLSerializer;
-var implementation = new (require('xmldom')).DOMImplementation;
-
-var document = implementation.createDocument('', '', null);
-
-fs.writeFile(
-  "/home/etudiant/test.xml", 
-  serializer.serializeToString(document), 
-  function(error) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("The file was saved!");
-    }
-  }
-); 
 /******************* END INOTIFY *******************/
 
 
@@ -112,38 +134,36 @@ document.getElementById('btnBroadcast').onclick = function() {
         });
 
 
-                if (SIMULATE_SERVER) {
-                    arrayNameOfServers.push("Arthas");
-                    arrayNameOfServers.push("SERVERLAB");
+        if (SIMULATE_SERVER) {
+            arrayIpOfServers.push("192.168.1.1");
+            arrayIpOfServers.push("192.168.1.2");
+        }
+        // Suppression de la liste des serveurs affichée
+        [].forEach.call(document.querySelectorAll('.li-server'),function(e){
+            e.parentNode.removeChild(e);
+        });
 
-                    arrayIpOfServers.push("192.168.1.1");
-                    arrayIpOfServers.push("192.168.1.2");
-                }
-                // Suppression de la liste des serveurs affichée
-                [].forEach.call(document.querySelectorAll('.li-server'),function(e){
-                    e.parentNode.removeChild(e);
-                });
+        // Actualisation de la liste des serveurs
+        for (var i = 0; i < arrayIpOfServers.length; i++) {
+            var ul = document.getElementById("listOfServers");
 
-                // Actualisation de la liste des serveurs
-                for (var i = 0; i < arrayIpOfServers.length; i++) {
-                    var ul = document.getElementById("listOfServers");
+            var li = document.createElement("li");
 
-                    var li = document.createElement("li");
+            var a = document.createElement("a");
+            a.innerHTML = "Connect →";
+            a.setAttribute("id", "btnConnect"+i);
+            a.setAttribute("class", "withripple")  
+            a.setAttribute("href", "javascript:void(0)");
+            a.setAttribute("onclick", "javascript:connect(\""+arrayIpOfServers[i]+"\")");
 
-                    var a = document.createElement("a");
-                    a.innerHTML = "Connect →";
-                    a.setAttribute("id", "btnConnect"+arrayNameOfServers);
-                    a.setAttribute("class", "withripple")  
-                    a.setAttribute("href", "javascript:void(0)");
+            li.appendChild(document.createTextNode(arrayIpOfServers[i]));
+            li.appendChild(a);
 
-                    li.appendChild(document.createTextNode(arrayNameOfServers[i] + " (" + arrayIpOfServers[i] + ")"));
-                    li.appendChild(a);
+            li.setAttribute("id", arrayNameOfServers[i]); // added line
+            li.setAttribute("class", "li-server next"); // added line
 
-                    li.setAttribute("id", arrayNameOfServers[i]); // added line
-                    li.setAttribute("class", "li-server next"); // added line
-
-                    ul.appendChild(li);
-                }
+            ul.appendChild(li);
+        }
     }
     
     var net = require('net');
@@ -191,7 +211,7 @@ document.getElementById('btnBroadcast').onclick = function() {
                     a.setAttribute("id", "btnConnect");
                     a.setAttribute("class", "withripple");
                     a.setAttribute("href", "javascript:void(0)");
-                    a.setAttribute("onclick", "javascript:connect(\""+arrayIpOfServers[i]+"\")");
+                    //a.setAttribute("onclick", "javascript:connect(\""+arrayIpOfServers[i]+"\")");
 
                     li.appendChild(document.createTextNode(arrayIpOfServers[i]));
                     li.appendChild(a);
@@ -206,7 +226,7 @@ document.getElementById('btnBroadcast').onclick = function() {
         
         // Add a 'close' event handler to this instance of socket
         sock.on('close', function(data) {
-            console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
+            console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
         });
         
     }).listen(PORT, HOST);
@@ -218,10 +238,43 @@ document.getElementById('btnBroadcast').onclick = function() {
 function connect(ipServer) {
     isConnectedToServer = true;
     var net = require('net');
+    console.log("Connect to : " + ipServer);
 
     var client = new net.Socket();
     client.connect(PORT, ipServer, function() {
-        client.write('shutdown');
+        (function() {
+            var c = 0;
+            var timeout = setInterval(function() {
+                    
+                //send a file to the server
+                var fileStream = fs.createReadStream(FILEPATH);
+                fileStream.on('error', function(err){
+                    console.log(err);
+                })
+
+                fileStream.on('open',function() {
+                    console.log("File sent");
+                    fileStream.pipe(client);
+                });
+
+                fs.unlink(FILEPATH, (err) => {
+                    if (err) throw err;
+                        console.log('successfully deleted ' + FILEPATH);
+                });
+
+
+                // Création du fichier si non existant
+                fs.open(FILEPATH,'r',function(err, fd){
+                    if (err) {
+                    fs.writeFile(FILEPATH, '', function(err) {
+                        if(err) {
+                            console.log(err);
+                        }
+                    });
+                }});
+
+            }, 10000);
+        })();
     });
 }
 
