@@ -47,33 +47,48 @@ class VideoService
         $this->container->get('doctrine')->getManager()->getConnection()->connect();
     }
 
-    public function getUsernameFromPath($path)
+    private function getUsernameFromPath($path)
     {
         $pos = strrpos($path, "/");
-        $sub = substr($path, $pos + 1);
+        $sub = substr($path, $pos);
         $pos = strrpos($sub, ".");
         $sub = substr($sub, 0, $pos);
         return $sub;
     }
 
-    public function listFiles()
+    private function getStudentCount($examName)
     {
-        $directoryPath = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads';
+        $directoryPath = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/' . $examName;
+        $finder = new Finder();
+        $finder->files()->in($directoryPath)->name('*.' . self::VIDEO_FORMAT)->sortByName();
+        return count($finder);
+    }
+
+    public function listFiles($examName)
+    {
+        try {
+            $this->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite');
+        } catch (\Exception $e) {
+            return $this->render('AppBundle:Static:error_database_file_not_found.html.twig', array(
+                'path' => $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite'
+            ));
+        }
+
+        $repository = $this->container->get('doctrine')->getRepository('AppBundle:SuspiciousEvent');
+
+        $directoryPath = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/' . $examName;
         $finder = new Finder();
         $finder->files()->in($directoryPath)->name('*.' . self::VIDEO_FORMAT)->sortByName();
         $files = array();
-        foreach ($finder as $file) {/*
-            // Dump the absolute path
-            var_dump($file->getRealPath());
-
-            // Dump the relative path to the file, omitting the filename
-            var_dump($file->getRelativePath());
-
-            // Dump the relative path to the file
-            var_dump($file->getRelativePathname());*/
+        foreach ($finder as $file) {
             $files[] =  array(
                 'path' => 'bundles/app/uploads/' . $file->getRelativePathname(),
-                'username' => $this->getUsernameFromPath($file->getRelativePathname())
+                'username' => $this->getUsernameFromPath($file->getRelativePathname()),
+                'eventCount' => count($repository->findBy(
+                    array(
+                        'username' => $this->getUsernameFromPath($file->getRelativePathname())
+                    )
+                ))
             );
         }
         return $files;
@@ -88,7 +103,8 @@ class VideoService
         foreach ($finder as $folder) {
             $folders[] =  array(
                 'path' => 'bundles/app/uploads/' . $folder->getRelativePathname(),
-                'name' => $folder->getRelativePathname()
+                'name' => $folder->getRelativePathname(),
+                'studentCount' => $this->getStudentCount($folder->getRelativePathname())
             );
         }
         return $folders;

@@ -28,25 +28,42 @@ class StaticController extends Controller
         ));
     }
 
-    public function displayAction()
+    public function displayExamAction($examName)
+    {
+
+        $videoService = $this->container->get('app.video_service');
+
+        $files = $videoService->listFiles($examName);
+        return $this->render('AppBundle:Static:display_exam.html.twig', array(
+            'examName' => $examName,
+            'files' => $files
+        ));
+    }
+
+    public function displayVideoAction($examName, $etudiant)
     {
 
         $videoService = $this->container->get('app.video_service');
         try {
-            $videoService->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/cuda_101017/database.sqlite');
+            $videoService->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite');
         } catch (\Exception $e) {
             return $this->render('AppBundle:Static:error_database_file_not_found.html.twig', array(
-                'path' => $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/cuda_101017/database.sqlite'
+                'path' => $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite'
             ));
         }
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:SuspiciousEvent');
 
-        $events = $repository->findAll();
-
-        $files = $videoService->listFiles();
-        return $this->render('AppBundle:Static:display.html.twig', array(
+        $events = $repository->findBy(
+            array(
+                'username' => $etudiant
+            )
+        );
+        return $this->render('AppBundle:Static:display_video.html.twig', array(
+            'examName' => $examName,
+            'etudiant' => $etudiant,
             'events' => $events
         ));
     }
+
 }

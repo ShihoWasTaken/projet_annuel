@@ -3,8 +3,12 @@ app_homepage:
     defaults: { _controller: AppBundle:Static:homepage }
     methods:  [GET]
 
-app_display:
-    path:     /display/
-    defaults: { _controller: AppBundle:Static:display }
+app_display_exam:
+    path:     /exam/{examName}
+    defaults: { _controller: AppBundle:Static:displayExam }
     methods:  [GET]
 
+app_display_video:
+    path:     /exam/{examName}/video/{etudiant}
+    defaults: { _controller: AppBundle:Static:displayVideo }
+    methods:  [GET]

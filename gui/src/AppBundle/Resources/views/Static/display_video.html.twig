@@ -47,21 +47,30 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">
+                <h3 class="title">Vidéo de {{ etudiant }} pour l'exam {{ examName }}</h3>
                 <div class="embed-responsive embed-responsive-16by9">
 
                     <video id="video-1" controls>
-                        <source src="http://localhost/projet_annuel/gui/web/bundles/app/uploads/cuda_101017/etudiant_14.mp4" type="video/mp4">
+                        <source src="{{ asset('bundles/app/uploads/'~examName~'/'~etudiant~'.mp4') }}" type="video/mp4">
                         Votre navigateur ne supporte pas le HTML 5
                     </video>
                 </div>
             </div>
             <div class="col-md-3">
-                {% for event in events %}
-                    <div class="label label-info" onclick="jump('video-1', {{ event.moment }})">{{ event.moment }} - {{ event.description }}</div>
-                {% endfor %}
+                <h4>Liste des évènements</h4>
+
+                    {% if events is empty %}
+                        <p>Aucun évènement enregistré pour cette vidéo</p>
+                    {% else %}
+                        {% for event in events %}
+                            <div class="label label-info" onclick="jump('video-1', {{ event.moment }})">{{ event.description }}</div>
+                        {% endfor %}
+                    {% endif %}
+
             </div>
             <div class="col-md-12">
-                <button class="btn btn-primary">Revenir à la liste</button>
+                <a class="btn btn-primary" href="{{ path('app_display_exam', {'examName' : examName}) }}">Revenir à la liste des étudiants</a>
+                <a class="btn btn-primary" href="{{ path('app_homepage') }}">Revenir à la liste des examens</a>
             </div>
         </div>
     </div>

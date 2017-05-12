@@ -28,7 +28,7 @@
 {% block javascripts_body %}
     {{ parent() }}
     {% javascripts '@bootstrap_js' output='js/bootstrap.js' %}
-        <script src="{{ asset_url }}"></script>
+    <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script src="{{ asset('bundles/app/js/main.js') }}"></script>
 {% endblock javascripts_body %}
@@ -36,23 +36,24 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <h1 class="title">Liste des examens</h1>
+            <h1 class="title">Liste des étudiants
+                <a class="btn btn-primary" href="{{ path('app_homepage') }}">Revenir à la liste des examens</a></h1>
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Nom de l'examen</th>
-                    <th>Nombre d'étudiants</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>Etudiant</th>
+                        <th>Nombre évènements</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
-                {% for exam in exams %}
-                    <tr>
-                        <td>{{ exam.name }}</td>
-                        <td>{{ exam.studentCount }} étudiants</td>
-                        <td><a class="btn btn-default" href="{{ path('app_display_exam',  {'examName': exam.name}) }}"><i class="fa fa-info-circle" aria-hidden="true"></i> Détails</a></td>
-                    </tr>
-                {% endfor %}
+                    {% for video in files %}
+                        <tr>
+                            <td>{{ video.username }}</td>
+                            <td> {{ video.eventCount }} évènements(s)</td>
+                            <td><a class="btn btn-default" href="{{ path('app_display_video',  {'examName': examName, etudiant: video.username}) }}"><i class="fa fa-file-video-o" aria-hidden="true"></i> Voir vidéo</a></td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
