@@ -1,5 +1,7 @@
 /******************* VARS *******************/
 var Inotify = require('inotify').Inotify;
+var net = require('net');
+var client = new net.Socket();
 
 const SIMULATE_SERVER = false;
 
@@ -133,117 +135,78 @@ document.getElementById('btnBroadcast').onclick = function() {
         server.send(message, 0, message.length, BROADCAST_PORT, BROADCAST_ADDR, function() {
             console.log("Sent '" + message + "'");
         });
-
-
-        if (SIMULATE_SERVER) {
-            arrayIpOfServers.push("192.168.1.1");
-            arrayIpOfServers.push("192.168.1.2");
-        }
-        // Suppression de la liste des serveurs affichée
-        [].forEach.call(document.querySelectorAll('.li-server'),function(e){
-            e.parentNode.removeChild(e);
-        });
-
-        // Actualisation de la liste des serveurs
-        for (var i = 0; i < arrayIpOfServers.length; i++) {
-            var ul = document.getElementById("listOfServers");
-
-            var li = document.createElement("li");
-
-            var a = document.createElement("a");
-            a.innerHTML = "Connect →";
-            a.setAttribute("id", "btnConnect"+i);
-            a.setAttribute("class", "withripple")  
-            a.setAttribute("href", "javascript:void(0)");
-            a.setAttribute("onclick", "javascript:connect(\""+arrayIpOfServers[i]+"\")");
-
-            li.appendChild(document.createTextNode(arrayIpOfServers[i]));
-            li.appendChild(a);
-
-            li.setAttribute("id", arrayNameOfServers[i]); // added line
-            li.setAttribute("class", "li-server next"); // added line
-
-            ul.appendChild(li);
-        }
     }
-    
-    var net = require('net');
-
-    // Create a server instance, and chain the listen function to it
-    // The function passed to net.createServer() becomes the event handler for the 'connection' event
-    // The sock object the callback function receives UNIQUE for each connection
-    net.createServer(function(sock) {
-        
-        // We have a connection - a socket object is assigned to the connection automatically
-        console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
-        
-        // Add a 'data' event handler to this instance of socket
-        sock.on('data', function(data) {
-            console.log('Message recu : ' + sock.remoteAddress + ': ' + data);
-            if (data == "discovered") {
-                arrayIpOfServers.push(sock.remoteAddress);
-                /*dns.resolve4(sock.remoteAddress, (err, hostname) => {
-                    if (err) throw err;
-                    hostname.forEach((ip_address) => {
-                        dns.reverse(ip_address, (err, hostname) => {
-                            if (err) {
-                                throw err;
-                            }
-                            var nomDuServeur = `${JSON.stringify(hostname[0])}`;
-                            arrayNameOfServers.push(nomDuServeur);
-                            console.log(`Reverse for ${ip_address}: ` + nomDuServeur);
-                        });
-                    });
-                });*/
-
-                // Suppression de la liste des serveurs affichée
-                [].forEach.call(document.querySelectorAll('.li-server'),function(e){
-                    e.parentNode.removeChild(e);
-                });
-
-                // Actualisation de la liste des serveurs
-                for (var i = 0; i < arrayIpOfServers.length; i++) {
-                    var ul = document.getElementById("listOfServers");
-
-                    var li = document.createElement("li");
-
-                    var a = document.createElement("a");
-                    a.innerHTML = "Connect →";
-                    a.setAttribute("id", "btnConnect");
-                    a.setAttribute("class", "withripple");
-                    a.setAttribute("href", "javascript:void(0)");
-                    //a.setAttribute("onclick", "javascript:connect(\""+arrayIpOfServers[i]+"\")");
-
-                    li.appendChild(document.createTextNode(arrayIpOfServers[i]));
-                    li.appendChild(a);
-
-                    li.setAttribute("class", "li-server next"); // added line
-
-                    ul.appendChild(li);
-                }
-
-            }
-        });
-        
-        // Add a 'close' event handler to this instance of socket
-        sock.on('close', function(data) {
-            console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
-        });
-        
-    }).listen(PORT_RECEIVE, HOST);
 };
 
+
+// Create a server instance, and chain the listen function to it
+// The function passed to net.createServer() becomes the event handler for the 'connection' event
+// The sock object the callback function receives UNIQUE for each connection
+net.createServer(function(sock) {
+        
+    // We have a connection - a socket object is assigned to the connection automatically
+    console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
+        
+    // Add a 'data' event handler to this instance of socket
+    sock.on('data', function(data) {
+        console.log('Message recu : ' + sock.remoteAddress + ': ' + data);
+        if (data == "discovered") {
+            arrayIpOfServers.push(sock.remoteAddress);
+
+            // Suppression de la liste des serveurs affichée
+            [].forEach.call(document.querySelectorAll('.li-server'),function(e){
+                e.parentNode.removeChild(e);
+            });
+
+            // Actualisation de la liste des serveurs
+            for (var i = 0; i < arrayIpOfServers.length; i++) {
+                var ul = document.getElementById("listOfServers");
+
+                var li = document.createElement("li");
+
+                var a = document.createElement("a");
+                a.innerHTML = "Connexion →";
+                a.setAttribute("id", "btnConnect"+i);
+                a.setAttribute("class", "withripple");
+                a.setAttribute("href", "javascript:void(0)");
+                a.setAttribute("onclick", "javascript:connect(this, \""+arrayIpOfServers[i]+"\")");
+
+                li.appendChild(document.createTextNode(arrayIpOfServers[i]));
+                li.appendChild(a);
+
+                li.setAttribute("class", "li-server next"); // added line
+
+                ul.appendChild(li);
+            }
+
+        }
+    });
+        
+    // Add a 'close' event handler to this instance of socket
+    sock.on('close', function(data) {
+        console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
+    });
+        
+}).listen(PORT_RECEIVE, HOST);
+
+
 // Connection au serveur
-function connect(ipServer) {
+function connect(btn, ipServer) {
     isConnectedToServer = true;
-    var net = require('net');
     console.log("Connect to : " + ipServer);
 
     // Animation pour informer que l'ordinateur est écouté
     $('#footer').addClass('animated slideInUp visible');
     $('#footer').removeClass('invisible');
 
-    var client = new net.Socket();
+    // Affichage du bouton disconnect
+    var a = document.getElementById($(btn).attr('id'));
+    a.innerHTML = "Déconnexion";
+    a.setAttribute("id", "btnDisconnect");
+    a.setAttribute("class", "btnDisconnect");
+    a.setAttribute("href", "javascript:void(0)");
+    a.setAttribute("onclick", "javascript:disconnect(\""+ipServer+"\")");
+
     client.connect(PORT_SEND, ipServer, function() {
         (function() {
             var c = 0;
@@ -279,6 +242,25 @@ function connect(ipServer) {
             }, 10000);
         })();
     });
+}
+
+// Déconnexion du serveur
+function disconnect(ipServer) {
+    client.destroy();
+    console.log("Disconnect from : " + ipServer);
+
+    // Animation pour informer que l'ordinateur est déconnecté
+    $('#footer').addClass('animated slideOutDown visible');
+    $('#footer').removeClass('insvisible');
+
+    // Affichage du bouton disconnect
+    var a = document.getElementById('btnDisconnect');
+    a.innerHTML = "Connexion →";
+    a.setAttribute("id", "btnConnect");
+    a.setAttribute("class", "btnConnect");
+    a.setAttribute("href", "javascript:void(0)");
+    a.setAttribute("onclick", "javascript:connect(this, \""+ipServer+"\")");
+    isConnectedToServer = false;
 }
 
 
