@@ -413,3 +413,57 @@ file  index.html  was modified
 file  index.html  was modified
 file  index.html  opened for writing was closed
 directory  Nouveau dossier  created
+file  .gitignore  deleted
+file  .gitignore  created
+file  .gitignore  was modified
+file  .gitignore  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  metadata changed
+file  index.html  metadata changed
+file  index.html  metadata changed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  package.json  was modified
+file  package.json  was modified
+file  package.json  opened for writing was closed
+file  package.json  metadata changed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  metadata changed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  was modified
+file  index.html  was modified
+file  index.html  opened for writing was closed
+file  index.html  metadata changed
+file  index.html  metadata changed
+file  index.html  metadata changed

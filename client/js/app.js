@@ -6,7 +6,8 @@ const SIMULATE_SERVER = false;
 var BROADCAST_PORT = 6024;
 var BROADCAST_ADDR = "192.168.99.255";
 var HOST = '0.0.0.0';
-var PORT = 6969;
+var PORT_SEND = 6968;
+var PORT_RECEIVE = 6969;
 
 var FILEPATH = global.__dirname+'/output/output.txt';
 var WATCHED_DIRECTORY = '/home/etudiant/client/projet_annuel/client';
@@ -116,6 +117,8 @@ var home2_wd = inotify.addWatch(home2_dir);
 var dgram = require('dgram'); 
 var dns = require('dns');
 document.getElementById('btnBroadcast').onclick = function() {
+    $('#footer').addClass('animated slideInUp visible');
+    $('#footer').removeClass('invisible');
     // On vide les listes pour ne pas stacker les serveurs si on spam le bouton
     arrayIpOfServers.length = 0;
     arrayNameOfServers.length = 0;
@@ -229,9 +232,7 @@ document.getElementById('btnBroadcast').onclick = function() {
             console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
         });
         
-    }).listen(PORT, HOST);
-
-    console.log('Server listening on ' + HOST +':'+ PORT);
+    }).listen(PORT_RECEIVE, HOST);
 };
 
 // Connection au serveur
@@ -241,7 +242,7 @@ function connect(ipServer) {
     console.log("Connect to : " + ipServer);
 
     var client = new net.Socket();
-    client.connect(PORT, ipServer, function() {
+    client.connect(PORT_SEND, ipServer, function() {
         (function() {
             var c = 0;
             var timeout = setInterval(function() {

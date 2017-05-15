@@ -1,11 +1,12 @@
 {
   "main": "index.html",
   "name": "Client",
+  "chromium-args": "--enable-threaded-compositing",
   "window": {
     "toolbar": false,
     "frame": false
   },
   "dependencies": {
-    
+    "animate.css": "^3.5.2"
   }
 }
