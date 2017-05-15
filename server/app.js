@@ -2,20 +2,24 @@ var fs = require('fs'),
     net = require('net'),
     buffer = require('buffer'),
     stream = require('stream'),
-    argv = require('yargs').argv,
     dgram = require('dgram'),
     http = require('http'),
     express = require('express'),
     app = express();
 require('yargs')
-  .usage('$0 [args]')
-  .command('app.js [directory]')
+  .usage('$0 <cmd> [args]')
+  .command('./app.js [directory]', {
+    name: {
+      default: 'default name'
+    }
+  }, function (argv) {
+    console.log('hello', argv.name, 'welcome to yargs!')
+  })
   .help()
   .argv
 
 var HOST = '0.0.0.0';
 var PORT = 6969;
-var PORT_CLIENT = 6968;
 var FILEPATH = "/home/mathieu/Documents/"
 var CLIENTS = [];
 
@@ -41,8 +45,8 @@ client.on('message', function (message, rinfo) {
 client.bind(PORTBT);
 function broadcastResponse(ip){
   var client = new net.Socket();
-  client.connect(PORT_CLIENT, ip, function() {
-      console.log('CONNECTED TO: ' + ip + ':' + PORT_CLIENT);
+  client.connect(PORT, ip, function() {
+      console.log('CONNECTED TO: ' + ip + ':' + PORT);
       // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
       client.write('discovered');
       client.destroy();
