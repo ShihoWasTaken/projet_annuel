@@ -1,0 +1,15 @@
+<html>
+Utilisateurs connectés : <%= clients.length %>
+<br/>
+Liste des utilisateurs :
+<ul>
+  <% for(var i = 0 ; i <= clients.length-1 ; i++)
+  {
+    %>
+      <li>
+      <%= clients[i] %>
+      </li>
+    <%
+  } %>
+</ul>
+</html>
