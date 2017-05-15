@@ -6,8 +6,8 @@ const SIMULATE_SERVER = false;
 var BROADCAST_PORT = 6024;
 var BROADCAST_ADDR = "192.168.99.255";
 var HOST = '0.0.0.0';
-var PORT_SEND = 6968;
-var PORT_RECEIVE = 6969;
+var PORT_SEND = 6969;
+var PORT_RECEIVE = 6968;
 
 var FILEPATH = global.__dirname+'/output/output.txt';
 var WATCHED_DIRECTORY = '/home/etudiant/client/projet_annuel/client';
@@ -113,12 +113,10 @@ var home2_wd = inotify.addWatch(home2_dir);
 
 
 /******************* BUTTONS *******************/
-// Start Button
+// Broadcast Button
 var dgram = require('dgram'); 
 var dns = require('dns');
 document.getElementById('btnBroadcast').onclick = function() {
-    $('#footer').addClass('animated slideInUp visible');
-    $('#footer').removeClass('invisible');
     // On vide les listes pour ne pas stacker les serveurs si on spam le bouton
     arrayIpOfServers.length = 0;
     arrayNameOfServers.length = 0;
@@ -240,6 +238,10 @@ function connect(ipServer) {
     isConnectedToServer = true;
     var net = require('net');
     console.log("Connect to : " + ipServer);
+
+    // Animation pour informer que l'ordinateur est écouté
+    $('#footer').addClass('animated slideInUp visible');
+    $('#footer').removeClass('invisible');
 
     var client = new net.Socket();
     client.connect(PORT_SEND, ipServer, function() {
