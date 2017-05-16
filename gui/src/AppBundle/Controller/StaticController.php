@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use AppBundle\Exception\SQLiteFileNotFoundException;
 
 class StaticController extends Controller
 {
@@ -33,7 +34,14 @@ class StaticController extends Controller
 
         $videoService = $this->container->get('app.video_service');
 
-        $files = $videoService->listFiles($examName);
+        try{
+            $files = $videoService->listFiles($examName);
+        }
+        catch (SQLiteFileNotFoundException $e) {
+            return $this->render('AppBundle:Static:error_database_file_not_found.html.twig', array(
+                'path' => $e->getPath()
+            ));
+        }
         return $this->render('AppBundle:Static:display_exam.html.twig', array(
             'examName' => $examName,
             'files' => $files
@@ -64,6 +72,11 @@ class StaticController extends Controller
             'etudiant' => $etudiant,
             'events' => $events
         ));
+    }
+
+    public function newExamAction()
+    {
+        return $this->render('AppBundle:Static:create_exam.html.twig');
     }
 
 }

@@ -1,37 +1,8 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}
-    {{ parent() }}
+    {{ parent() }} | Vidéo de {{ etudiant }} pour l'examen {{ examName }}
 {% endblock title %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets '@bootstrap_css' output='css/bootstrap.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
-    {% endstylesheets %}
-    {% stylesheets 'bundles/app/css/*' filter='cssrewrite, uglifycss' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
-    {% endstylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}"/>
-{% endblock stylesheets %}
-
-{% block javascripts_head %}
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-{% endblock javascripts_head %}
-
-{% block javascripts_body %}
-    {{ parent() }}
-    {% javascripts '@bootstrap_js' output='js/bootstrap.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    <script src="{{ asset('bundles/app/js/main.js') }}"></script>
-{% endblock javascripts_body %}
 
 {% block body %}
     <style>
@@ -47,7 +18,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">
-                <h3 class="title">Vidéo de {{ etudiant }} pour l'exam {{ examName }}</h3>
+                <h3 class="title">Vidéo de {{ etudiant }} pour l'examen {{ examName }}</h3>
                 <div class="embed-responsive embed-responsive-16by9">
 
                     <video id="video-1" controls>
