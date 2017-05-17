@@ -2,21 +2,13 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\SuspiciousEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use AppBundle\Exception\SQLiteFileNotFoundException;
+use AppBundle\Entity\Exam;
+use AppBundle\Form\ExamType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class StaticController extends Controller
 {
@@ -74,9 +66,76 @@ class StaticController extends Controller
         ));
     }
 
-    public function newExamAction()
+    public function newExamAction(Request $request)
     {
-        return $this->render('AppBundle:Static:create_exam.html.twig');
+        $exam = new Exam();
+        $form = $this->createForm(ExamType::class, $exam);
+
+        $error = null;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $exam = $form->getData();
+            $exam->setDate(new \DateTime());
+
+            $fs = new Filesystem();
+            $folderName = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/' . $exam->getName() . "/";
+            //$folderName = $exam->getName() . "/" ;
+            if($fs->exists($folderName))
+            {
+                $error = "Le dossier " . $exam->getName() . " existe déjà, veuillez choisir un autre nom ou supprimez l'examen portant ce nom";
+            }
+            else
+            {
+                try {
+                    $fs->mkdir($folderName);
+                } catch (IOExceptionInterface $e) {
+                    $error = "Erreur : " . $e->getMessage();
+                }
+            }
+
+            if(empty($error))
+            {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($exam);
+                $em->flush();
+
+                return $this->redirectToRoute('app_pending_exam', array('id' => $exam->getId()));
+            }
+        }
+
+
+        return $this->render('AppBundle:Static:create_exam.html.twig', array(
+            'form' => $form->createView(),
+            'error' => $error
+        ));
+    }
+
+    public function pendingExamListAction()
+    {
+        $exams = $this->getDoctrine()
+            ->getRepository('AppBundle:Exam')
+            ->findAll();
+
+        return $this->render('AppBundle:Static:pending_exam_list.html.twig', array(
+            'exams' => $exams
+        ));
+    }
+
+    public function pendingExamAction($id)
+    {
+        $exam = $this->getDoctrine()
+            ->getRepository('AppBundle:Exam')
+            ->find($id);
+
+        if (!$exam) {
+            throw $this->createNotFoundException(
+                "Pas d'examen trouvé pour l'id" . $id
+            );
+        }
+        return $this->render('AppBundle:Static:pending_exam.html.twig', array(
+            'exam' => $exam
+        ));
     }
 
 }
