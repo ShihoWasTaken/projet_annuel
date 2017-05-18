@@ -16,3 +16,38 @@ function playVideo(id)
         element.pause();
     }
 }
+
+// request permission on page load
+document.addEventListener('DOMContentLoaded', function () {
+    if (!Notification) {
+        alert('Les notifications ne sont pas disponibles avec votre navigateur, essayez Chrome !');
+        return;
+    }
+
+    if (Notification.permission !== "granted")
+        Notification.requestPermission();
+});
+
+function notifyMe(title, body, link) {
+    if (Notification.permission !== "granted")
+        Notification.requestPermission();
+    else {
+        var notification = new Notification(title, {
+            icon: copIconPath,
+            body: body,
+        });
+
+        notification.onclick = function () {
+            if (typeof link !== 'undefined')
+            {
+                window.open(link);
+            }
+            else
+            {
+                window.focus();
+            }
+            notification.close();
+        };
+    }
+
+}
