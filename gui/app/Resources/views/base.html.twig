@@ -38,6 +38,9 @@
         {% endif %}
         {% block body %}{% endblock %}
         {% block javascripts_body %}
+            <script>
+                var copIconPath = '{{ asset('bundles/app/images/cop.png') }}';
+            </script>
             {% javascripts '@bootstrap_js' output='js/bootstrap.js' %}
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
