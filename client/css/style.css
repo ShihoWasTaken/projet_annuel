@@ -78,3 +78,7 @@ a#windowControlMinimize{
 .visible {
     display: block;
 }
+.btnDisconnect {
+    color: red !important;
+    border-color: red !important;
+}

@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Créer un examen
+{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% if error is not null %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <h1 class="title">Créer un examen
+                <a class="btn btn-primary" href="{{ path('app_homepage') }}">Revenir à la liste des examens</a>
+            </h1>
+            {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.name) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.username) }}
+                    {{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.username) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.password) }}
+                    {{ form_widget(form.password, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.password) }}
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock body %}

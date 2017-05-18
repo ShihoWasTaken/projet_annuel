@@ -2,6 +2,7 @@
 
 namespace AppBundle\Services;
 
+use AppBundle\Exception\SQLiteFileNotFoundException;
 use Monolog\Logger;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -69,9 +70,7 @@ class VideoService
         try {
             $this->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite');
         } catch (\Exception $e) {
-            return $this->render('AppBundle:Static:error_database_file_not_found.html.twig', array(
-                'path' => $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite'
-            ));
+            throw new SQLiteFileNotFoundException($e->getMessage(), $e->getCode(), $e, '$this->container->getParameter(\'kernel.root_dir\') . \'/../web/bundles/app/uploads/\'. $examName . \'/database.sqlite\'');
         }
 
         $repository = $this->container->get('doctrine')->getRepository('AppBundle:SuspiciousEvent');

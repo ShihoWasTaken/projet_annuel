@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Liste des examens en cours
+{% endblock title %}
+
+{% block body %}
+    {% if exams is empty %}
+        Aucun examens en cours
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom de l'examen</th>
+                <th>Date de début</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for exam in exams %}
+                <tr>
+                    <td>{{ exam.name }}</td>
+                    <td> {{ exam.date|date }}</td>
+                    <td><a class="btn btn-default" href="{{ path('app_pending_exam',  {'id': exam.id}) }}"><i class="fa fa-eye" aria-hidden="true"></i> Voir infos</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock body %}

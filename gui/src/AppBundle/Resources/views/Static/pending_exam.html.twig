@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Créer un examen
+{% endblock title %}
+
+{% block body %}
+    Examen {{ exam.name }}
+    Commencé le {{ exam.date|date }}
+{% endblock body %}
