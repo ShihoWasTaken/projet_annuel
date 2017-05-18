@@ -1,85 +1,182 @@
 #!/usr/bin/env node
-
 var fs = require('fs'),
     net = require('net'),
     buffer = require('buffer'),
     stream = require('stream'),
     argv = require('yargs').argv,
-    dgram = require('dgram'),
-    http = require('http'),
-    express = require('express'),
-    app = express();
-require('yargs')
-  .usage('$0 [args]')
-  .command('app.js [directory]')
-  .help()
-  .argv
+    sqlite3 = require('sqlite3').verbose(),
+    redis = require('socket.io-redis');
+
+//*********************************************//
+//**********Gestion des arguments*************//
+//*******************************************//
+var argv = require('yargs')
+          .usage('$0 [options]')
+          .demandOption(['s'])
+          .describe('s', 'Nom de la session')
+          .describe('p', 'Port d\'écoute')
+          .help('h')
+          .alias('h', 'help')
+          .alias('s', 'session')
+          .alias('p','port')
+          .help()
+          .argv
+//*********************************************//
+//**********End Gestion des arguments*********//
+//*******************************************//
+
 
 var HOST = '0.0.0.0';
 var PORT = 6969;
 var PORT_CLIENT = 6968;
 var FILEPATH = "/home/mathieu/Documents/"
 var CLIENTS = [];
+var SESSION = argv.s;
 
-//Listen for broadcast
-var PORTBT = 6024;
-var client = dgram.createSocket('udp4');
-client.on('listening', function () {
-    var address = client.address();
-    console.log('UDP Client listening on ' + address.address + ":" + address.port);
-    client.setBroadcast(true);
+
+fs.stat(SESSION, function (err, stats){
+  if (err) {
+    // Directory doesn't exist or something.
+    console.log('Folder '+SESSION+' created\n');
+    return fs.mkdir(SESSION, function(){
+      main();
+    });
+  }
+  if (!stats.isDirectory()) {
+    // This isn't a directory!
+    callback(new Error(SESSION + ' is not a directory!'));
+  } else {
+    console.log('!! ERROR '+SESSION + ' already exists !!');
+    process.exit();
+  }
 });
-client.on('message', function (message, rinfo) {
-    console.log('Message from: ' + rinfo.address + ':' + rinfo.port +' - ' + message);
-    if(message == 'discovery'){
-      CLIENTS.push(rinfo.address);
-      console.log(CLIENTS.length);
-      for(var i=0; i<CLIENTS.length; i++){
-        console.log(CLIENTS[i]);
-      }
-      broadcastResponse(rinfo.address);
+
+function main(){
+  //****************************************************//
+  //*****************Broadcast Part********************//
+  //**************************************************//
+  var SSDP = require('node-ssdp').Server,
+  server = new SSDP({
+    //unicastHost: '192.168.11.63',
+    sourcePort: 1900,
+  });
+
+  server.addUSN('urn:schemas-upnp-org:service:ProjetAnnuel:1');
+
+  // start server on all interfaces
+  server.start();
+
+  //****************************************************//
+  //***************End Broadcast Part******************//
+  //**************************************************//
+
+  //****************************************************//
+  //***************Communication Part******************//
+  //**************************************************//
+  var io = require('socket.io')(PORT);
+
+  var config = {
+    "video":{
+      "imagesPerSeconds": 2,
+      "resolution": "1280x1024",
+      "encoding": "x265",
+    },
+    "inotify":{
+      "options":false
     }
-});
-client.bind(PORTBT);
-function broadcastResponse(ip){
-  var client = new net.Socket();
-  client.connect(PORT_CLIENT, ip, function() {
-      console.log('CONNECTED TO: ' + ip + ':' + PORT_CLIENT);
-      // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
-      client.write('discovered');
-      client.destroy();
-  });
-  // Add a 'close' event handler for the client socket
-  client.on('close', function() {
-      console.log('Connection closed');
-  });
-}
+  }
+  var people = {};
+  io.on('connection', function (socket) {
+    //console.log('connection !!');
+    socket.emit('config', config);
 
-//
-net.createServer(function(sock) {
-    console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
-    sock.on('data', function(data) {
-      console.log('DATA: \n' + data);
-      parsing(data);
-    });
-    sock.on('close', function(data) {
-        console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
+    socket.on('disconnect', function() {
+      console.log(people[socket.id] + ' disconnected');
+      io.emit('notification', people[socket.id] + ' a été déconnecté du serveur');
+      delete people[socket.id];
     });
 
-}).listen(PORT, HOST);
+    socket.on('user', function(user){
+      people[socket.id] = user;
+      console.log(user + " connected !!");
+      var userDirectory = SESSION+'/'+user
+      fs.stat(userDirectory, function (err, stats){
+        if (err) {
+          // Directory doesn't exist or something.
+          console.log('Folder '+userDirectory+' created\n');
+          return fs.mkdirSync(userDirectory);
+        }
+      });
+      db.all("SELECT COUNT(*) AS COUNT FROM students WHERE student = '"+user+"'",function(err,rows){
+        if(rows[0].COUNT == 0){
+          var stmt = db.prepare("INSERT INTO students(student) VALUES (?)");
+          stmt.run(user);
+        }
+      });
+    });
 
-//Parsing des données reçu
-function parsing(data){
+    socket.on('events', function(events){
+      console.log(events);
+      parsing(events);
+    });
 
+    socket.on('image', function(image) {
+      console.log("Image reçu !");
+      console.log(image);
+      var directory, user, time, file;
+      if(image.image){
+        user = image.user;
+        directory = SESSION + "/" + user + "/";
+        time = image.time;
+        file = directory + time + ".jpg";
+        fs.writeFile(file, image.buffer, 'binary', function(err) {
+          if(err)
+            console.log(err);
+          else
+            console.log("The file was saved to " + file);
+        });
+      }
+    })
+  });
+
+  io.adapter(redis({ host: '127.0.0.1', port: 6379 }));
+
+  //Parsing des events reçus
+  function parsing(data){
+        var student, action, time, file, stmt;
+    db.all("SELECT id FROM students WHERE student = '"+data.user+"'",function(err,rows){
+        student = rows.id;
+    });
+
+    for(var i=0; i<data.event.length;i++){
+      stmt = db.prepare("INSERT INTO events(student, file, action, time) VALUES (?,?,?,?)");
+      action = data.event[i].action;
+      time = data.event[i].time;
+      file = data.event[i].file;
+      stmt.run(1, file, action, time);
+    }
+  }
+
+  console.log('-> Server listening for connections on ' + PORT+ '\n');
+
+  //****************************************************//
+  //*************End Communication Part****************//
+  //**************************************************//
+
+  //****************************************************//
+  //********************SQLite Part********************//
+  //**************************************************//
+
+
+  var db = new sqlite3.Database(SESSION+"/database.db");
+
+  db.serialize(function() {
+    db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `student` TEXT)");
+    db.run("CREATE TABLE `events`(`id`	INTEGER PRIMARY KEY AUTOINCREMENT, `student` INTEGER, `file`	TEXT, `action`	TEXT, `time`	INTEGER, FOREIGN KEY(`student`) REFERENCES `students.id`);");
+
+  });
+
+  //****************************************************//
+  //*****************End SQLite Part*******************//
+  //**************************************************//
 }
-
-console.log('Server listening on ' + HOST +':'+ PORT);
-
-//Interface web
-app.get('/', function (req, res) {
-  res.render('index.ejs', {clients: CLIENTS});
-})
-
-app.listen(8080, function () {
-  console.log('Example app listening on port 8080!')
-})
