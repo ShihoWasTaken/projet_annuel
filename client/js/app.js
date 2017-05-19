@@ -27,6 +27,9 @@ var io = require('socket.io-client');
 const username = require('username');
 var ssdp = require("node-ssdp").Client, client = new ssdp();
 var screenshot = require('desktop-screenshot');
+var screenStreamer = require('screen-streamer');
+
+var socket;
 
 var btnBroadcast = document.getElementById('btnBroadcast');
 /************************************************/
@@ -146,16 +149,31 @@ function watchEvents() {
 /***********************************************/
 
 function captureScreen() {
+    var _height = CONFIG.video.resolution.split('x')[1];
+    var _width = CONFIG.video.resolution.split('x')[0];
+    var ips = CONFIG.video.imagesPerSeconds;
+    var timeOut = 1000/ips;
 
-    setInterval(function() {
-        var screenTime = Date.now()
-        screenshot("screenshot/screenshot-"+ screenTime +".jpg", {width: 1920, height: 1080, quality: 80}, function(error, complete) {
-            if(error)
-                log("Screenshot failed", error);
+    console.log(ips);
+
+        var screenStreamer = require('screen-streamer');
+        var fs = require('fs');
+        var fileIndex = 0;
+
+        screenStreamer({
+            width: _width,
+            height: _height,
+            fps: ips,
+            duration: 86400,
+            format: 'jpeg',
+            quality: 50,
+        }, function(err, buffer){
+            if (err) throw err;
+
+            username().then(username => {
+                socket.emit('image', { image: true, buffer: buffer, user: username, time: Date.now() });
+            });
         });
-
-        arrayOfScreens.push("screenshot/screenshot-"+screenTime+".jpg");
-    }, 1000);
 
 }
 /***************************************************/
@@ -298,11 +316,17 @@ function disconnect(ipServer) {
 /**********************************************/
 // Connection au serveur
 function connectTo(ipServer, btn = null) {
-    var socket = io.connect("http://" + ipServer + ":" + PORT_SEND);
+    socket = io.connect("http://" + ipServer + ":" + PORT_SEND);
 
     // On connect, on envoie l'user au serveur
     socket.on('connect', () => {
-        log("Connexion au serveur, démarrage du timer");
+    });
+
+    // Réception de la configuration
+    socket.on('config', function (config) {
+        CONFIG = config;
+        log("Réception de config : " + CONFIG);
+        log("Connexion au serveur, démarrage du timer");    
         isConnectedToServer = true;
         showYouAreListening();
         timeStampStart = Date.now();
@@ -311,12 +335,6 @@ function connectTo(ipServer, btn = null) {
         username().then(username => {
             socket.emit('user', username);
         });
-    });
-
-    // Réception de la configuration
-    socket.on('config', function (config) {
-        CONFIG = config;
-        log("Réception de config : " + CONFIG);
     });
 
     // Envoie régulier des événements
@@ -334,19 +352,6 @@ function connectTo(ipServer, btn = null) {
             }
             log("Event emited");
             arrayOfEvents.length = 0;
-
-            for (var i = arrayOfScreens.length - 1; i >= 0; i--) {
-                var res = arrayOfScreens[i].split("-");
-                var time = res[1].split(".");
-                var timeVideo = time[0] - timeStampStart;
-
-                fs.readFile(arrayOfScreens[i], function(err, buf){
-                    socket.emit('image', { image: true, buffer: buf, user: username, time: timeVideo});
-                });
-
-                fs.unlink('./' + arrayOfEvents[i]);
-                arrayOfScreens.splice(i, 1);
-            }
         });
     }, 3000);
 }
