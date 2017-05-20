@@ -77,8 +77,8 @@ function main(){
 
   var config = {
     "video":{
-      "imagesPerSeconds": 2,
-      "resolution": "1280x1024",
+      "imagesPerSeconds": 1,
+      "resolution": "1920x1080",
       "encoding": "x265",
     },
     "inotify":{
@@ -92,7 +92,7 @@ function main(){
 
     socket.on('disconnect', function() {
       console.log(people[socket.id] + ' disconnected');
-      io.emit('notification', people[socket.id] + ' a été déconnecté du serveur');
+      // io.emit('notification', people[socket.id] + ' a été déconnecté du serveur');
       delete people[socket.id];
     });
 
@@ -139,7 +139,7 @@ function main(){
     })
   });
 
-  io.adapter(redis({ host: '127.0.0.1', port: 6379 }));
+  // io.adapter(redis({ host: '127.0.0.1', port: 6379 }));
 
   //Parsing des events reçus
   function parsing(data){
