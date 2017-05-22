@@ -91,8 +91,10 @@ function main(){
     socket.emit('config', config);
 
     socket.on('disconnect', function() {
+      user = people[socket.id];
       console.log(people[socket.id] + ' disconnected');
       // io.emit('notification', people[socket.id] + ' a été déconnecté du serveur');
+      db.run("UPDATE students set connected = 0 WHERE student = '"+user+"';");
       delete people[socket.id];
     });
 
@@ -109,8 +111,11 @@ function main(){
       });
       db.all("SELECT COUNT(*) AS COUNT FROM students WHERE student = '"+user+"'",function(err,rows){
         if(rows[0].COUNT == 0){
-          var stmt = db.prepare("INSERT INTO students(student) VALUES (?)");
-          stmt.run(user);
+          var stmt = db.prepare("INSERT INTO students(student,connected) VALUES (?,?)");
+          stmt.run(user, 1);
+        }
+        else{
+          db.run("UPDATE students set connected = 1 WHERE student = '"+user+"';");
         }
       });
     });
@@ -171,7 +176,7 @@ function main(){
   var db = new sqlite3.Database(SESSION+"/database.db");
 
   db.serialize(function() {
-    db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `student` TEXT)");
+    db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `student` TEXT, 'connected' INTEGER)");
     db.run("CREATE TABLE `events`(`id`	INTEGER PRIMARY KEY AUTOINCREMENT, `student` INTEGER, `file`	TEXT, `action`	TEXT, `time`	INTEGER, FOREIGN KEY(`student`) REFERENCES `students.id`);");
 
   });
