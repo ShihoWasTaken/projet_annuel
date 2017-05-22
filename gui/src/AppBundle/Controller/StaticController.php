@@ -9,6 +9,8 @@ use AppBundle\Form\ExamType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class StaticController extends Controller
 {
@@ -27,7 +29,7 @@ class StaticController extends Controller
         $videoService = $this->container->get('app.video_service');
 
         try{
-            $files = $videoService->listFiles($examName);
+            $data = $videoService->listFilesAndFolders($examName);
         }
         catch (SQLiteFileNotFoundException $e) {
             return $this->render('AppBundle:Static:error_database_file_not_found.html.twig', array(
@@ -36,7 +38,8 @@ class StaticController extends Controller
         }
         return $this->render('AppBundle:Static:display_exam.html.twig', array(
             'examName' => $examName,
-            'files' => $files
+            'files' => $data['files'],
+            'folders' => $data['folders']
         ));
     }
 
@@ -138,4 +141,46 @@ class StaticController extends Controller
         ));
     }
 
+
+    public function getLoggedUsersAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
+        } else {
+            $translator = $this->get('translator');
+            $response = new JsonResponse();
+            /** @var \AppBundle\Services\VideoService $videoService */
+            $videoService = $this->get('app.video_service');
+            $response->setData(array(
+                'errorMessage' => $translator->trans('summoner.update.waiting.message', array('%time%' => $databaseSummoner->secondsBeforeNextUpdate()))
+            ));
+            return $response;
+        }
+    }
+
+    public function buildVideoAction(Request $request, $examName, $etudiant)
+    {
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
+        } else {
+            $translator = $this->get('translator');
+            $response = new JsonResponse();
+            /** @var \AppBundle\Services\VideoService $videoService */
+            $videoService = $this->get('app.video_service');
+            try {
+
+                $output = $videoService->buildVideo($examName, $etudiant);
+                $response->setData(array(
+                    'output' => $output
+                ));
+            } catch (\ProcessFailedException $e) {
+
+                $response->setData(array(
+                    'error' => $e->getMessage()
+                ));
+            }
+            $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+            return $response;
+        }
+    }
 }

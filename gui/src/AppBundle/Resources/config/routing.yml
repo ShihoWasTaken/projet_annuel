@@ -27,3 +27,8 @@ app_pending_exam:
     path:     /pendingExam/{id}
     defaults: { _controller: AppBundle:Static:pendingExam }
     methods:  [GET]
+
+app_build_video:
+    path:     /exam/{examName}/video/{etudiant}/buildVideo
+    defaults: { _controller: AppBundle:Static:buildVideo }
+    methods:  [GET]
