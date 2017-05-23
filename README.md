@@ -18,7 +18,7 @@ $ php bin/console fos:user:create testuser testuser@example.com password
 $ php bin/console fos:user:promote testuser ROLE_ADMIN
 
 # Changement des droits du fichier users.sqlite afin que le serveur web puisse y écrire
-chown :www-data users.sqlite
-chmod g+w users.sqlite
+$ chown :www-data database.sqlite
+$ chmod g+w database.sqlite
 ```
 
