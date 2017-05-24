@@ -43,6 +43,7 @@ var SESSION = argv.s;
 var IPS = argv.i;
 var CODEC = argv.c;
 var RESOLUTION = argv.r;
+var START_TIME = Date.now();
 
 var DIRECTORY = 'sessions/';
 var WORKING_DIRECTORY = DIRECTORY+SESSION;
@@ -101,7 +102,8 @@ function main(){
       "unlink":true,
       "addDir":true,
       "unlinkDir":true
-    }
+    },
+    "time":0
   }
   var people = {};
   io.on('connection', function (socket) {
@@ -117,16 +119,6 @@ function main(){
     });
 
     socket.on('user', function(user){
-
-      config.video.port = PORT_FFMPEG;
-      people[socket.id] = {
-                            'name':user,
-                            'port':config.video.port
-                          };
-      PORT_FFMPEG++;
-      socket.emit('config', config);
-
-
       console.log(user + " connected !!");
       var userDirectory = WORKING_DIRECTORY+'/'+user
       fs.stat(userDirectory, function (err, stats){
@@ -138,15 +130,28 @@ function main(){
       });
       db.all("SELECT COUNT(*) AS COUNT FROM students WHERE student = '"+user+"'",function(err,rows){
         if(rows[0].COUNT == 0){
-          var stmt = db.prepare("INSERT INTO students(student,connected) VALUES (?,?)");
-          stmt.run(user, 1);
-          exec('ffmpeg -i udp://localhost:'+people[socket.id].port+' -c copy '+ userDirectory+'/'+user+'.mkv')
+          var stmt = db.prepare("INSERT INTO students(student,connected,port) VALUES (?,?,?)");
+          stmt.run(user, 1, PORT_FFMPEG);
+          exec('ffmpeg -i udp://localhost:'+PORT_FFMPEG+' -c copy '+ userDirectory+'/'+user+'.mkv');
+          console.log('Envoi port' + PORT_FFMPEG);
+          config.video.port = PORT_FFMPEG;
+          config.time = 0;
+          PORT_FFMPEG++;
         }
         else{
           db.run("UPDATE students set connected = 1 WHERE student = '"+user+"';");
+          db.all("SELECT port FROM students WHERE student = '"+user+"'",function(err,rows){
+            config.video.port = rows[0].port;
+          });
+          config.time = Date.now()-START_TIME;
         }
-      });
+        people[socket.id] = {
+                              'name':user,
+                            };
 
+        console.log(config);
+        socket.emit('config', config);
+      });
     });
 
     socket.on('events', function(events){
@@ -219,7 +224,7 @@ function main(){
   var db = new sqlite3.Database(WORKING_DIRECTORY+"/database.db");
 
   db.serialize(function() {
-    db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `student` TEXT, 'connected' INTEGER)");
+    db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `student` TEXT, 'port' INTEGER, 'connected' INTEGER, 'deconnection' INTEGER)");
     db.run("CREATE TABLE `events`(`id`	INTEGER PRIMARY KEY AUTOINCREMENT, `student` INTEGER, `file`	TEXT, `action`	TEXT, `time`	INTEGER, FOREIGN KEY(`student`) REFERENCES `students.id`);");
 
   });
