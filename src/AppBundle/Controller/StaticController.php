@@ -103,8 +103,7 @@ class StaticController extends Controller
             {
                 /** @var \AppBundle\Services\VideoService $videoService */
                 $videoService = $this->get('app.video_service');
-                $pid = $videoService->createExam($exam->getName());
-                $exam->setPID($pid);
+                $videoService->createExam($exam->getName());
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($exam);
@@ -143,6 +142,8 @@ class StaticController extends Controller
             return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
         } else {
             $response = new JsonResponse();
+
+            /** @var \AppBundle\Entity\Exam $exam */
             $exam = $this->getDoctrine()
                 ->getRepository('AppBundle:Exam')
                 ->findOneByName($examName);
@@ -155,13 +156,10 @@ class StaticController extends Controller
             }
             /** @var \AppBundle\Services\VideoService $videoService */
             $videoService = $this->get('app.video_service');
-            $videoService->stopExam($exam->getPID());
+            $videoService->stopExam($exam->getName());
             $em = $this->getDoctrine()->getManager();
             $em->remove($exam);
             $em->flush();
-            $response->setData(array(
-                'message' => "ok"
-            ));
             return $response;
         }
     }
@@ -176,7 +174,29 @@ class StaticController extends Controller
             $videoService = $this->get('app.video_service');
             $users = $videoService->getLoggedUsers($examName);
             $response->setData(array(
-                'errorMessage' => $users
+                'error' => $users
+            ));
+            return $response;
+        }
+    }
+
+    public function deleteExamAction(Request $request, $examName)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
+        } else {
+            $response = new JsonResponse();
+            /** @var \AppBundle\Services\VideoService $videoService */
+            $videoService = $this->get('app.video_service');
+            try {
+                $videoService->deleteExam($examName);
+            } catch (\Exception $e) {
+                $response->setData(array(
+                    'error' => $e->getMessage()
+                ));
+            }
+            $response->setData(array(
+                'error' => 'toto'
             ));
             return $response;
         }

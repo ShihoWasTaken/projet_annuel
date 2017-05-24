@@ -53,11 +53,6 @@ class Exam
     private $framesPerSecond;
 
     /**
-     * @ORM\Column(type="smallint")
-     */
-    private $PID;
-
-    /**
      * Get id
      *
      * @return integer
@@ -233,29 +228,5 @@ class Exam
     public function getFramesPerSecond()
     {
         return $this->framesPerSecond;
-    }
-
-    /**
-     * Set pID
-     *
-     * @param integer $pID
-     *
-     * @return Exam
-     */
-    public function setPID($pID)
-    {
-        $this->PID = $pID;
-
-        return $this;
-    }
-
-    /**
-     * Get pID
-     *
-     * @return integer
-     */
-    public function getPID()
-    {
-        return $this->PID;
     }
 }

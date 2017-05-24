@@ -44,14 +44,14 @@ var IPS = argv.i;
 var CODEC = argv.c;
 var RESOLUTION = argv.r;
 
-var DIRECTORY = 'sessions/';
+var DIRECTORY = 'bundles/app/uploads/';
 var WORKING_DIRECTORY = DIRECTORY+SESSION;
 
 fs.stat(WORKING_DIRECTORY, function (err, stats){
   if (err) {
     // Directory doesn't exist or something.
-    console.log('Folder '+WORKING_DIRECTORY+' created\n');
     return fs.mkdir(WORKING_DIRECTORY, function(){
+      console.log('Folder '+WORKING_DIRECTORY+' created\n');
       main();
     });
   }
@@ -59,8 +59,7 @@ fs.stat(WORKING_DIRECTORY, function (err, stats){
     // This isn't a directory!
     callback(new Error(WORKING_DIRECTORY + ' is not a directory!'));
   } else {
-    console.log('!! ERROR '+WORKING_DIRECTORY + ' already exists !!');
-    process.exit();
+    main();
   }
 });
 
@@ -216,7 +215,7 @@ function main(){
   //**************************************************//
 
 
-  var db = new sqlite3.Database(WORKING_DIRECTORY+"/database.db");
+  var db = new sqlite3.Database(WORKING_DIRECTORY+"/database.sqlite");
 
   db.serialize(function() {
     db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `student` TEXT, 'connected' INTEGER)");

@@ -17,8 +17,13 @@ $ php bin/console fos:user:create testuser testuser@example.com password
 # Promotion de testuser au statut d'admin
 $ php bin/console fos:user:promote testuser ROLE_ADMIN
 
-# Changement des droits du fichier users.sqlite afin que le serveur web puisse y écrire
+# Changement des droits du fichier database.sqlite et du dossier parent afin que le serveur web puisse y écrire
 $ chown :www-data database.sqlite
 $ chmod g+w database.sqlite
-```
+$ chown :www-data .
+$ chmod g+w .
 
+# Changement des droits du dossier où on upload les vidéos afin que le serveur web puisse y écrire
+$ chown :www-data src/AppBundle/Resources/public/uploads
+$ chmod g+w src/AppBundle/Resources/public/uploads
+```

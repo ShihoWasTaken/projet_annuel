@@ -8,6 +8,8 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class VideoService
 {
@@ -121,22 +123,19 @@ class VideoService
 
     public function createExam($examName)
     {
-        // TODO: changer la commande
-        $path = $this->container->getParameter('kernel.root_dir') . '/../../serveur/';
-        $process = new Process('cd ' . $path . ' && node app.js -s ' . $examName);
+        $command = 'node nodejs_server/app -s ' . $examName;
+        $process = new Process($command . ' > /dev/null 2>&1 &');
         $process->setPty(true);
-        $process->run();
-
-        // executes after the command finishes
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-        return $process->getPid();
+        $process->start();
     }
 
-    public function stopExam($pid)
+    public function stopExam($examName)
     {
-        return $this->executeCommand('kill -SIGTERM ' . $pid);
+        $command = 'node nodejs_server/app -s ' . $examName;
+        $process = new Process("ps -ax | grep '" . $command . "' | head -n 1 | awk '{print $1;}'");
+        $process->setPty(true);
+        $process->run();
+        return $this->executeCommand('kill ' . $process->getOutput());
     }
 
     private function executeCommand($command)
@@ -150,5 +149,16 @@ class VideoService
             throw new ProcessFailedException($process);
         }
         return $process->getOutput();
+    }
+
+    public function deleteExam($examName)
+    {
+        $fs = new Filesystem();
+        $folderName = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/' . $examName . "/";
+        try {
+            $fs->remove($folderName);
+        } catch (IOExceptionInterface $e) {
+            echo "An error occurred while creating your directory at ".$e->getPath();
+        }
     }
 }

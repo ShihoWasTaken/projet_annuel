@@ -28,7 +28,7 @@ app_pending_exam:
     defaults: { _controller: AppBundle:Static:pendingExam }
     methods:  [GET]
 
-app_build_video:
-    path:     /exam/{examName}/video/{etudiant}/buildVideo
-    defaults: { _controller: AppBundle:Static:buildVideo }
-    methods:  [GET]
+app_delete_exam:
+    path:     /exam/{examName}/deleteExam
+    defaults: { _controller: AppBundle:Static:deleteExam }
+    methods:  [POST]

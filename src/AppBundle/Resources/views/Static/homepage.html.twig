@@ -7,6 +7,7 @@
 {% block body %}
     <div class="container">
         <div class="row">
+            <a href="{{ path("app_new_exam") }}" class="btn btn-lg btn-success">Nouvel examen</a>
             <h3 class="title">Liste des examens en cours </h3>
             {% if pendingExams is empty %}
                 Aucun examens en cours
@@ -30,9 +31,7 @@
                     </tbody>
                 </table>
             {% endif %}
-            <h3 class="title">Liste des examens terminés
-                <a href="{{ path("app_new_exam") }}" class="btn btn-lg btn-success">Nouvel examen</a>
-            </h3>
+            <h3 class="title">Liste des examens consultables</h3>
             {% if exams is empty %}
                 Aucun examens à consulter
             {% else %}
@@ -49,7 +48,10 @@
                         <tr>
                             <td>{{ exam.name }}</td>
                             <td>{{ exam.studentCount }} étudiants</td>
-                            <td><a class="btn btn-default" href="{{ path('app_display_exam',  {'examName': exam.name}) }}"><i class="fa fa-info-circle" aria-hidden="true"></i> Détails</a></td>
+                            <td>
+                                <a class="btn btn-default" href="{{ path('app_display_exam',  {'examName': exam.name}) }}"><i class="fa fa-info-circle" aria-hidden="true"></i> Détails</a>
+                                <button onclick="deleteExam('{{ exam.name }}')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -58,4 +60,26 @@
             <button onclick="notifyMe('Elève déconnecté', 'Machin a été déconnecté du serveur')">Notify me!</button>
         </div>
     </div>
+    <script>
+        function deleteExam(name)
+        {
+            if (confirm("Voulez-vous vraiment supprimer cet examen et toutes les vidéos associées ?"))
+            {
+                var url = Routing.generate('app_delete_exam', {
+                    'examName': name
+                });
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {'examName': name },
+                    dataType: 'json'
+                }).done(function () {
+                            window.location.href = '{{ path('app_homepage') }}';
+                        })
+                        .fail(function (data) {
+                            alert(data.error);
+                        });
+            }
+        }
+    </script>
 {% endblock body %}
