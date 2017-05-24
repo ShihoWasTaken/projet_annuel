@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Student;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Exception\SQLiteFileNotFoundException;
 use AppBundle\Entity\Exam;
@@ -77,33 +78,43 @@ class StaticController extends Controller
         $exam = new Exam();
         $form = $this->createForm(ExamType::class, $exam);
 
-        $error = null;
+        $errors = array();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $exam = $form->getData();
             $exam->setDate(new \DateTime());
 
+            // Test de l'utilisation du port
+            /** @var \AppBundle\Entity\Exam $exam */
+            $usedPort = $this->getDoctrine()
+                ->getRepository('AppBundle:Exam')
+                ->findOneByPort($exam->getPort());
+
+            if($usedPort)
+            {
+                $errors[] = "Le port " . $exam->getPort() . " est déjà utilisé par l'examen " . $usedPort->getName();
+            }
+
+            // Test de l'existence du dossier
             $fs = new Filesystem();
             $folderName = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/' . $exam->getName() . "/";
             if($fs->exists($folderName))
             {
-                $error = "Le dossier " . $exam->getName() . " existe déjà, veuillez choisir un autre nom ou supprimez l'examen portant ce nom";
+                $errors[] = "Le dossier " . $exam->getName() . " existe déjà, veuillez choisir un autre nom ou supprimez l'examen portant ce nom";
             }
-            else
+
+            if(empty($errors))
             {
                 try {
                     $fs->mkdir($folderName);
                 } catch (IOExceptionInterface $e) {
                     $error = "Erreur : " . $e->getMessage();
                 }
-            }
 
-            if(empty($error))
-            {
                 /** @var \AppBundle\Services\VideoService $videoService */
                 $videoService = $this->get('app.video_service');
-                $videoService->createExam($exam->getName());
+                $videoService->startExam($exam);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($exam);
@@ -116,7 +127,7 @@ class StaticController extends Controller
 
         return $this->render('AppBundle:Static:create_exam.html.twig', array(
             'form' => $form->createView(),
-            'error' => $error
+            'errors' => $errors
         ));
     }
 
@@ -156,7 +167,7 @@ class StaticController extends Controller
             }
             /** @var \AppBundle\Services\VideoService $videoService */
             $videoService = $this->get('app.video_service');
-            $videoService->stopExam($exam->getName());
+            $videoService->stopExam($exam);
             $em = $this->getDoctrine()->getManager();
             $em->remove($exam);
             $em->flush();
@@ -164,17 +175,44 @@ class StaticController extends Controller
         }
     }
     
-    public function getLoggedUsersAction(Request $request, $examName)
+    public function getLoggedStudentsAction(Request $request, $examName)
     {
         if (!$request->isXmlHttpRequest()) {
             return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
         } else {
             $response = new JsonResponse();
+
+            $serializer = $this->container->get('fos_js_routing.serializer');
+
             /** @var \AppBundle\Services\VideoService $videoService */
             $videoService = $this->get('app.video_service');
-            $users = $videoService->getLoggedUsers($examName);
+            $students = $videoService->getLoggedStudents($examName);
+            $students = array();
+            //for($i = 0; $i < 30; $i++)
+            if (rand(0, 1))
+            {
+                $student = new Student();
+                $student->setConnected(true);
+                $student->setUsername("kguiougou");
+                $students[] = $serializer->serialize($student, 'json');
+                $student2 = new Student();
+                $student2->setConnected(true);
+                $student2->setUsername("echavallier");
+                $students[] = $serializer->serialize($student2, 'json');
+            }
+            else
+            {
+                $student = new Student();
+                $student->setConnected(false);
+                $student->setUsername("kguiougou");
+                $students[] = $serializer->serialize($student, 'json');
+                $student2 = new Student();
+                $student2->setConnected(false);
+                $student2->setUsername("echavallier");
+                $students[] = $serializer->serialize($student2, 'json');
+            }
             $response->setData(array(
-                'error' => $users
+                'students' => $students
             ));
             return $response;
         }

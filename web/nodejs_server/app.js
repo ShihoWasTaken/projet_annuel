@@ -111,7 +111,7 @@ function main(){
       user = people[socket.id].name;
       console.log(user + ' disconnected');
       // io.emit('notification', people[socket.id] + ' a été déconnecté du serveur');
-      db.run("UPDATE students set connected = 0 WHERE student = '"+user+"';");
+      db.run("UPDATE student set connected = 0 WHERE username = '"+user+"';");
       delete people[socket.id];
     });
 
@@ -135,14 +135,14 @@ function main(){
           return fs.mkdirSync(userDirectory);
         }
       });
-      db.all("SELECT COUNT(*) AS COUNT FROM students WHERE student = '"+user+"'",function(err,rows){
+      db.all("SELECT COUNT(*) AS COUNT FROM student WHERE username = '"+user+"'",function(err,rows){
         if(rows[0].COUNT == 0){
-          var stmt = db.prepare("INSERT INTO students(student,connected) VALUES (?,?)");
+          var stmt = db.prepare("INSERT INTO student(username,connected) VALUES (?,?)");
           stmt.run(user, 1);
           exec('ffmpeg -i udp://localhost:'+people[socket.id].port+' -c copy '+ userDirectory+'/'+user+'.mkv')
         }
         else{
-          db.run("UPDATE students set connected = 1 WHERE student = '"+user+"';");
+          db.run("UPDATE student set connected = 1 WHERE username = '"+user+"';");
         }
       });
 
@@ -191,7 +191,7 @@ function main(){
   //Parsing des events reçus
   function parsing(data){
         var student, action, time, file, stmt;
-    db.all("SELECT id FROM students WHERE student = '"+data.user+"'",function(err,rows){
+    db.all("SELECT id FROM student WHERE username = '"+data.user+"'",function(err,rows){
         student = rows.id;
     });
 
@@ -218,8 +218,8 @@ function main(){
   var db = new sqlite3.Database(WORKING_DIRECTORY+"/database.sqlite");
 
   db.serialize(function() {
-    db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `student` TEXT, 'connected' INTEGER)");
-    db.run("CREATE TABLE `events`(`id`	INTEGER PRIMARY KEY AUTOINCREMENT, `student` INTEGER, `file`	TEXT, `action`	TEXT, `time`	INTEGER, FOREIGN KEY(`student`) REFERENCES `students.id`);");
+    db.run("CREATE TABLE `student` (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `username` TEXT, 'connected' INTEGER)");
+    db.run("CREATE TABLE `events`(`id`	INTEGER PRIMARY KEY AUTOINCREMENT, `student_id` INTEGER, `file`	TEXT, `action`	TEXT, `time`	INTEGER, FOREIGN KEY(`student_id`) REFERENCES `student.id`);");
 
   });
 

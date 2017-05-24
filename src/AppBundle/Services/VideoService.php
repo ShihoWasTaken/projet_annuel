@@ -112,26 +112,32 @@ class VideoService
         return $folders;
     }
 
-    public function getLoggedUsers($examName)
+    public function getLoggedStudents($examName)
     {
         try {
             $this->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite');
         } catch (\Exception $e) {
             throw new SQLiteFileNotFoundException($e->getMessage(), $e->getCode(), $e, '$this->container->getParameter(\'kernel.root_dir\') . \'/../web/bundles/app/uploads/\'. $examName . \'/database.sqlite\'');
         }
+        /** @var \AppBundle\Entity\Student $students */
+        $students = $this->container->get('doctrine')
+            ->getRepository('AppBundle:Student')
+            ->findAll();
+
+        return $students;
     }
 
-    public function createExam($examName)
+    public function startExam(\AppBundle\Entity\Exam $exam)
     {
-        $command = 'node nodejs_server/app -s ' . $examName;
+        $command = 'node nodejs_server/app -s ' . $exam->getName() . ' -p ' . $exam->getPort();
         $process = new Process($command . ' > /dev/null 2>&1 &');
         $process->setPty(true);
         $process->start();
     }
 
-    public function stopExam($examName)
+    public function stopExam(\AppBundle\Entity\Exam $exam)
     {
-        $command = 'node nodejs_server/app -s ' . $examName;
+        $command = 'node nodejs_server/app -s ' . $exam->getName() . ' -p ' . $exam->getPort();
         $process = new Process("ps -ax | grep '" . $command . "' | head -n 1 | awk '{print $1;}'");
         $process->setPty(true);
         $process->run();

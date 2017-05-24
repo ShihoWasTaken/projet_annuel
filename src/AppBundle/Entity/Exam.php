@@ -53,6 +53,11 @@ class Exam
     private $framesPerSecond;
 
     /**
+     * @ORM\Column(type="smallint")
+     */
+    private $port;
+
+    /**
      * Get id
      *
      * @return integer
@@ -228,5 +233,29 @@ class Exam
     public function getFramesPerSecond()
     {
         return $this->framesPerSecond;
+    }
+
+    /**
+     * Set port
+     *
+     * @param integer $port
+     *
+     * @return Exam
+     */
+    public function setPort($port)
+    {
+        $this->port = $port;
+
+        return $this;
+    }
+
+    /**
+     * Get port
+     *
+     * @return integer
+     */
+    public function getPort()
+    {
+        return $this->port;
     }
 }

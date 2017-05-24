@@ -19,6 +19,7 @@ class ExamType extends AbstractType
             ->add('width', IntegerType::class, array('label' => "Largeur"))
             ->add('height', IntegerType::class, array('label' => "Hauteur"))
             ->add('framesPerSecond', IntegerType::class, array('label' => "FPS"))
+            ->add('port', IntegerType::class, array('label' => "Port"))
             ->add('save', SubmitType::class, array('label' => "Créer l'examen", 'attr' => array('class' => 'btn btn-default')))
         ;
     }
