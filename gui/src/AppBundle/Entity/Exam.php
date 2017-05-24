@@ -37,21 +37,25 @@ class Exam
      */
     private $password;
 
-
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $width;
 
     /**
-     * Set id
-     *
-     * @param integer $id
-     *
-     * @return Exam
+     * @ORM\Column(type="smallint")
      */
-    public function setId($id)
-    {
-        $this->id = $id;
+    private $height;
 
-        return $this;
-    }
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $framesPerSecond;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $PID;
 
     /**
      * Get id
@@ -157,5 +161,101 @@ class Exam
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set width
+     *
+     * @param integer $width
+     *
+     * @return Exam
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return integer
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set height
+     *
+     * @param integer $height
+     *
+     * @return Exam
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return integer
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set framesPerSecond
+     *
+     * @param integer $framesPerSecond
+     *
+     * @return Exam
+     */
+    public function setFramesPerSecond($framesPerSecond)
+    {
+        $this->framesPerSecond = $framesPerSecond;
+
+        return $this;
+    }
+
+    /**
+     * Get framesPerSecond
+     *
+     * @return integer
+     */
+    public function getFramesPerSecond()
+    {
+        return $this->framesPerSecond;
+    }
+
+    /**
+     * Set pID
+     *
+     * @param integer $pID
+     *
+     * @return Exam
+     */
+    public function setPID($pID)
+    {
+        $this->PID = $pID;
+
+        return $this;
+    }
+
+    /**
+     * Get pID
+     *
+     * @return integer
+     */
+    public function getPID()
+    {
+        return $this->PID;
     }
 }

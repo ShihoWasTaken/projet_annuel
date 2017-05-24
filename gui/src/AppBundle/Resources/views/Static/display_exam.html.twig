@@ -22,7 +22,11 @@
                         <tr>
                             <td>{{ video.username }}</td>
                             <td> {{ video.eventCount }} évènements(s)</td>
-                            <td><a class="btn btn-default" href="{{ path('app_display_video',  {'examName': examName, etudiant: video.username}) }}"><i class="fa fa-file-video-o" aria-hidden="true"></i> Voir vidéo</a></td>
+                            <td>
+                                <a class="btn btn-default" href="{{ path('app_display_video',  {'examName': examName, etudiant: video.username}) }}">
+                                    <i class="fa fa-file-video-o" aria-hidden="true"></i> Voir vidéo
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

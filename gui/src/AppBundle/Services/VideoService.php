@@ -6,7 +6,8 @@ use AppBundle\Exception\SQLiteFileNotFoundException;
 use Monolog\Logger;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class VideoService
 {
@@ -77,7 +78,7 @@ class VideoService
 
         $directoryPath = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/' . $examName;
         $finder = new Finder();
-        $finder->files()->in($directoryPath)->name('*.' . self::VIDEO_FORMAT)->sortByName();
+        $finder->files()->in($directoryPath)->depth('== 0')->name('*.' . self::VIDEO_FORMAT)->sortByName();
         $files = array();
         foreach ($finder as $file) {
             $files[] =  array(
@@ -97,7 +98,7 @@ class VideoService
     {
         $directoryPath = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads';
         $finder = new Finder();
-        $finder->directories()->in($directoryPath)->sortByName();
+        $finder->directories()->in($directoryPath)->depth('== 0')->sortByName();
         $folders = array();
         foreach ($finder as $folder) {
             $folders[] =  array(
@@ -109,4 +110,45 @@ class VideoService
         return $folders;
     }
 
+    public function getLoggedUsers($examName)
+    {
+        try {
+            $this->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite');
+        } catch (\Exception $e) {
+            throw new SQLiteFileNotFoundException($e->getMessage(), $e->getCode(), $e, '$this->container->getParameter(\'kernel.root_dir\') . \'/../web/bundles/app/uploads/\'. $examName . \'/database.sqlite\'');
+        }
+    }
+
+    public function createExam($examName)
+    {
+        // TODO: changer la commande
+        $path = $this->container->getParameter('kernel.root_dir') . '/../../serveur/';
+        $process = new Process('cd ' . $path . ' && node app.js -s ' . $examName);
+        $process->setPty(true);
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        return $process->getPid();
+    }
+
+    public function stopExam($pid)
+    {
+        return $this->executeCommand('kill -SIGTERM ' . $pid);
+    }
+
+    private function executeCommand($command)
+    {
+        $process = new Process($command);
+        $process->setPty(true);
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        return $process->getOutput();
+    }
 }
