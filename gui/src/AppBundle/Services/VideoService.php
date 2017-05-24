@@ -66,7 +66,7 @@ class VideoService
         return count($finder);
     }
 
-    public function listFilesAndFolders($examName)
+    public function listFiles($examName)
     {
         try {
             $this->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite');
@@ -78,7 +78,7 @@ class VideoService
 
         $directoryPath = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/' . $examName;
         $finder = new Finder();
-        $finder->files()->in($directoryPath)->name('*.' . self::VIDEO_FORMAT)->sortByName();
+        $finder->files()->in($directoryPath)->depth('== 0')->name('*.' . self::VIDEO_FORMAT)->sortByName();
         $files = array();
         foreach ($finder as $file) {
             $files[] =  array(
@@ -91,23 +91,7 @@ class VideoService
                 ))
             );
         }
-        $finder2 = new Finder();
-        $finder2->directories()->in($directoryPath)->sortByName();
-        $folders = array();
-        foreach ($finder2 as $file) {
-            $folders[] =  array(
-                'path' => 'bundles/app/uploads/' . $file->getRelativePathname(),
-                'username' => $file->getRelativePathname(),
-                'eventCount' => count($repository->findBy(
-                    array(
-                        'username' => $file->getRelativePathname()
-                    )
-                ))
-            );
-        }
-        $data['folders'] = $folders;
-        $data['files'] = $files;
-        return $data;
+        return $files;
     }
 
     public function listExams()
@@ -126,20 +110,6 @@ class VideoService
         return $folders;
     }
 
-    public function buildVideo($examName, $etudiant)
-    {
-        $path = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/' . $etudiant . '/';
-        $process = new Process('cd ' . $path . ' && ffmpeg -r 1 -f image2 -s 960x540 -i %d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p ' . $etudiant . '.mp4');
-        $process->setPty(true);
-        $process->run();
-
-        // executes after the command finishes
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-        return $process->getOutput();
-    }
-
     public function getLoggedUsers($examName)
     {
         try {
@@ -149,4 +119,36 @@ class VideoService
         }
     }
 
+    public function createExam($examName)
+    {
+        // TODO: changer la commande
+        $path = $this->container->getParameter('kernel.root_dir') . '/../../serveur/';
+        $process = new Process('cd ' . $path . ' && node app.js -s ' . $examName);
+        $process->setPty(true);
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        return $process->getPid();
+    }
+
+    public function stopExam($pid)
+    {
+        return $this->executeCommand('kill -SIGTERM ' . $pid);
+    }
+
+    private function executeCommand($command)
+    {
+        $process = new Process($command);
+        $process->setPty(true);
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        return $process->getOutput();
+    }
 }

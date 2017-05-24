@@ -18,7 +18,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">
-                <h3 class="title">Vidéo de {{ etudiant }} pour l'examen {{ examName }}</h3>
+                <h3 class="title">Vidéo de {{ etudiant }} pour l'examen {{ examName }}
+                    <a class="btn btn-primary" href="{{ path('app_display_exam', {'examName' : examName}) }}">Revenir à la liste des étudiants</a>
+                    <a class="btn btn-primary" href="{{ path('app_homepage') }}">Revenir à la liste des examens</a>
+                </h3>
                 <div class="embed-responsive embed-responsive-16by9">
 
                     <video id="video-1" controls>
@@ -37,11 +40,6 @@
                             <div class="label label-info" onclick="jump('video-1', {{ event.moment }})">{{ event.description }}</div>
                         {% endfor %}
                     {% endif %}
-
-            </div>
-            <div class="col-md-12">
-                <a class="btn btn-primary" href="{{ path('app_display_exam', {'examName' : examName}) }}">Revenir à la liste des étudiants</a>
-                <a class="btn btn-primary" href="{{ path('app_homepage') }}">Revenir à la liste des examens</a>
             </div>
         </div>
     </div>

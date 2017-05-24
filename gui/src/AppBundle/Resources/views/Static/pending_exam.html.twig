@@ -5,6 +5,30 @@
 {% endblock title %}
 
 {% block body %}
+    <button id="stop" class="btn btn-lg btn-danger">Stopper l'examen</button><br>
     Examen {{ exam.name }}<br>
     Commencé le {{ exam.date|date('j/m/Y à h:m:s') }}
+    <script>
+        $( document ).ready(function() {
+            $('#stop').on( "click", function() {
+                if (confirm("Voulez-vous vraiment stoppez l'examen ?"))
+                {
+                    $.ajax({
+                        url: '{{ path('app_stop_exam', {'examName': exam.name }) }}',
+                        type: 'POST',
+                        data: {'examName': '{{ exam.name }}' },
+                        dataType: 'json'
+                    }).done(function () {
+                        window.location.href = '{{ path('app_homepage') }}';
+                    })
+                    .fail(function (data) {
+                        alert(data.responseJSON['error']);
+                    })
+                    .always(function () {
+                    });
+                }
+            });
+
+        });
+    </script>
 {% endblock body %}

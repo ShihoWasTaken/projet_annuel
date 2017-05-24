@@ -23,32 +23,9 @@
                             <td>{{ video.username }}</td>
                             <td> {{ video.eventCount }} évènements(s)</td>
                             <td>
-                                {%  if true %}
-                                    <a class="btn btn-default" href="{{ path('app_display_video',  {'examName': examName, etudiant: video.username}) }}">
-                                        <i class="fa fa-file-video-o" aria-hidden="true"></i> Voir vidéo
-                                    </a>
-                                {% else %}
-                                    <a href="{{ path('app_build_video',  {'examName': examName, 'etudiant': video.username}) }}" class="btn btn-danger">
-                                        <i class="fa fa-wrench" aria-hidden="true"></i> Build la vidéo
-                                    </a>
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    {% for video in folders %}
-                        <tr>
-                            <td>{{ video.username }}</td>
-                            <td> {{ video.eventCount }} évènements(s)</td>
-                            <td>
-                                {%  if false %}
-                                    <a class="btn btn-default" href="{{ path('app_display_video',  {'examName': examName, etudiant: video.username}) }}">
-                                        <i class="fa fa-file-video-o" aria-hidden="true"></i> Voir vidéo
-                                    </a>
-                                {% else %}
-                                    <a href="{{ path('app_build_video',  {'examName': examName, 'etudiant': video.username}) }}" class="btn btn-danger">
-                                        <i class="fa fa-wrench" aria-hidden="true"></i> Build la vidéo
-                                    </a>
-                                {% endif %}
+                                <a class="btn btn-default" href="{{ path('app_display_video',  {'examName': examName, etudiant: video.username}) }}">
+                                    <i class="fa fa-file-video-o" aria-hidden="true"></i> Voir vidéo
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}

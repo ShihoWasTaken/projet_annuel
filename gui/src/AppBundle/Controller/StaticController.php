@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class StaticController extends Controller
 {
@@ -18,8 +17,12 @@ class StaticController extends Controller
     {
         $videoService = $this->container->get('app.video_service');
         $exams = $videoService->listExams();
+        $pendingExams = $this->getDoctrine()
+            ->getRepository('AppBundle:Exam')
+            ->findAll();
         return $this->render('AppBundle:Static:homepage.html.twig', array(
-            'exams' => $exams
+            'exams' => $exams,
+            'pendingExams' => $pendingExams
         ));
     }
 
@@ -29,7 +32,7 @@ class StaticController extends Controller
         $videoService = $this->container->get('app.video_service');
 
         try{
-            $data = $videoService->listFilesAndFolders($examName);
+            $data = $videoService->listFiles($examName);
         }
         catch (SQLiteFileNotFoundException $e) {
             return $this->render('AppBundle:Static:error_database_file_not_found.html.twig', array(
@@ -38,14 +41,12 @@ class StaticController extends Controller
         }
         return $this->render('AppBundle:Static:display_exam.html.twig', array(
             'examName' => $examName,
-            'files' => $data['files'],
-            'folders' => $data['folders']
+            'files' => $data
         ));
     }
 
     public function displayVideoAction($examName, $etudiant)
     {
-
         $videoService = $this->container->get('app.video_service');
         try {
             $videoService->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite');
@@ -71,6 +72,8 @@ class StaticController extends Controller
 
     public function newExamAction(Request $request)
     {
+
+        /** @var \AppBundle\Entity\Exam $exam */
         $exam = new Exam();
         $form = $this->createForm(ExamType::class, $exam);
 
@@ -83,7 +86,6 @@ class StaticController extends Controller
 
             $fs = new Filesystem();
             $folderName = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/' . $exam->getName() . "/";
-            //$folderName = $exam->getName() . "/" ;
             if($fs->exists($folderName))
             {
                 $error = "Le dossier " . $exam->getName() . " existe déjà, veuillez choisir un autre nom ou supprimez l'examen portant ce nom";
@@ -99,6 +101,11 @@ class StaticController extends Controller
 
             if(empty($error))
             {
+                /** @var \AppBundle\Services\VideoService $videoService */
+                $videoService = $this->get('app.video_service');
+                $pid = $videoService->createExam($exam->getName());
+                $exam->setPID($pid);
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($exam);
                 $em->flush();
@@ -111,17 +118,6 @@ class StaticController extends Controller
         return $this->render('AppBundle:Static:create_exam.html.twig', array(
             'form' => $form->createView(),
             'error' => $error
-        ));
-    }
-
-    public function pendingExamListAction()
-    {
-        $exams = $this->getDoctrine()
-            ->getRepository('AppBundle:Exam')
-            ->findAll();
-
-        return $this->render('AppBundle:Static:pending_exam_list.html.twig', array(
-            'exams' => $exams
         ));
     }
 
@@ -141,45 +137,47 @@ class StaticController extends Controller
         ));
     }
 
-
-    public function getLoggedUsersAction(Request $request)
+    public function stopExamAction(Request $request, $examName)
     {
         if (!$request->isXmlHttpRequest()) {
             return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
         } else {
-            $translator = $this->get('translator');
             $response = new JsonResponse();
+            $exam = $this->getDoctrine()
+                ->getRepository('AppBundle:Exam')
+                ->findOneByName($examName);
+
+            if (!$exam) {
+                $response->setData(array(
+                    'error' => "Pas d'examen trouvé pour le nom: " . $examName
+                ));
+                return $response;
+            }
             /** @var \AppBundle\Services\VideoService $videoService */
             $videoService = $this->get('app.video_service');
+            $videoService->stopExam($exam->getPID());
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($exam);
+            $em->flush();
             $response->setData(array(
-                'errorMessage' => $translator->trans('summoner.update.waiting.message', array('%time%' => $databaseSummoner->secondsBeforeNextUpdate()))
+                'message' => "ok"
             ));
             return $response;
         }
     }
-
-    public function buildVideoAction(Request $request, $examName, $etudiant)
+    
+    public function getLoggedUsersAction(Request $request, $examName)
     {
-        if ($request->isXmlHttpRequest()) {
+        if (!$request->isXmlHttpRequest()) {
             return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
         } else {
-            $translator = $this->get('translator');
             $response = new JsonResponse();
             /** @var \AppBundle\Services\VideoService $videoService */
             $videoService = $this->get('app.video_service');
-            try {
-
-                $output = $videoService->buildVideo($examName, $etudiant);
-                $response->setData(array(
-                    'output' => $output
-                ));
-            } catch (\ProcessFailedException $e) {
-
-                $response->setData(array(
-                    'error' => $e->getMessage()
-                ));
-            }
-            $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+            $users = $videoService->getLoggedUsers($examName);
+            $response->setData(array(
+                'errorMessage' => $users
+            ));
             return $response;
         }
     }
