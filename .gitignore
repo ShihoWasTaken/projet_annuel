@@ -16,4 +16,9 @@
 /web/bundles/
 /src/AppBundle/Resources/public/uploads/*
 *.php~
-*/node_modules/*
+!web/nodejs_server/node_modules
+/web/nodejs_server/node_modules/*
+!web/nodejs_server/node_modules/.gitkeep
+!/nodejs_client/node_modules
+/nodejs_client/node_modules/*
+!nodejs_client/node_modules/.gitkeep
