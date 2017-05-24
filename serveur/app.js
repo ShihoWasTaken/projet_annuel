@@ -6,7 +6,7 @@ var fs = require('fs'),
     argv = require('yargs').argv,
     sqlite3 = require('sqlite3').verbose(),
     redis = require('socket.io-redis');
-
+    exec = require('child_process').exec;
 //*********************************************//
 //**********Gestion des arguments*************//
 //*******************************************//
@@ -15,10 +15,19 @@ var argv = require('yargs')
           .demandOption(['s'])
           .describe('s', 'Nom de la session')
           .describe('p', 'Port d\'écoute')
+          .describe('f', 'Premier port d\'écoute pour ffmpeg')
+          .describe('i', 'Images par seconde')
+          .describe('c', 'Codec video')
+          .describe('r', 'Résolution vidéo')
           .help('h')
           .alias('h', 'help')
           .alias('s', 'session')
           .alias('p','port')
+          .default('p', 6969)
+          .default('f', 7000)
+          .default('i', 5)
+          .default('c', 'libx264')
+          .default('r', '960x540')
           .help()
           .argv
 //*********************************************//
@@ -27,26 +36,30 @@ var argv = require('yargs')
 
 
 var HOST = '0.0.0.0';
-var PORT = 6969;
-var PORT_CLIENT = 6968;
-var FILEPATH = "/home/mathieu/Documents/"
+var PORT = argv.p;
+var PORT_FFMPEG = argv.f;
 var CLIENTS = [];
 var SESSION = argv.s;
+var IPS = argv.i;
+var CODEC = argv.c;
+var RESOLUTION = argv.r;
 
+var DIRECTORY = 'sessions/';
+var WORKING_DIRECTORY = DIRECTORY+SESSION;
 
-fs.stat(SESSION, function (err, stats){
+fs.stat(WORKING_DIRECTORY, function (err, stats){
   if (err) {
     // Directory doesn't exist or something.
-    console.log('Folder '+SESSION+' created\n');
-    return fs.mkdir(SESSION, function(){
+    console.log('Folder '+WORKING_DIRECTORY+' created\n');
+    return fs.mkdir(WORKING_DIRECTORY, function(){
       main();
     });
   }
   if (!stats.isDirectory()) {
     // This isn't a directory!
-    callback(new Error(SESSION + ' is not a directory!'));
+    callback(new Error(WORKING_DIRECTORY + ' is not a directory!'));
   } else {
-    console.log('!! ERROR '+SESSION + ' already exists !!');
+    console.log('!! ERROR '+WORKING_DIRECTORY + ' already exists !!');
     process.exit();
   }
 });
@@ -77,31 +90,45 @@ function main(){
 
   var config = {
     "video":{
-      "imagesPerSeconds": 1,
-      "resolution": "1920x1080",
-      "encoding": "x265",
+      "imagesPerSeconds": IPS,
+      "resolution": RESOLUTION,
+      "encoding": CODEC,
+      "port": 0
     },
     "inotify":{
-      "options":false
+      "add":true,
+      "change":true,
+      "unlink":true,
+      "addDir":true,
+      "unlinkDir":true
     }
   }
   var people = {};
   io.on('connection', function (socket) {
     //console.log('connection !!');
-    socket.emit('config', config);
+
 
     socket.on('disconnect', function() {
-      user = people[socket.id];
-      console.log(people[socket.id] + ' disconnected');
+      user = people[socket.id].name;
+      console.log(user + ' disconnected');
       // io.emit('notification', people[socket.id] + ' a été déconnecté du serveur');
       db.run("UPDATE students set connected = 0 WHERE student = '"+user+"';");
       delete people[socket.id];
     });
 
     socket.on('user', function(user){
-      people[socket.id] = user;
+
+      config.video.port = PORT_FFMPEG;
+      people[socket.id] = {
+                            'name':user,
+                            'port':config.video.port
+                          };
+      PORT_FFMPEG++;
+      socket.emit('config', config);
+
+
       console.log(user + " connected !!");
-      var userDirectory = SESSION+'/'+user
+      var userDirectory = WORKING_DIRECTORY+'/'+user
       fs.stat(userDirectory, function (err, stats){
         if (err) {
           // Directory doesn't exist or something.
@@ -113,11 +140,13 @@ function main(){
         if(rows[0].COUNT == 0){
           var stmt = db.prepare("INSERT INTO students(student,connected) VALUES (?,?)");
           stmt.run(user, 1);
+          exec('ffmpeg -i udp://localhost:'+people[socket.id].port+' -c copy '+ userDirectory+'/'+user+'.mkv')
         }
         else{
           db.run("UPDATE students set connected = 1 WHERE student = '"+user+"';");
         }
       });
+
     });
 
     socket.on('events', function(events){
@@ -131,7 +160,7 @@ function main(){
       var directory, user, time, file;
       if(image.image){
         user = image.user;
-        directory = SESSION + "/" + user + "/";
+        directory = WORKING_DIRECTORY + "/" + user + "/";
         time = image.time;
         file = directory + time + ".jpg";
         fs.writeFile(file, image.buffer, 'binary', function(err) {
@@ -142,6 +171,20 @@ function main(){
         });
       }
     })
+    var isBuffering = false;
+    var wstream;
+    socket.on('video', function(data) {
+        if(!isBuffering){
+            wstream = fs.createWriteStream('fooTest.flv');
+            isBuffering = true;
+        }
+        buffer = new Buffer(data);
+        fs.appendFile('fooTest.flv', buffer, function (err) {
+          if (err) throw err;
+          console.log('The "data to append" was appended to file!');
+        });
+    });
+
   });
 
   // io.adapter(redis({ host: '127.0.0.1', port: 6379 }));
@@ -173,7 +216,7 @@ function main(){
   //**************************************************//
 
 
-  var db = new sqlite3.Database(SESSION+"/database.db");
+  var db = new sqlite3.Database(WORKING_DIRECTORY+"/database.db");
 
   db.serialize(function() {
     db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `student` TEXT, 'connected' INTEGER)");
