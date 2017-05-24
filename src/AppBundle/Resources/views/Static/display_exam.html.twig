@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Examen {{ examName }}
+{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="title">Liste des étudiants
+                <a class="btn btn-primary" href="{{ path('app_homepage') }}">Revenir à la liste des examens</a></h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Etudiant</th>
+                        <th>Nombre évènements</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for video in files %}
+                        <tr>
+                            <td>{{ video.username }}</td>
+                            <td> {{ video.eventCount }} évènements(s)</td>
+                            <td>
+                                <a class="btn btn-default" href="{{ path('app_display_video',  {'examName': examName, etudiant: video.username}) }}">
+                                    <i class="fa fa-file-video-o" aria-hidden="true"></i> Voir vidéo
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock body %}

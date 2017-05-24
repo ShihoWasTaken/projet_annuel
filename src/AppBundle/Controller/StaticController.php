@@ -1,0 +1,204 @@
+<?php
+
+namespace AppBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Exception\SQLiteFileNotFoundException;
+use AppBundle\Entity\Exam;
+use AppBundle\Form\ExamType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+class StaticController extends Controller
+{
+    public function homepageAction()
+    {
+        $videoService = $this->container->get('app.video_service');
+        $exams = $videoService->listExams();
+        $pendingExams = $this->getDoctrine()
+            ->getRepository('AppBundle:Exam')
+            ->findAll();
+        return $this->render('AppBundle:Static:homepage.html.twig', array(
+            'exams' => $exams,
+            'pendingExams' => $pendingExams
+        ));
+    }
+
+    public function displayExamAction($examName)
+    {
+
+        $videoService = $this->container->get('app.video_service');
+
+        try{
+            $data = $videoService->listFiles($examName);
+        }
+        catch (SQLiteFileNotFoundException $e) {
+            return $this->render('AppBundle:Static:error_database_file_not_found.html.twig', array(
+                'path' => $e->getPath()
+            ));
+        }
+        return $this->render('AppBundle:Static:display_exam.html.twig', array(
+            'examName' => $examName,
+            'files' => $data
+        ));
+    }
+
+    public function displayVideoAction($examName, $etudiant)
+    {
+        $videoService = $this->container->get('app.video_service');
+        try {
+            $videoService->switchDatabase($this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite');
+        } catch (\Exception $e) {
+            return $this->render('AppBundle:Static:error_database_file_not_found.html.twig', array(
+                'path' => $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/'. $examName . '/database.sqlite'
+            ));
+        }
+
+        $repository = $this->getDoctrine()->getRepository('AppBundle:SuspiciousEvent');
+
+        $events = $repository->findBy(
+            array(
+                'username' => $etudiant
+            )
+        );
+        return $this->render('AppBundle:Static:display_video.html.twig', array(
+            'examName' => $examName,
+            'etudiant' => $etudiant,
+            'events' => $events
+        ));
+    }
+
+    public function newExamAction(Request $request)
+    {
+
+        /** @var \AppBundle\Entity\Exam $exam */
+        $exam = new Exam();
+        $form = $this->createForm(ExamType::class, $exam);
+
+        $error = null;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $exam = $form->getData();
+            $exam->setDate(new \DateTime());
+
+            $fs = new Filesystem();
+            $folderName = $this->container->getParameter('kernel.root_dir') . '/../web/bundles/app/uploads/' . $exam->getName() . "/";
+            if($fs->exists($folderName))
+            {
+                $error = "Le dossier " . $exam->getName() . " existe déjà, veuillez choisir un autre nom ou supprimez l'examen portant ce nom";
+            }
+            else
+            {
+                try {
+                    $fs->mkdir($folderName);
+                } catch (IOExceptionInterface $e) {
+                    $error = "Erreur : " . $e->getMessage();
+                }
+            }
+
+            if(empty($error))
+            {
+                /** @var \AppBundle\Services\VideoService $videoService */
+                $videoService = $this->get('app.video_service');
+                $videoService->createExam($exam->getName());
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($exam);
+                $em->flush();
+
+                return $this->redirectToRoute('app_pending_exam', array('id' => $exam->getId()));
+            }
+        }
+
+
+        return $this->render('AppBundle:Static:create_exam.html.twig', array(
+            'form' => $form->createView(),
+            'error' => $error
+        ));
+    }
+
+    public function pendingExamAction($id)
+    {
+        $exam = $this->getDoctrine()
+            ->getRepository('AppBundle:Exam')
+            ->find($id);
+
+        if (!$exam) {
+            throw $this->createNotFoundException(
+                "Pas d'examen trouvé pour l'id" . $id
+            );
+        }
+        return $this->render('AppBundle:Static:pending_exam.html.twig', array(
+            'exam' => $exam
+        ));
+    }
+
+    public function stopExamAction(Request $request, $examName)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
+        } else {
+            $response = new JsonResponse();
+
+            /** @var \AppBundle\Entity\Exam $exam */
+            $exam = $this->getDoctrine()
+                ->getRepository('AppBundle:Exam')
+                ->findOneByName($examName);
+
+            if (!$exam) {
+                $response->setData(array(
+                    'error' => "Pas d'examen trouvé pour le nom: " . $examName
+                ));
+                return $response;
+            }
+            /** @var \AppBundle\Services\VideoService $videoService */
+            $videoService = $this->get('app.video_service');
+            $videoService->stopExam($exam->getName());
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($exam);
+            $em->flush();
+            return $response;
+        }
+    }
+    
+    public function getLoggedUsersAction(Request $request, $examName)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
+        } else {
+            $response = new JsonResponse();
+            /** @var \AppBundle\Services\VideoService $videoService */
+            $videoService = $this->get('app.video_service');
+            $users = $videoService->getLoggedUsers($examName);
+            $response->setData(array(
+                'error' => $users
+            ));
+            return $response;
+        }
+    }
+
+    public function deleteExamAction(Request $request, $examName)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('httpCode' => 400, 'error' => 'Requête non AJAX'));
+        } else {
+            $response = new JsonResponse();
+            /** @var \AppBundle\Services\VideoService $videoService */
+            $videoService = $this->get('app.video_service');
+            try {
+                $videoService->deleteExam($examName);
+            } catch (\Exception $e) {
+                $response->setData(array(
+                    'error' => $e->getMessage()
+                ));
+            }
+            $response->setData(array(
+                'error' => 'toto'
+            ));
+            return $response;
+        }
+    }
+}
