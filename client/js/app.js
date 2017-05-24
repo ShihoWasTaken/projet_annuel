@@ -9,6 +9,7 @@ var BROADCAST_ADDR = "192.168.99.255";
 var HOST = '0.0.0.0';
 var PORT_SEND = 6969;
 var PORT_RECEIVE = 6968;
+var SERVER_IP_ADDRESS = null;
 
 var WATCHED_DIRECTORY = '/home/etudiant/client/projet_annuel/client';
 var CONFIG = null;
@@ -18,6 +19,7 @@ var arrayOfScreens = [];
 var arrayServers = [];
 var isConnectedToServer = false;
 var timeStampStart = 0;
+var process_ffmpeg = null;
 
 var chokidar = require('chokidar');
 var net = require('net');
@@ -26,8 +28,7 @@ var dns = require('dns');
 var io = require('socket.io-client');
 const username = require('username');
 var ssdp = require("node-ssdp").Client, client = new ssdp();
-var screenshot = require('desktop-screenshot');
-var screenStreamer = require('screen-streamer');
+var child_process = require('child_process');
 
 var socket;
 
@@ -76,58 +77,67 @@ function watchEvents() {
         ignored: '/home/etudiant/client/projet_annuel/client/pnacl/*',
     });
 
-    // Add event listeners. 
-    watcher
-    .on('add', (path) => {
+    // Add event listeners (if true in config)
+    if (CONFIG.inotify.add) {
+        watcher.on('add', (path) => {
             var event = 
                 {
-                    "time": Date.now() - timeStampStart,
+                    "time": (Date.now() - timeStampStart) + CONFIG.time,
                     "action": "Create",
                     "file": path.toString()
                 };
             arrayOfEvents.push(event);
             log(path);
-        })
-    .on('change', (path) => {
+        });
+    }
+    if (CONFIG.inotify.change) {
+        watcher.on('change', (path) => {
             var event = 
                 {
-                    "time": Date.now() - timeStampStart,
+                    "time": (Date.now() - timeStampStart) + CONFIG.time,
                     "action": "Modify",
                     "file": path.toString()
                 };
             arrayOfEvents.push(event);
             log(`Modify file : ${path}`);
-        })
-    .on('unlink', (path) => {
+        });
+    }
+    if (CONFIG.inotify.unlink) {
+        watcher.on('unlink', (path) => {
             var event = 
                 {
-                    "time": Date.now() - timeStampStart,
+                    "time": (Date.now() - timeStampStart) + CONFIG.time,
                     "action": "Delete",
                     "file": path.toString()
                 };
             arrayOfEvents.push(event);
             log(`Delete file : ${path}`);
-        })
-    .on('addDir', (path) => {
+        });
+    }
+    if (CONFIG.inotify.addDir) {
+        watcher.on('addDir', (path) => {
             var event = 
                 {
-                    "time": Date.now() - timeStampStart,
+                    "time": (Date.now() - timeStampStart) + CONFIG.time,
                     "action": "Create",
                     "file": path.toString()
                 };
             arrayOfEvents.push(event);
             log(`Add Directory : ${path}`);
-        })
-    .on('unlinkDir', (path) => {
+        });
+    }
+    if (CONFIG.inotify.unlinkDir) {
+        watcher.on('unlinkDir', (path) => {
             var event = 
                 {
-                    "time": Date.now() - timeStampStart,
+                    "time": (Date.now() - timeStampStart) + CONFIG.time,
                     "action": "Delete",
                     "file": path.toString()
                 };
             arrayOfEvents.push(event);
             log(`Delete Directory : ${path}`);
         });
+    }
 
     watcher.unwatch('/home/etudiant/client/projet_annuel/client/screenshot/*');
 }
@@ -152,28 +162,13 @@ function captureScreen() {
     var _height = CONFIG.video.resolution.split('x')[1];
     var _width = CONFIG.video.resolution.split('x')[0];
     var ips = CONFIG.video.imagesPerSeconds;
-    var timeOut = 1000/ips;
 
-    console.log(ips);
+    //ffmpeg -video_size 1920x1080 -framerate 2 -f x11grab -i :0.0+0,0 -vcodec libx264 -f mpegts -vf scale=960:540 "udp://192.168.99.129:6969"
 
-        var screenStreamer = require('screen-streamer');
-        var fs = require('fs');
-        var fileIndex = 0;
-
-        screenStreamer({
-            width: _width,
-            height: _height,
-            fps: ips,
-            duration: 86400,
-            format: 'jpeg',
-            quality: 50,
-        }, function(err, buffer){
-            if (err) throw err;
-
-            username().then(username => {
-                socket.emit('image', { image: true, buffer: buffer, user: username, time: Date.now() });
-            });
-        });
+    // or more concisely
+    var exec = child_process.exec;
+    function puts(error, stdout, stderr) { console.log(stdout) }
+    process_ffmpeg = exec("ffmpeg -video_size "+screen.width+"x"+screen.height+" -framerate "+ips+" -f x11grab -i :0.0+0,0 -vcodec "+CONFIG.video.encoding+" -f mpegts -vf scale="+_width+":"+_height+" 'udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port+"'", puts);
 
 }
 /***************************************************/
@@ -236,6 +231,7 @@ function containsObject(obj, list) {
 /*****************************************************/
 /******************* END BROADCAST *******************/
 /*****************************************************/
+
 
 
 
@@ -317,24 +313,33 @@ function disconnect(ipServer) {
 // Connection au serveur
 function connectTo(ipServer, btn = null) {
     socket = io.connect("http://" + ipServer + ":" + PORT_SEND);
+    SERVER_IP_ADDRESS = ipServer;
 
     // On connect, on envoie l'user au serveur
-    socket.on('connect', () => {
+    /*socket.on('connect', () => {
+    });*/
+    socket.on('connect', function () {
+        username().then(username => {
+            socket.emit('user', username);
+        });
+    });
+
+    socket.on('disconnect', function () {
+        log("Disconnect : Kill du ffmpeg");
+        var exec = child_process.exec;
+        exec("killall ffmpeg");
+        hideYouAreListening();
     });
 
     // Réception de la configuration
     socket.on('config', function (config) {
         CONFIG = config;
-        log("Réception de config : " + CONFIG);
-        log("Connexion au serveur, démarrage du timer");    
+        log("Réception de config avec port : " + CONFIG.video.port);
         isConnectedToServer = true;
         showYouAreListening();
         timeStampStart = Date.now();
         watchEvents();
         captureScreen();
-        username().then(username => {
-            socket.emit('user', username);
-        });
     });
 
     // Envoie régulier des événements
@@ -376,6 +381,10 @@ function showYouAreListening() {
     footer.className += ' visible animate slideInUp';
     footer.classList.remove('invisible');
 }
+function hideYouAreListening() {
+    var footer = document.getElementById('footer');
+    footer.className += ' animate slideOutDown';
+}
 // Min
 document.getElementById('windowControlMinimize').onclick = function()
 {
@@ -383,19 +392,19 @@ document.getElementById('windowControlMinimize').onclick = function()
 };
 
 // Close
-document.getElementById('windowControlClose').onclick = function()
+/*document.getElementById('windowControlClose').onclick = function()
 {
     win.close();
-};
+};*/
 
 // Max
-document.getElementById('windowControlMaximize').onclick = function()
+/*document.getElementById('windowControlMaximize').onclick = function()
 {
     if (win.isMaximized)
         win.unmaximize();
     else
         win.maximize();
-};
+};*/
 /***************************************************/
 /******************* END UI *******************/
 /***************************************************/
