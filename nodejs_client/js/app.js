@@ -1,6 +1,16 @@
 /********************************************/
 /******************* VARS *******************/
 /********************************************/
+var chokidar = require('chokidar');
+var net = require('net');
+var dgram = require('dgram'); 
+var dns = require('dns');
+var io = require('socket.io-client');
+const username = require('username');
+var ssdp = require("node-ssdp").Client, client = new ssdp();
+var child_process = require('child_process');
+var os = require('os');
+
 const SIMULATE_SERVER = false;
 const DEBUG = true;
 
@@ -11,7 +21,7 @@ var PORT_SEND = 6969;
 var PORT_RECEIVE = 6968;
 var SERVER_IP_ADDRESS = null;
 
-var WATCHED_DIRECTORY = '/home/etudiant/client/projet_annuel/client';
+var WATCHED_DIRECTORY = os.homedir()/*+'/client/projet_annuel/nodejs_client'*/;
 var CONFIG = null;
 var arrayOfEvents = [];
 var arrayOfScreens = [];
@@ -20,15 +30,6 @@ var arrayServers = [];
 var isConnectedToServer = false;
 var timeStampStart = 0;
 var process_ffmpeg = null;
-
-var chokidar = require('chokidar');
-var net = require('net');
-var dgram = require('dgram'); 
-var dns = require('dns');
-var io = require('socket.io-client');
-const username = require('username');
-var ssdp = require("node-ssdp").Client, client = new ssdp();
-var child_process = require('child_process');
 
 var socket;
 
@@ -65,6 +66,9 @@ function log(txt) {
 
 
 
+
+
+
 /**********************************************/ 
 /******************* EVENTS *******************/
 /**********************************************/
@@ -74,7 +78,9 @@ function watchEvents() {
     var watcher = chokidar.watch(WATCHED_DIRECTORY, {
         persistent: true,
         ignoreInitial: true,
-        ignored: '/home/etudiant/client/projet_annuel/client/pnacl/*',
+        ignored: WATCHED_DIRECTORY + '/.*',
+        usePolling: true,
+        useFsEvents: true,
     });
 
     // Add event listeners (if true in config)
@@ -138,8 +144,6 @@ function watchEvents() {
             log(`Delete Directory : ${path}`);
         });
     }
-
-    watcher.unwatch('/home/etudiant/client/projet_annuel/client/screenshot/*');
 }
 /**************************************************/
 /******************* END EVENTS *******************/
@@ -163,12 +167,20 @@ function captureScreen() {
     var _width = CONFIG.video.resolution.split('x')[0];
     var ips = CONFIG.video.imagesPerSeconds;
 
+    //ffmpeg -video_size 1024x768 -framerate 25 -f x11grab -i :0.0+100,200 output.mp4
+    //ffmpeg -video_size 1920x1080 -framerate 2 -f x11grab -i :0.0+0,0 output.mp4
     //ffmpeg -video_size 1920x1080 -framerate 2 -f x11grab -i :0.0+0,0 -vcodec libx264 -f mpegts -vf scale=960:540 "udp://192.168.99.129:6969"
+
+    /*
+-vf drawtext="fontsize=15:fontfile=/Library/Fonts/DroidSansMono.ttf:timecode='00\:00\:00\:00':rate=25:text='TCR\:':fontsize=72:fontcolor='white':boxcolor=0x000000AA:box=1:x=10:y=10"
+    */
 
     // or more concisely
     var exec = child_process.exec;
     function puts(error, stdout, stderr) { console.log(stdout) }
-    process_ffmpeg = exec("ffmpeg -video_size "+screen.width+"x"+screen.height+" -framerate "+ips+" -f x11grab -i :0.0+0,0 -vcodec "+CONFIG.video.encoding+" -f mpegts -vf scale="+_width+":"+_height+" 'udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port+"'", puts);
+    var command = "ffmpeg -video_size "+screen.width+"x"+screen.height+" -framerate "+ips+" -f x11grab -i :0.0+0,0 -vcodec "+CONFIG.video.encoding+" -vf scale="+_width+":"+_height+" -f avi -pix_fmt yuv420p 'udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port+"'";
+    log(command);
+    process_ffmpeg = exec(command, puts);
 
 }
 /***************************************************/
@@ -319,12 +331,14 @@ function connectTo(ipServer, btn = null) {
     /*socket.on('connect', () => {
     });*/
     socket.on('connect', function () {
+        btnBroadcast.disabled = true;
         username().then(username => {
             socket.emit('user', username);
         });
     });
 
     socket.on('disconnect', function () {
+        btnBroadcast.disabled = false;
         log("Disconnect : Kill du ffmpeg");
         var exec = child_process.exec;
         exec("killall ffmpeg");
@@ -334,7 +348,7 @@ function connectTo(ipServer, btn = null) {
     // Réception de la configuration
     socket.on('config', function (config) {
         CONFIG = config;
-        log("Réception de config avec port : " + CONFIG.video.port);
+        log("Réception de config avec options update : " + CONFIG.inotify.change);
         isConnectedToServer = true;
         showYouAreListening();
         timeStampStart = Date.now();
@@ -383,7 +397,7 @@ function showYouAreListening() {
 }
 function hideYouAreListening() {
     var footer = document.getElementById('footer');
-    footer.className += ' animate slideOutDown';
+    footer.className += ' invisible animate slideOutDown';
 }
 // Min
 document.getElementById('windowControlMinimize').onclick = function()
