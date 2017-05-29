@@ -2,29 +2,20 @@
 /******************* VARS *******************/
 /********************************************/
 var chokidar = require('chokidar');
-var net = require('net');
-var dgram = require('dgram'); 
-var dns = require('dns');
 var io = require('socket.io-client');
 const username = require('username');
 var ssdp = require("node-ssdp").Client, client = new ssdp();
 var child_process = require('child_process');
 var os = require('os');
 
-const SIMULATE_SERVER = false;
 const DEBUG = true;
 
-var BROADCAST_PORT = 6024;
-var BROADCAST_ADDR = "192.168.99.255";
-var HOST = '0.0.0.0';
 var PORT_SEND = 6969;
-var PORT_RECEIVE = 6968;
 var SERVER_IP_ADDRESS = null;
 
 var WATCHED_DIRECTORY = os.homedir()/*+'/client/projet_annuel/nodejs_client'*/;
 var CONFIG = null;
 var arrayOfEvents = [];
-var arrayOfScreens = [];
 
 var arrayServers = [];
 var isConnectedToServer = false;
