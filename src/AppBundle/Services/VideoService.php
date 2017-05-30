@@ -134,7 +134,8 @@ class VideoService
 
     public function startExam(\AppBundle\Entity\Exam $exam)
     {
-        $command = 'node nodejs_server/app -s ' . $exam->getName() . ' -p ' . $exam->getPort();
+        $command = $this->getServerCommand($exam);
+        $this->logger->addDebug('Commande node lancée : ' . $command);
         $process = new Process($command . ' > /dev/null 2>&1 &');
         $process->setPty(true);
         $process->start();
@@ -142,11 +143,16 @@ class VideoService
 
     public function stopExam(\AppBundle\Entity\Exam $exam)
     {
-        $command = 'node nodejs_server/app -s ' . $exam->getName() . ' -p ' . $exam->getPort();
+        $command = $this->getServerCommand($exam);
         $process = new Process("ps -ax | grep '" . $command . "' | head -n 1 | awk '{print $1;}'");
         $process->setPty(true);
         $process->run();
         return $this->executeCommand('kill ' . $process->getOutput());
+    }
+
+    private function getServerCommand(\AppBundle\Entity\Exam $exam)
+    {
+        return 'node nodejs_server/app -s ' . $exam->getName() . ' -p ' . $exam->getPort() . ' -i ' . $exam->getFramesPerSecond() . ' -r \'' . $exam->getWidth() . 'x'. $exam->getHeight() . '\'';
     }
 
     private function executeCommand($command)
