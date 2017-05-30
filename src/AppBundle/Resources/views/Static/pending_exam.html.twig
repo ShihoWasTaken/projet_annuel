@@ -7,11 +7,106 @@
 {% block body %}
         <div class="container">
             <div class="row">
-                <button id="stop" class="btn btn-lg btn-danger">Stopper l'examen</button><br>
-                Examen {{ exam.name }}<br>
-                Commencé le {{ exam.date|date('j/m/Y à h:m:s') }}
+                <div class="col-md-7">
+
+                    <button id="stop" class="btn btn-lg btn-danger">Stopper l'examen</button>
+                    <a class="btn btn-lg btn-primary" href="{{ path('app_homepage') }}">Revenir à la liste des examens</a>
+                    <h4>Informations de l'examen</h4>
+                    <div>Examen {{ exam.name }}</div>
+                    <div>Commencé le {{ exam.date|date('j/m/Y à h:m:s') }}</div>
+                    <div>Port {{ exam.port }} utilisé</div>
+                    <h4>Journal des évènements</h4>
+                    <div id="events">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <h4>Etudiants connectés à cet exam</h4>
+                    <div>Inscrits: <span id="registered"></span></div>
+                    <div>Connectés: <span id="connected"></span></div>
+                    <div>Déconnectés: <span id="disconnected"></span></div>
+                    <table class="table table-bordered table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Connecté</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+                </div>
+                <script>
+                    var currentlyLogged = new Object();
+
+                    function getLoggedStudents() {
+                        $.ajax({
+                            url: '{{ path('app_logged_students', {'examName': exam.name }) }}',
+                            type: 'POST',
+                            data: {'examName': '{{ exam.name }}' },
+                            dataType: 'json'
+                        }).done(function (data) {
+                            console.log(data);
+                            $('#tbody').text("");
+                            $('#registered').text(data.students.length);
+                            var connectedStudents = 0;
+                            data.students.forEach(function(element){
+                                var obj = JSON.parse(element);
+                                var icon;
+                                if(obj.connected)
+                                {
+                                    icon = '<i class="fa fa-check text-success"></fa>';
+                                    connectedStudents++;
+                                }
+                                else
+                                {
+                                    icon = '<i class="fa fa-times text-danger"></fa>';
+                                }
+                                $('#tbody').append('<tr><td>'+ obj.username + '</td><td>' + icon + '</td></tr>');
+                                if(currentlyLogged[obj.username] !== 'undefined')
+                                {
+                                    if(currentlyLogged[obj.username] != obj.connected)
+                                    {
+                                        var eventTitle, eventText;
+                                        if(currentlyLogged[obj.username])
+                                        {
+                                            eventTitle = 'Elève reconnecté';
+                                            eventText = obj.username + ' s\'est déconnecté du serveur';
+                                        }
+                                        else
+                                        {
+                                            eventTitle = 'Elève déconnecté';
+                                            eventText = obj.username + ' s\'est reconnecté au serveur';
+                                        }
+                                        notifyMe(eventTitle, eventText);
+                                        var date = new Date;
+
+                                        var seconds = date.getSeconds();
+                                        var minutes = date.getMinutes();
+                                        var hour = date.getHours();
+                                        $('#events').append(hour + ':' + minutes + ":" + seconds + " - " + eventText + "<br>");
+                                        currentlyLogged[obj.username] = obj.connected;
+                                    }
+                                }
+                                else
+                                {
+                                    currentlyLogged[obj.username] = obj.connected;
+                                }
+                            });
+                            $('#connected').text(connectedStudents);
+                            $('#disconnected').text(data.students.length - connectedStudents);
+                        })
+                        .fail(function (data) {
+                            alert(data.error);
+                        });
+                    }
+                </script>
                 <script>
                     $( document ).ready(function() {
+
+                        getLoggedStudents();
+                        setInterval("getLoggedStudents()", 2000);
+
+
                         $('#stop').on( "click", function() {
                             if (confirm("Voulez-vous vraiment stoppez l'examen ?"))
                             {
@@ -21,11 +116,11 @@
                                     data: {'examName': '{{ exam.name }}' },
                                     dataType: 'json'
                                 }).done(function () {
-                                            window.location.href = '{{ path('app_homepage') }}';
-                                        })
-                                        .fail(function (data) {
-                                            alert(data.responseJSON['error']);
-                                        });
+                                    window.location.href = '{{ path('app_homepage') }}';
+                                })
+                                .fail(function (data) {
+                                    alert(data.error);
+                                });
                             }
                         });
 

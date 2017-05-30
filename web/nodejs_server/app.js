@@ -91,7 +91,6 @@ function main(){
   //**************************************************//
   var SSDP = require('node-ssdp').Server,
   server = new SSDP({
-    //unicastHost: '192.168.11.63',
     sourcePort: 1900,
   });
 
@@ -150,7 +149,7 @@ function main(){
           return fs.mkdirSync(userDirectory);
         }
       });
-      db.all("SELECT COUNT(*) AS COUNT FROM students WHERE student = '"+user+"'",function(err,rows){
+      db.all("SELECT COUNT(*) AS COUNT FROM student WHERE username = '"+user+"'",function(err,rows){
         if(rows[0].COUNT == 0){
           var stmt = db.prepare("INSERT INTO students(student,connected,port,disconnect_on) VALUES (?,?,?,?)");
           stmt.run(user, 1, PORT_FFMPEG, 0);
@@ -181,12 +180,11 @@ function main(){
     });
   });
 
-  // io.adapter(redis({ host: '127.0.0.1', port: 6379 }));
 
   //Parsing des events reçus
   function parsing(data){
         var student, action, time, file, stmt;
-    db.all("SELECT id FROM students WHERE student = '"+data.user+"'",function(err,rows){
+    db.all("SELECT id FROM student WHERE username = '"+data.user+"'",function(err,rows){
         student = rows.id;
     });
 

@@ -32,3 +32,8 @@ app_delete_exam:
     path:     /exam/{examName}/deleteExam
     defaults: { _controller: AppBundle:Static:deleteExam }
     methods:  [POST]
+
+app_logged_students:
+    path:     /exam/{examName}/loggedStudents
+    defaults: { _controller: AppBundle:Static:getLoggedStudents }
+    methods:  [POST]
