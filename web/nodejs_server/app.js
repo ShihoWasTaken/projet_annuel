@@ -6,7 +6,7 @@ var fs = require('fs'),
     argv = require('yargs').argv,
     sqlite3 = require('sqlite3').verbose(),
     redis = require('socket.io-redis');
-    exec = require('child_process').exec;
+    spawn = require('child_process').spawn;
 //*********************************************//
 //**********Gestion des arguments*************//
 //*******************************************//
@@ -50,6 +50,8 @@ var IPS = argv.i;
 var CODEC = argv.c;
 var RESOLUTION = argv.r;
 var START_TIME = Date.now();
+var runs = [];
+var COUNT_EXEC = 0;
 
 // Gestion inotify
 var remove = true;
@@ -127,19 +129,19 @@ function main(){
 
   var people = {};
   io.on('connection', function (socket) {
-    //console.log('connection !!');
-
-
     socket.on('disconnect', function() {
       user = people[socket.id].name;
       console.log(user + ' disconnected');
-      // io.emit('notification', people[socket.id] + ' a été déconnecté du serveur');
       var time = Date.now()-(people[socket.id].connected_on)
-      db.run("UPDATE students set connected = 0, disconnect_on = disconnect_on+"+ time +" WHERE student = '"+user+"';");
+      db.run("UPDATE students set connected = 0, disconnect_on = disconnect_on+"+ time +" WHERE username = '"+user+"';");
       delete people[socket.id];
     });
 
     socket.on('user', function(user){
+      people[socket.id] = {
+                            'name':user,
+                            'connected_on':Date.now()
+                          };
       console.log(user + " connected !!");
       var userDirectory = WORKING_DIRECTORY+'/'+user
       fs.stat(userDirectory, function (err, stats){
@@ -149,28 +151,26 @@ function main(){
           return fs.mkdirSync(userDirectory);
         }
       });
-      db.all("SELECT COUNT(*) AS COUNT FROM student WHERE username = '"+user+"'",function(err,rows){
+      db.all("SELECT COUNT(*) AS COUNT FROM students WHERE username = '"+user+"'",function(err,rows){
         if(rows[0].COUNT == 0){
-          var stmt = db.prepare("INSERT INTO students(student,connected,port,disconnect_on) VALUES (?,?,?,?)");
+          var stmt = db.prepare("INSERT INTO students(username,connected,port,disconnect_on) VALUES (?,?,?,?)");
           stmt.run(user, 1, PORT_FFMPEG, 0);
-          exec('ffmpeg -i udp://localhost:'+PORT_FFMPEG+' -c copy '+ userDirectory+'/'+user+'.avi');
+          runs[COUNT_EXEC] = spawn('ffmpeg', ['-i', 'udp://localhost:'+PORT_FFMPEG, '-c', 'copy',userDirectory+'/'+user+'.avi']);
           config.video.port = PORT_FFMPEG;
           config.time = 0;
           PORT_FFMPEG++;
+          COUNT_EXEC++;
           socket.emit('config', config);
         }
         else{
-          db.run("UPDATE students set connected = 1 WHERE student = '"+user+"';");
-          db.all("SELECT port, disconnect_on FROM students WHERE student = '"+user+"'",function(err,rows){
+          db.run("UPDATE students set connected = 1 WHERE username = '"+user+"';");
+          db.all("SELECT port, disconnect_on FROM students WHERE username = '"+user+"'",function(err,rows){
             config.time = rows[0].disconnect_on;
             config.video.port = rows[0].port;
             socket.emit('config', config);
           });
         }
-        people[socket.id] = {
-                              'name':user,
-                              'connected_on':Date.now()
-                            };
+
       });
     });
 
@@ -181,20 +181,21 @@ function main(){
   });
 
 
-  //Parsing des events reçus
+  //stockage des events reçus
   function parsing(data){
         var student, action, time, file, stmt;
-    db.all("SELECT id FROM student WHERE username = '"+data.user+"'",function(err,rows){
+    db.all("SELECT id FROM students WHERE username = '"+data.user+"'",function(err,rows){
         student = rows.id;
     });
-
-    for(var i=0; i<data.event.length;i++){
-      stmt = db.prepare("INSERT INTO events(student, file, action, time) VALUES (?,?,?,?)");
-      action = data.event[i].action;
-      time = data.event[i].time;
-      file = data.event[i].file;
-      stmt.run(1, file, action, time);
-    }
+      stmt = db.prepare("INSERT INTO events(student, file, action, size, time) VALUES (?,?,?,?,?)");
+      action = data.action;
+      time = data.time;
+      file = data.file;
+      size = 0;
+      if(data.size){
+        size = data.size;
+      }
+      stmt.run(student, file, action, size, time);
   }
 
   console.log('-> Server listening for connections on ' + PORT+ '\n');
@@ -211,12 +212,30 @@ function main(){
   var db = new sqlite3.Database(WORKING_DIRECTORY+"/database.sqlite");
 
   db.serialize(function() {
-    db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `student` TEXT, 'port' INTEGER, 'connected' INTEGER, 'disconnect_on' INTEGER)");
-    db.run("CREATE TABLE `events`(`id`	INTEGER PRIMARY KEY AUTOINCREMENT, `student` INTEGER, `file`	TEXT, `action`	TEXT, `time`	INTEGER, FOREIGN KEY(`student`) REFERENCES `students.id`);");
+    db.run("CREATE TABLE students (`id`	INTEGER PRIMARY KEY AUTOINCREMENT,  `username` TEXT, 'port' INTEGER, 'connected' INTEGER, 'disconnect_on' INTEGER)");
+    db.run("CREATE TABLE `events`(`id`	INTEGER PRIMARY KEY AUTOINCREMENT, `student` INTEGER, `file`	TEXT, `action`	TEXT, `size` INTEGER, `time`	INTEGER, FOREIGN KEY(`student`) REFERENCES `students.id`);");
 
   });
 
   //****************************************************//
   //*****************End SQLite Part*******************//
   //**************************************************//
+
+
+  function exitHandler(err) {
+    runs.forEach(elem => {
+      elem.kill()
+    });
+    if (err) console.log(err.stack);
+    process.exit();
+  }
+
+  //do something when app is closing
+  process.on('exit', exitHandler.bind());
+
+  //catches ctrl+c event
+  process.on('SIGINT', exitHandler.bind());
+
+  //catches uncaught exceptions
+  process.on('uncaughtException', exitHandler.bind());
 }
