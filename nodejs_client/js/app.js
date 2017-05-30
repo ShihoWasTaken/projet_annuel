@@ -13,7 +13,7 @@ const DEBUG = true;
 var PORT_SEND = 6969;
 var SERVER_IP_ADDRESS = null;
 
-var WATCHED_DIRECTORY = os.homedir()/*+'/client/projet_annuel/nodejs_client'*/;
+var WATCHED_DIRECTORY = os.homedir();
 var CONFIG = null;
 var arrayOfEvents = [];
 
@@ -59,7 +59,7 @@ if (DEBUG == true) {
 
 
 
-
+win.setAlwaysOnTop(true);
 
 
 
@@ -71,14 +71,18 @@ if (DEBUG == true) {
 /**********************************************/
 // Initialize watcher. 
 function watchEvents() {
-
+    log("Watching : " + WATCHED_DIRECTORY);
     watcher = chokidar.watch(WATCHED_DIRECTORY, {
         persistent: true,
         ignoreInitial: true,
         ignored: WATCHED_DIRECTORY + '/.*',
-        usePolling: true,
         useFsEvents: true,
+        usePolling: false,
     });
+
+    watcher.unwatch('.*');
+
+    watcher.on('ready', () => cnosole.log('Initial scan complete. Ready for changes'))
 
     // Add event listeners (if true in config)
     if (CONFIG.inotify.add) {
@@ -176,7 +180,7 @@ function captureScreen() {
     function puts(error, stdout, stderr) { console.log(stdout) }
     var command = "ffmpeg -video_size "+screen.width+"x"+screen.height+" -framerate "+ips+" -f x11grab -i :0.0+0,0 -vcodec "+CONFIG.video.encoding+" -vf scale="+_width+":"+_height+" -f avi -pix_fmt yuv420p 'udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port+"'";
     log(command);
-    process_ffmpeg = exec(command, puts);
+    //process_ffmpeg = exec(command, puts);
 }
 /***************************************************/
 /******************* END CAPTURE *******************/
@@ -358,24 +362,6 @@ function connectTo(ipServer, btn = null) {
         watchEvents();
         captureScreen();
     });
-
-    // Envoie régulier des événements
-    var timeout = setInterval(function() {
-        username().then(username => {
-            var jsonToSend = {
-                "user": username,
-                "event": []
-            };
-            for (var i = 0; i < arrayOfEvents.length; i++) {
-                jsonToSend.event.push(arrayOfEvents[i]);
-            }
-            if (arrayOfEvents.length != 0) {
-                socket.emit('events', jsonToSend);
-            }
-            log("Event emited");
-            arrayOfEvents.length = 0;
-        });
-    }, 3000);
 }
 /**************************************************/
 /******************* END SOCKET *******************/

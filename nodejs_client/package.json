@@ -4,7 +4,7 @@
   "window": {
     "toolbar": false,
     "frame": false,
-    "title": "Observateur",
+    "title": "Client",
     "always-on-top": true,
     "width": 500,
     "height": 150,
