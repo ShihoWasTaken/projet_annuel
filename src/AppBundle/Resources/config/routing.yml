@@ -1,0 +1,34 @@
+app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Static:homepage }
+    methods:  [GET]
+
+app_new_exam:
+    path:     /create
+    defaults: { _controller: AppBundle:Static:newExam }
+    methods:  [GET|POST]
+
+app_stop_exam:
+    path:     /exam/{examName}/stop
+    defaults: { _controller: AppBundle:Static:stopExam }
+    methods:  [POST]
+
+app_display_exam:
+    path:     /exam/{examName}
+    defaults: { _controller: AppBundle:Static:displayExam }
+    methods:  [GET]
+
+app_display_video:
+    path:     /exam/{examName}/video/{etudiant}
+    defaults: { _controller: AppBundle:Static:displayVideo }
+    methods:  [GET]
+
+app_pending_exam:
+    path:     /pendingExam/{id}
+    defaults: { _controller: AppBundle:Static:pendingExam }
+    methods:  [GET]
+
+app_delete_exam:
+    path:     /exam/{examName}/deleteExam
+    defaults: { _controller: AppBundle:Static:deleteExam }
+    methods:  [POST]
