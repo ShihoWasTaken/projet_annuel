@@ -23,11 +23,14 @@ var timeStampStart = 0;
 var process_ffmpeg = null;
 
 var socket;
+var watcher;
 
 var btnBroadcast = document.getElementById('btnBroadcast');
 /************************************************/
 /******************* END VARS *******************/
 /************************************************/
+
+
 
 
 
@@ -45,6 +48,9 @@ function log(txt) {
     if (DEBUG == true) {
         console.log(txt);
     }
+}
+if (DEBUG == true) {
+    win.showDevTools();
 }
 /***************************************************/
 /******************* END HELPERS *******************/
@@ -66,7 +72,7 @@ function log(txt) {
 // Initialize watcher. 
 function watchEvents() {
 
-    var watcher = chokidar.watch(WATCHED_DIRECTORY, {
+    watcher = chokidar.watch(WATCHED_DIRECTORY, {
         persistent: true,
         ignoreInitial: true,
         ignored: WATCHED_DIRECTORY + '/.*',
@@ -76,26 +82,30 @@ function watchEvents() {
 
     // Add event listeners (if true in config)
     if (CONFIG.inotify.add) {
-        watcher.on('add', (path) => {
+        watcher.on('add', (path, stats) => {
             var event = 
                 {
                     "time": (Date.now() - timeStampStart) + CONFIG.time,
                     "action": "Create",
-                    "file": path.toString()
+                    "file": path.toString(),
+                    "size": stats.size
                 };
-            arrayOfEvents.push(event);
+            //arrayOfEvents.push(event);
+            socket.emit('events', event);
             log(path);
         });
     }
     if (CONFIG.inotify.change) {
-        watcher.on('change', (path) => {
+        watcher.on('change', (path, stats) => {
             var event = 
                 {
                     "time": (Date.now() - timeStampStart) + CONFIG.time,
                     "action": "Modify",
-                    "file": path.toString()
+                    "file": path.toString(),
+                    "size": stats.size
                 };
-            arrayOfEvents.push(event);
+            //arrayOfEvents.push(event);
+            socket.emit('events', event);
             log(`Modify file : ${path}`);
         });
     }
@@ -107,19 +117,22 @@ function watchEvents() {
                     "action": "Delete",
                     "file": path.toString()
                 };
-            arrayOfEvents.push(event);
+            //arrayOfEvents.push(event);
+            socket.emit('events', event);
             log(`Delete file : ${path}`);
         });
     }
     if (CONFIG.inotify.addDir) {
-        watcher.on('addDir', (path) => {
+        watcher.on('addDir', (path, stats) => {
             var event = 
                 {
                     "time": (Date.now() - timeStampStart) + CONFIG.time,
                     "action": "Create",
-                    "file": path.toString()
+                    "file": path.toString(),
+                    "size": stats.size
                 };
-            arrayOfEvents.push(event);
+            //arrayOfEvents.push(event);
+            socket.emit('events', event);
             log(`Add Directory : ${path}`);
         });
     }
@@ -131,7 +144,8 @@ function watchEvents() {
                     "action": "Delete",
                     "file": path.toString()
                 };
-            arrayOfEvents.push(event);
+            //arrayOfEvents.push(event);
+            socket.emit('events', event);
             log(`Delete Directory : ${path}`);
         });
     }
@@ -158,21 +172,11 @@ function captureScreen() {
     var _width = CONFIG.video.resolution.split('x')[0];
     var ips = CONFIG.video.imagesPerSeconds;
 
-    //ffmpeg -video_size 1024x768 -framerate 25 -f x11grab -i :0.0+100,200 output.mp4
-    //ffmpeg -video_size 1920x1080 -framerate 2 -f x11grab -i :0.0+0,0 output.mp4
-    //ffmpeg -video_size 1920x1080 -framerate 2 -f x11grab -i :0.0+0,0 -vcodec libx264 -f mpegts -vf scale=960:540 "udp://192.168.99.129:6969"
-
-    /*
--vf drawtext="fontsize=15:fontfile=/Library/Fonts/DroidSansMono.ttf:timecode='00\:00\:00\:00':rate=25:text='TCR\:':fontsize=72:fontcolor='white':boxcolor=0x000000AA:box=1:x=10:y=10"
-    */
-
-    // or more concisely
     var exec = child_process.exec;
     function puts(error, stdout, stderr) { console.log(stdout) }
     var command = "ffmpeg -video_size "+screen.width+"x"+screen.height+" -framerate "+ips+" -f x11grab -i :0.0+0,0 -vcodec "+CONFIG.video.encoding+" -vf scale="+_width+":"+_height+" -f avi -pix_fmt yuv420p 'udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port+"'";
     log(command);
     process_ffmpeg = exec(command, puts);
-
 }
 /***************************************************/
 /******************* END CAPTURE *******************/
@@ -252,6 +256,9 @@ function connectAfterBroadcast(arrayServers) {
         connectTo(arrayServers[0].address);
 
     } else if (arrayServers.length > 1) { // Plus d'un serveur alors on propose la liste de connexion
+        win.setResizable(true);
+        win.resizeBy(150, 300);
+
         // Suppression de la liste des serveurs affichée
         [].forEach.call(document.querySelectorAll('.li-server'),function(e){
             e.parentNode.removeChild(e);
@@ -283,6 +290,7 @@ function connectAfterBroadcast(arrayServers) {
 // Déconnexion du serveur
 function disconnect(ipServer) {
     client.destroy();
+    watcher.close();
     log("Disconnect from : " + ipServer);
 
     // Animation pour informer que l'ordinateur est déconnecté
@@ -315,14 +323,17 @@ function disconnect(ipServer) {
 /**********************************************/
 // Connection au serveur
 function connectTo(ipServer, btn = null) {
+    if (win.resizable == true) {
+        win.resizeBy(500, 150);
+        win.setResizable(false);    
+    }
+
     socket = io.connect("http://" + ipServer + ":" + PORT_SEND);
     SERVER_IP_ADDRESS = ipServer;
 
-    // On connect, on envoie l'user au serveur
-    /*socket.on('connect', () => {
-    });*/
     socket.on('connect', function () {
         btnBroadcast.disabled = true;
+        btnBroadcast.innerHTML = "Vous êtes écouté";
         username().then(username => {
             socket.emit('user', username);
         });
@@ -330,6 +341,7 @@ function connectTo(ipServer, btn = null) {
 
     socket.on('disconnect', function () {
         btnBroadcast.disabled = false;
+        btnBroadcast.innerHTML = "Recherche de serveur";
         log("Disconnect : Kill du ffmpeg");
         var exec = child_process.exec;
         exec("killall ffmpeg");
@@ -389,6 +401,7 @@ function showYouAreListening() {
 function hideYouAreListening() {
     var footer = document.getElementById('footer');
     footer.className += ' invisible animate slideOutDown';
+    footer.classList.remove('visible');
 }
 // Min
 document.getElementById('windowControlMinimize').onclick = function()
@@ -397,21 +410,12 @@ document.getElementById('windowControlMinimize').onclick = function()
 };
 
 // Close
-/*document.getElementById('windowControlClose').onclick = function()
+document.getElementById('windowControlClose').onclick = function()
 {
     win.close();
-};*/
-
-// Max
-/*document.getElementById('windowControlMaximize').onclick = function()
-{
-    if (win.isMaximized)
-        win.unmaximize();
-    else
-        win.maximize();
-};*/
+};
 /***************************************************/
-/******************* END UI *******************/
+/******************* END UI ************************/
 /***************************************************/
 
 
@@ -428,12 +432,17 @@ document.getElementById('windowControlMinimize').onclick = function()
 /**********************************************/
 /******************* EVENTS *******************/
 /**********************************************/
-win.on( 'close', function() {
-    win.minimize();
-} );
+win.on('close', function() {
+    var exec = child_process.exec;
+    exec("killall ffmpeg");
+    watcher.close();
+    alert('En quittant, une alerte sera envoyée au serveur');
+    win.close(true); 
+});
 
 win.on('maximize', function(){
     win.isMaximized = true;
+
 });
 
 win.on('unmaximize', function(){
