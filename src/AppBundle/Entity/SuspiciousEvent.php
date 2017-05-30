@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="evenement")
+ * @ORM\Table(name="events")
  */
 class SuspiciousEvent
 {
@@ -18,33 +18,35 @@ class SuspiciousEvent
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=24)
+     * @ORM\Column(name="student", type="string", length=24)
      */
-    private $username;
+    /**
+     * Many Events have One Student.
+     * @ORM\ManyToOne(targetEntity="Student")
+     * @ORM\JoinColumn(name="student", referencedColumnName="id")
+     */
+    private $student;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="file", type="text")
+     */
+    private $filename;
+
+    /**
+     * @ORM\Column(name="action", type="text")
+     */
+    private $action;
+
+    /**
+     * @ORM\Column(name="size", type="text")
+     */
+    private $size;
+
+    /**
+     * @ORM\Column(name="time", type="integer")
      */
     private $moment;
 
-    /**
-     * @ORM\Column(type="string", length=1024)
-     */
-    private $description;
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     *
-     * @return SuspiciousEvent
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -57,27 +59,75 @@ class SuspiciousEvent
     }
 
     /**
-     * Set username
+     * Set filename
      *
-     * @param string $username
+     * @param string $filename
      *
      * @return SuspiciousEvent
      */
-    public function setUsername($username)
+    public function setFilename($filename)
     {
-        $this->username = $username;
+        $this->filename = $filename;
 
         return $this;
     }
 
     /**
-     * Get username
+     * Get filename
      *
      * @return string
      */
-    public function getUsername()
+    public function getFilename()
     {
-        return $this->username;
+        return $this->filename;
+    }
+
+    /**
+     * Set action
+     *
+     * @param string $action
+     *
+     * @return SuspiciousEvent
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    /**
+     * Get action
+     *
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * Set size
+     *
+     * @param string $size
+     *
+     * @return SuspiciousEvent
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return string
+     */
+    public function getSize()
+    {
+        return $this->size;
     }
 
     /**
@@ -105,26 +155,26 @@ class SuspiciousEvent
     }
 
     /**
-     * Set description
+     * Set student
      *
-     * @param string $description
+     * @param \AppBundle\Entity\Student $student
      *
      * @return SuspiciousEvent
      */
-    public function setDescription($description)
+    public function setStudent(\AppBundle\Entity\Student $student = null)
     {
-        $this->description = $description;
+        $this->student = $student;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get student
      *
-     * @return string
+     * @return \AppBundle\Entity\Student
      */
-    public function getDescription()
+    public function getStudent()
     {
-        return $this->description;
+        return $this->student;
     }
 }

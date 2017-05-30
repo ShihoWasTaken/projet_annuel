@@ -7,3 +7,8 @@ services:
     app.video_service:
         class: AppBundle\Services\VideoService
         arguments: ['@logger', '@service_container']
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }

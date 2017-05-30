@@ -83,12 +83,17 @@ class VideoService
         $finder->files()->in($directoryPath)->depth('== 0')->name('*.' . self::VIDEO_FORMAT)->sortByName();
         $files = array();
         foreach ($finder as $file) {
+            $student = $this->container->get('doctrine')->getRepository('AppBundle:Student')->findOneBy(
+                array(
+                    'username' => $this->getUsernameFromPath($file->getRelativePathname())
+                )
+            );
             $files[] =  array(
                 'path' => 'bundles/app/uploads/' . $file->getRelativePathname(),
                 'username' => $this->getUsernameFromPath($file->getRelativePathname()),
                 'eventCount' => count($repository->findBy(
                     array(
-                        'username' => $this->getUsernameFromPath($file->getRelativePathname())
+                        'student' => $student
                     )
                 ))
             );
