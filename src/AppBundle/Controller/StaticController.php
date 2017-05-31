@@ -245,14 +245,21 @@ $serializer = new Serializer(array($normalizer), array($encoder));
             $videoService = $this->get('app.video_service');
             try {
                 $videoService->deleteExam($examName);
+                $em = $this->getDoctrine()->getManager();
+                /** @var \AppBundle\Entity\Exam $exam */
+                $exam = $this->container->get('doctrine')->getRepository('AppBundle:Exam')->findOneBy(
+                    array(
+                        'name' => $examName
+                    )
+                );
+                $em->remove($exam);
+                $em->flush();
             } catch (\Exception $e) {
                 $response->setData(array(
                     'error' => $e->getMessage()
                 ));
             }
-            $response->setData(array(
-                'error' => 'toto'
-            ));
+
             return $response;
         }
     }

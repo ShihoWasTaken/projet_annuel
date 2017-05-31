@@ -30,26 +30,54 @@
 
         #filtr-wrapper
         {
-            height: 780px;
+            height: 750px;
             overflow: scroll;
             overflow-x: hidden;
         }
     </style>
     <script>
         $(document).ready(function () {
-            $('#filtr-container').filterizr({
-                //options object
+
+
+            function filterEvents() {
+
+                $('.filtr-item').each(function( index ) {
+                    var pattern = $('#text-filter').val().toLowerCase();
+                    var dataText = $(this).attr("data-text").toLowerCase();
+
+                    var n = dataText.search(pattern);
+
+                    var toDisplay = true;
+                    if(n == -1)
+                    {
+                        toDisplay = false;
+                    }
+                    if($('#size-filter').val() == "" && toDisplay)
+                    {
+                        $(this).show();
+                    }
+                    else
+                    {
+                        var maxSize = parseInt($('#size-filter').val());
+                        var eventSize = parseInt($(this).attr( "data-size"));
+                        if( (eventSize >= maxSize)  && toDisplay)
+                        {
+                            $(this).show();
+                        }
+                        else
+                        {
+                            $(this).hide();
+                        }
+                    }
+                });
+            }
+
+            $('#text-filter').change(function() {
+                filterEvents();
             });
 
             $('#size-filter').change(function() {
-                var maxSize = $(this).val();
-                $('.filtr-item').each(function( index ) {
-                    if($(this).attr( "data-size") > maxSize)
-                    {
-                        $(this).addClass('filteredOut');
-                    }
-                });
-
+                filterEvents();
             });
 
         });
@@ -72,21 +100,13 @@
             <div class="col-md-3">
                 <h4>Liste des évènements</h4>
                 <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-md-6">
-                        <div id="event-choice" class="btn-group">
-                            <button data-filter="all" type="button" class="btn btn-info btn-lg" title="Tout"><i class="fa fa-th-list" aria-hidden="true"></i></button>
-                            <button data-filter="1" type="button" class="btn btn-success btn-lg" title="Création de fichier"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                            <button data-filter="2" type="button" class="btn btn-warning btn-lg" title="Modification de fichier"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                            <button data-filter="3" type="button" class="btn btn-danger btn-lg" title="Suppression de fichier"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                        </div>
-                    </div>
-                    <div class="col-md-5 input-group">
-                        <input type="text" name="filtr-search" class="filtr-search form-control" value=""
-                               placeholder="Recherche" data-search="">
+                    <div class="col-md-12 input-group">
+                        <input type="text" id="text-filter" name="text-filter" class="form-control" value=""
+                               placeholder="Recherche">
                     </div>
                     <div class="col-md-12 input-group">
-                        <input type="number" min="0" id="size-filter" name="size-filter" class="form-control" value=""
-                               placeholder="Recherche" >
+                        <input type="number" min="0" id="size-filter" name="size-filter" class="form-control" placeholder="Nombre d'octets max des fichiers filtrés" aria-describedby="basic-addon2">
+                        <span class="input-group-addon" id="basic-addon2">octet(s) max</span>
                     </div>
                 </div>
                 <div id="filtr-wrapper">
@@ -97,16 +117,13 @@
                             {% for event in events %}
                                 {% if event.action|lower == 'create' %}
                                     {% set event_class_color = 'success' %}
-                                    {% set event_action_id = '1' %}
                                 {%  elseif event.action|lower == 'modify'  %}
                                     {% set event_class_color = 'warning' %}
-                                    {% set event_action_id = '2' %}
                                 {%  elseif event.action|lower == 'delete'  %}
                                     {% set event_class_color = 'danger' %}
-                                    {% set event_action_id = '3' %}
                                 {% endif %}
                                 {% set description = event.moment|videoTime ~ " " ~ event.action ~ " " ~ event.filename|tildePath ~ " " ~ event.size|filesize %}
-                                <div class="filtr-item" data-category="{{ event_action_id }}"
+                                <div class="filtr-item" data-category="{{ event.action|lower }}" data-text="{{ description }}"
                                      data-sort="value" data-size="{{ event.size }}" >
                                     <div class="label label-{{ event_class_color }}" onclick="jump('video-1', {{ event.moment/1000 }})" title="{{ description }}" >{{ description }}</div>
                                     <div class="event-spacing"></div>

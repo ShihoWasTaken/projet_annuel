@@ -77,7 +77,7 @@
                     type: 'POST',
                     data: {'examName': name },
                     dataType: 'json'
-                }).done(function () {
+                }).success(function () {
                             window.location.href = '{{ path('app_homepage') }}';
                         })
                         .fail(function (data) {

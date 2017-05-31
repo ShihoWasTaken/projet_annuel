@@ -4,6 +4,7 @@ namespace AppBundle\Services;
 
 use AppBundle\Exception\SQLiteFileNotFoundException;
 use Monolog\Logger;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Process\Process;
@@ -191,7 +192,7 @@ class VideoService
         try {
             $fs->remove($folderName);
         } catch (IOExceptionInterface $e) {
-            echo "An error occurred while creating your directory at ".$e->getPath();
+            throw new Exception("Impossible de supprimer le dossier" . $folderName);
         }
     }
 }
