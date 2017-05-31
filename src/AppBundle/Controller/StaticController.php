@@ -59,9 +59,14 @@ class StaticController extends Controller
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:SuspiciousEvent');
 
-        $events = $repository->findBy(
+        $student = $this->getDoctrine()->getRepository('AppBundle:Student')->findOneBy(
             array(
                 'username' => $etudiant
+            )
+        );
+        $events = $repository->findBy(
+            array(
+                'student' => $student
             )
         );
         return $this->render('AppBundle:Static:display_video.html.twig', array(

@@ -68,7 +68,7 @@ if(argv.u){
   update = false
 }
 
-var DIRECTORY = '';
+var DIRECTORY = 'bundles/app/uploads/';
 var WORKING_DIRECTORY = DIRECTORY+SESSION;
 
 fs.stat(WORKING_DIRECTORY, function (err, stats){

@@ -1,6 +1,7 @@
 {
   "main": "index.html",
   "name": "Client",
+  "version": "0.1.0",
   "window": {
     "toolbar": false,
     "frame": false,

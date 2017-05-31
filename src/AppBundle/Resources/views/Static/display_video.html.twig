@@ -10,11 +10,38 @@
         {
             padding: 10px;
             display: block;
-            margin: 10px 0;
             cursor: pointer;
             border-radius: 0;
+            width: 100%;
+            text-align: left;
+        }
+        div.filtr-item
+        {
+            width: 100%;
+        }
+        .event-spacing
+        {
+            height: 10px;
+        }
+        .filtr-item.filteredOut {
+            visibility: hidden;
+            display: none;
+        }
+
+        #filtr-wrapper
+        {
+            height: 780px;
+            overflow: scroll;
+            overflow-x: hidden;
         }
     </style>
+    <script>
+        $(document).ready(function () {
+            $('#filtr-container').filterizr({
+                //options object
+            });
+        });
+    </script>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">
@@ -32,14 +59,46 @@
             </div>
             <div class="col-md-3">
                 <h4>Liste des évènements</h4>
-
-                    {% if events is empty %}
-                        <p>Aucun évènement enregistré pour cette vidéo</p>
-                    {% else %}
-                        {% for event in events %}
-                            <div class="label label-info" onclick="jump('video-1', {{ event.moment }})">{{ event.description }}</div>
-                        {% endfor %}
-                    {% endif %}
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <div id="event-choice" class="btn-group">
+                            <button data-filter="all" type="button" class="btn btn-info btn-lg" title="Tout"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+                            <button data-filter="1" type="button" class="btn btn-success btn-lg" title="Création de fichier"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button data-filter="2" type="button" class="btn btn-warning btn-lg" title="Modification de fichier"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            <button data-filter="3" type="button" class="btn btn-danger btn-lg" title="Suppression de fichier"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-5 input-group">
+                        <input type="text" name="filtr-search" class="filtr-search form-control" value=""
+                               placeholder="Recherche" data-search="">
+                    </div>
+                </div>
+                <div id="filtr-wrapper">
+                    <div id="filtr-container" class="filtr-container">
+                        {% if events is empty %}
+                            <p>Aucun évènement enregistré pour cette vidéo</p>
+                        {% else %}
+                            {% for event in events %}
+                                {% if event.action|lower == 'create' %}
+                                    {% set event_class_color = 'success' %}
+                                    {% set event_action_id = '1' %}
+                                {%  elseif event.action|lower == 'modify'  %}
+                                    {% set event_class_color = 'warning' %}
+                                    {% set event_action_id = '2' %}
+                                {%  elseif event.action|lower == 'delete'  %}
+                                    {% set event_class_color = 'danger' %}
+                                    {% set event_action_id = '3' %}
+                                {% endif %}
+                                {% set description = event.moment|videoTime ~ " " ~ event.action ~ " " ~ event.filename|tildePath ~ " " ~ event.size|filesize %}
+                                <div class="filtr-item" data-category="{{ event_action_id }}"
+                                     data-sort="value">
+                                    <div class="label label-{{ event_class_color }}" onclick="jump('video-1', {{ event.moment/1000 }})" title="{{ description }}" >{{ description }}</div>
+                                    <div class="event-spacing"></div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
