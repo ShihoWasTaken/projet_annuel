@@ -8,7 +8,7 @@ var ssdp = require("node-ssdp").Client, client = new ssdp();
 var child_process = require('child_process');
 var os = require('os');
 
-const DEBUG = true;
+const DEBUG = false;
 
 var PORT_SEND = 6969;
 var SERVER_IP_ADDRESS = null;
