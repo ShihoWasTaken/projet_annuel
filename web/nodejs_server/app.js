@@ -176,17 +176,16 @@ function main(){
 
     socket.on('events', function(events){
       console.log(events);
-      parsing(events);
+      parsing(events, people[socket.id].name);
     });
   });
 
 
   //stockage des events reçus
-  function parsing(data){
-        var student, action, time, file, stmt;
-    db.all("SELECT id FROM students WHERE username = '"+data.user+"'",function(err,rows){
-        student = rows.id;
-    });
+  function parsing(data, user){
+    var student, action, time, file, stmt;
+    db.all("SELECT id FROM students WHERE username = '"+user+"'",function(err,rows){
+      student = rows[0].id;
       stmt = db.prepare("INSERT INTO events(student, file, action, size, time) VALUES (?,?,?,?,?)");
       action = data.action;
       time = data.time;
@@ -196,6 +195,7 @@ function main(){
         size = data.size;
       }
       stmt.run(student, file, action, size, time);
+    });
   }
 
   console.log('-> Server listening for connections on ' + PORT+ '\n');
