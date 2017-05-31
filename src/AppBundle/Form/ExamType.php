@@ -14,8 +14,6 @@ class ExamType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array('label' => "Nom de l'examen"))
-            ->add('username', TextType::class, array('label' => "Nom d'utilisateur"))
-            ->add('password', TextType::class, array('label' => "Mot de passe"))
             ->add('width', IntegerType::class, array('label' => "Largeur"))
             ->add('height', IntegerType::class, array('label' => "Hauteur"))
             ->add('framesPerSecond', IntegerType::class, array('label' => "FPS"))

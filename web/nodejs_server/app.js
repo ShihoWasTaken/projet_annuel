@@ -143,19 +143,12 @@ function main(){
                             'connected_on':Date.now()
                           };
       console.log(user + " connected !!");
-      var userDirectory = WORKING_DIRECTORY+'/'+user
-      fs.stat(userDirectory, function (err, stats){
-        if (err) {
-          // Directory doesn't exist or something.
-          console.log('Folder '+userDirectory+' created\n');
-          return fs.mkdirSync(userDirectory);
-        }
-      });
+
       db.all("SELECT COUNT(*) AS COUNT FROM students WHERE username = '"+user+"'",function(err,rows){
         if(rows[0].COUNT == 0){
           var stmt = db.prepare("INSERT INTO students(username,connected,port,disconnect_on) VALUES (?,?,?,?)");
           stmt.run(user, 1, PORT_FFMPEG, 0);
-          runs[COUNT_EXEC] = spawn('ffmpeg', ['-i', 'udp://localhost:'+PORT_FFMPEG, '-c', 'copy',userDirectory+'/'+user+'.avi']);
+          runs[COUNT_EXEC] = spawn('ffmpeg', ['-i', 'udp://localhost:'+PORT_FFMPEG, '-c', 'copy', user+'.avi']);
           config.video.port = PORT_FFMPEG;
           config.time = 0;
           PORT_FFMPEG++;

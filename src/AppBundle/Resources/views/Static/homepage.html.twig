@@ -31,7 +31,7 @@
                     </tbody>
                 </table>
             {% endif %}
-            <h3 class="title">Liste des examens consultables</h3>
+            <h3 class="title">Liste des examens consultables par {{ app.user.username }}</h3>
             {% if exams is empty %}
                 Aucun examens à consulter
             {% else %}
@@ -40,6 +40,7 @@
                     <tr>
                         <th>Nom de l'examen</th>
                         <th>Nombre d'étudiants</th>
+                        <th>Crée par</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -48,16 +49,19 @@
                         <tr>
                             <td>{{ exam.name }}</td>
                             <td>{{ exam.studentCount }} étudiants</td>
+                            <td>{{ exam.creator }} le {{ exam.date|date('d/m/y à H:i:s') }}</td>
                             <td>
                                 <a class="btn btn-default" href="{{ path('app_display_exam',  {'examName': exam.name}) }}"><i class="fa fa-info-circle" aria-hidden="true"></i> Détails</a>
-                                <button onclick="deleteExam('{{ exam.name }}')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                {% if app.user == exam.creator or is_granted('ROLE_ADMIN') %}
+                                    <button onclick="deleteExam('{{ exam.name }}')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <a class="btn btn-default" href="{{ path('app_share_exam',  {'examName': exam.name}) }}"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             {% endif %}
-            <button onclick="notifyMe('Elève déconnecté', 'Machin a été déconnecté du serveur')">Notify me!</button>
         </div>
     </div>
     <script>

@@ -40,6 +40,18 @@
             $('#filtr-container').filterizr({
                 //options object
             });
+
+            $('#size-filter').change(function() {
+                var maxSize = $(this).val();
+                $('.filtr-item').each(function( index ) {
+                    if($(this).attr( "data-size") > maxSize)
+                    {
+                        $(this).addClass('filteredOut');
+                    }
+                });
+
+            });
+
         });
     </script>
     <div class="container-fluid">
@@ -72,6 +84,10 @@
                         <input type="text" name="filtr-search" class="filtr-search form-control" value=""
                                placeholder="Recherche" data-search="">
                     </div>
+                    <div class="col-md-12 input-group">
+                        <input type="number" min="0" id="size-filter" name="size-filter" class="form-control" value=""
+                               placeholder="Recherche" >
+                    </div>
                 </div>
                 <div id="filtr-wrapper">
                     <div id="filtr-container" class="filtr-container">
@@ -91,7 +107,7 @@
                                 {% endif %}
                                 {% set description = event.moment|videoTime ~ " " ~ event.action ~ " " ~ event.filename|tildePath ~ " " ~ event.size|filesize %}
                                 <div class="filtr-item" data-category="{{ event_action_id }}"
-                                     data-sort="value">
+                                     data-sort="value" data-size="{{ event.size }}" >
                                     <div class="label label-{{ event_class_color }}" onclick="jump('video-1', {{ event.moment/1000 }})" title="{{ description }}" >{{ description }}</div>
                                     <div class="event-spacing"></div>
                                 </div>

@@ -107,12 +107,27 @@ class VideoService
         $finder = new Finder();
         $finder->directories()->in($directoryPath)->depth('== 0')->sortByName();
         $folders = array();
+
+        /** @var \AppBundle\Entity\User $user */
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
         foreach ($finder as $folder) {
-            $folders[] =  array(
-                'path' => 'bundles/app/uploads/' . $folder->getRelativePathname(),
-                'name' => $folder->getRelativePathname(),
-                'studentCount' => $this->getStudentCount($folder->getRelativePathname())
+
+            /** @var \AppBundle\Entity\Exam $exam */
+            $exam = $this->container->get('doctrine')->getRepository('AppBundle:Exam')->findOneBy(
+                array(
+                    'name' => $folder->getRelativePathname()
+                )
             );
+            if($user->isAllowedToWatchExam($exam))
+            {
+                $folders[] =  array(
+                    'creator' => $exam->getCreator(),
+                    'date' => $exam->getDate(),
+                    'path' => 'bundles/app/uploads/' . $folder->getRelativePathname(),
+                    'name' => $folder->getRelativePathname(),
+                    'studentCount' => $this->getStudentCount($folder->getRelativePathname())
+                );
+            }
         }
         return $folders;
     }
@@ -136,7 +151,8 @@ class VideoService
     {
         $command = $this->getServerCommand($exam);
         $this->logger->addDebug('Commande node lancée : ' . $command);
-        $process = new Process($command . ' > /dev/null 2>&1 &');
+        //$process = new Process($command . ' > /dev/null 2>&1 &');
+        $process = new Process($command . ' > bundles/app/uploads/' . $exam->getName() . '/server.log &');
         $process->setPty(true);
         $process->start();
     }
