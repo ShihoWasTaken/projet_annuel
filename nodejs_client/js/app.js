@@ -421,7 +421,7 @@ document.getElementById('windowControlClose').onclick = function()
 win.on('close', function() {
     var exec = child_process.exec;
     exec("killall ffmpeg");
-    watcher.close();
+    if (watcher != null) watcher.close();
     alert('En quittant, une alerte sera envoyée au serveur');
     win.close(true); 
 });
