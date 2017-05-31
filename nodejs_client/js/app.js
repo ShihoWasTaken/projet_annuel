@@ -176,11 +176,11 @@ function captureScreen() {
     var _width = CONFIG.video.resolution.split('x')[0];
     var ips = CONFIG.video.imagesPerSeconds;
 
-    var exec = child_process.exec;
+    var spawn = child_process.spawn;
     function puts(error, stdout, stderr) { console.log(stdout) }
     var command = "ffmpeg -video_size "+screen.width+"x"+screen.height+" -framerate "+ips+" -f x11grab -i :0.0+0,0 -vcodec "+CONFIG.video.encoding+" -vf scale="+_width+":"+_height+" -f avi -pix_fmt yuv420p 'udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port+"'";
     log(command);
-    //process_ffmpeg = exec(command, puts);
+    process_ffmpeg = spawn("ffmpeg", ["-video_size", screen.width+"x"+screen.height, "-framerate", ips, "-f", "x11grab", "-i", ":0.0+0,0", "-vcodec", CONFIG.video.encoding, "-vf", "scale="+_width+":"+_height, "-f", "avi", "-pix_fmt", "yuv420p", "udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port]);
 }
 /***************************************************/
 /******************* END CAPTURE *******************/
@@ -348,7 +348,8 @@ function connectTo(ipServer, btn = null) {
         btnBroadcast.innerHTML = "Recherche de serveur";
         log("Disconnect : Kill du ffmpeg");
         var exec = child_process.exec;
-        exec("killall ffmpeg");
+        //exec("killall ffmpeg");
+        process_ffmpeg.kill();
         hideYouAreListening();
     });
 
@@ -420,7 +421,8 @@ document.getElementById('windowControlClose').onclick = function()
 /**********************************************/
 win.on('close', function() {
     var exec = child_process.exec;
-    exec("killall ffmpeg");
+    process_ffmpeg.kill();
+    //exec("killall ffmpeg");
     if (watcher != null) watcher.close();
     alert('En quittant, une alerte sera envoyée au serveur');
     win.close(true); 
