@@ -32,7 +32,7 @@ var argv = require('yargs')
           .default('p', 6969)
           .default('f', 7000)
           .default('i', 5)
-          .default('c', 'libx264')
+          .default('c', 'libvpx')
           .default('r', '960x540')
           .help()
           .argv
@@ -148,7 +148,7 @@ function main(){
         if(rows[0].COUNT == 0){
           var stmt = db.prepare("INSERT INTO students(username,connected,port,disconnect_on) VALUES (?,?,?,?)");
           stmt.run(user, 1, PORT_FFMPEG, 0);
-          runs[COUNT_EXEC] = spawn('ffmpeg', ['-i', 'udp://localhost:'+PORT_FFMPEG, '-c', 'copy', 'bundles/app/uploads/' + SESSION + '/' + user + '.avi']);
+          runs[COUNT_EXEC] = spawn('ffmpeg', ['-i', 'udp://localhost:'+PORT_FFMPEG, '-c', 'copy', 'bundles/app/uploads/' + SESSION + '/' + user + '.webm']);
           runs[COUNT_EXEC].stderr.on('data', (data) => {
             console.log(`stderr: ${data}`);
           });
