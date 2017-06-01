@@ -3,6 +3,7 @@
 #### Serveur
 Il est nécessaire d'installer les paquets suivants:
 - google-chrome-stable
+- ffmpeg
 - composer
 - version 6 de NodeJS minimum
 - La dernière version de npm
