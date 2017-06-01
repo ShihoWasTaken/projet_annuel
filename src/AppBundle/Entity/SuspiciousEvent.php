@@ -18,11 +18,9 @@ class SuspiciousEvent
     private $id;
 
     /**
-     * @ORM\Column(name="student", type="string", length=24)
-     */
-    /**
      * Many Events have One Student.
-     * @ORM\ManyToOne(targetEntity="Student")
+     *
+     * @ORM\ManyToOne(targetEntity="Student", inversedBy="events")
      * @ORM\JoinColumn(name="student", referencedColumnName="id")
      */
     private $student;

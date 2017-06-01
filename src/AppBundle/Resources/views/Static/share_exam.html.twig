@@ -1,0 +1,76 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Partage de l'examen {{ exam.name }}
+{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1 class="title">Examen {{ exam.name }}
+                <a class="btn btn-primary" href="{{ path('app_homepage') }}">Revenir à la liste des examens</a></h1>
+            <h3>Créateur : {{ exam.creator }}</h3>
+            <h3>Admin ayant l'accès</h3>
+            {% if admins is empty %}
+                Aucun admin
+            {% else %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in admins %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            <h3>Utilisateurs ayant l'accès</h3>
+            {% if allowed is empty %}
+                Aucun utilisateur autorisé
+            {% else %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in allowed %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td><a class="btn btn-danger" href="{{ path('app_share_exam_disallow', {'examName' : exam.name, 'userId' : user.id}) }}"><i class="fa fa-lock" aria-hidden="true"></i> Retirer</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            <h3>Utilisateurs ayant pas l'accès</h3>
+            {% if not_allowed is empty %}
+                Aucun utilisateur non autorisé
+            {% else %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in not_allowed %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td><a class="btn btn-success" href="{{ path('app_share_exam_allow', {'examName' : exam.name, 'userId' : user.id}) }}"><i class="fa fa-unlock" aria-hidden="true"></i> Autoriser</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock body %}

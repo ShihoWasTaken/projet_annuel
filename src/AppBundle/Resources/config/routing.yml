@@ -37,3 +37,18 @@ app_logged_students:
     path:     /exam/{examName}/loggedStudents
     defaults: { _controller: AppBundle:Static:getLoggedStudents }
     methods:  [POST]
+
+app_share_exam:
+    path:     /exam/{examName}/share
+    defaults: { _controller: AppBundle:Static:shareExam }
+    methods:  [GET]
+
+app_share_exam_allow:
+    path:     /exam/{examName}/share/{userId}/allow
+    defaults: { _controller: AppBundle:Static:allowUser }
+    methods:  [GET]
+
+app_share_exam_disallow:
+    path:     /exam/{examName}/share/{userId}/disallow
+    defaults: { _controller: AppBundle:Static:disallowUser }
+    methods:  [GET]

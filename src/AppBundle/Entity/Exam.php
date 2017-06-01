@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -28,14 +29,13 @@ class Exam
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=24)
+     * Many Exams have One User who created them.
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="exams")
+     * @ORM\JoinColumn(name="creator_id", referencedColumnName="id")
      */
-    private $username;
+    private $creator;
 
-    /**
-     * @ORM\Column(type="string", length=24)
-     */
-    private $password;
 
     /**
      * @ORM\Column(type="smallint")
@@ -56,6 +56,24 @@ class Exam
      * @ORM\Column(type="smallint")
      */
     private $port;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $finished = false;
+
+    // ...
+    /**
+     * Many exams have many user
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="sharedExams", cascade={"persist", "remove"})
+     */
+    private $allowedUsers;
+
+
+    public function __construct()
+    {
+        $this->allowedUsers = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -113,54 +131,6 @@ class Exam
     public function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return Exam
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return Exam
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 
     /**
@@ -257,5 +227,87 @@ class Exam
     public function getPort()
     {
         return $this->port;
+    }
+
+    /**
+     * Set creator
+     *
+     * @param \AppBundle\Entity\User $creator
+     *
+     * @return Exam
+     */
+    public function setCreator(\AppBundle\Entity\User $creator = null)
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    /**
+     * Get creator
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * Add allowedUser
+     *
+     * @param \AppBundle\Entity\User $allowedUser
+     *
+     * @return Exam
+     */
+    public function addAllowedUser(\AppBundle\Entity\User $allowedUser)
+    {
+        $this->allowedUsers[] = $allowedUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove allowedUser
+     *
+     * @param \AppBundle\Entity\User $allowedUser
+     */
+    public function removeAllowedUser(\AppBundle\Entity\User $allowedUser)
+    {
+        $this->allowedUsers->removeElement($allowedUser);
+    }
+
+    /**
+     * Get allowedUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAllowedUsers()
+    {
+        return $this->allowedUsers;
+    }
+
+    /**
+     * Set finished
+     *
+     * @param boolean $finished
+     *
+     * @return Exam
+     */
+    public function setFinished($finished)
+    {
+        $this->finished = $finished;
+
+        return $this;
+    }
+
+    /**
+     * Is finished
+     *
+     * @return boolean
+     */
+    public function isFinished()
+    {
+        return $this->finished;
     }
 }

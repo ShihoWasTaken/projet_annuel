@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class StaticController extends Controller
 {
@@ -20,7 +23,11 @@ class StaticController extends Controller
         $exams = $videoService->listExams();
         $pendingExams = $this->getDoctrine()
             ->getRepository('AppBundle:Exam')
-            ->findAll();
+            ->findBy(
+                array(
+                    "finished" => false,
+                )
+            );
         return $this->render('AppBundle:Static:homepage.html.twig', array(
             'exams' => $exams,
             'pendingExams' => $pendingExams
@@ -89,16 +96,20 @@ class StaticController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $exam = $form->getData();
             $exam->setDate(new \DateTime());
+            $exam->setCreator($this->get('security.token_storage')->getToken()->getUser());
 
             // Test de l'utilisation du port
-            /** @var \AppBundle\Entity\Exam $exam */
+            /** @var \AppBundle\Entity\Exam $usedPort */
             $usedPort = $this->getDoctrine()
                 ->getRepository('AppBundle:Exam')
                 ->findOneByPort($exam->getPort());
 
             if($usedPort)
             {
-                $errors[] = "Le port " . $exam->getPort() . " est déjà utilisé par l'examen " . $usedPort->getName();
+                if(!$usedPort->isFinished())
+                {
+                    $errors[] = "Le port " . $exam->getPort() . " est déjà utilisé par l'examen " . $usedPort->getName();
+                }
             }
 
             // Test de l'existence du dossier
@@ -117,15 +128,19 @@ class StaticController extends Controller
                     $error = "Erreur : " . $e->getMessage();
                 }
 
-                /** @var \AppBundle\Services\VideoService $videoService */
-                $videoService = $this->get('app.video_service');
-                $videoService->startExam($exam);
+                if(empty($errors))
+                {
+                    /** @var \AppBundle\Services\VideoService $videoService */
+                    $videoService = $this->get('app.video_service');
+                    $videoService->startExam($exam);
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($exam);
-                $em->flush();
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($exam);
+                    $em->flush();
 
-                return $this->redirectToRoute('app_pending_exam', array('id' => $exam->getId()));
+                    return $this->redirectToRoute('app_pending_exam', array('id' => $exam->getId()));
+                }
+
             }
         }
 
@@ -172,14 +187,21 @@ class StaticController extends Controller
             }
             /** @var \AppBundle\Services\VideoService $videoService */
             $videoService = $this->get('app.video_service');
-            $videoService->stopExam($exam);
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($exam);
-            $em->flush();
+            try {
+                $videoService->stopExam($exam);
+                $em = $this->getDoctrine()->getManager();
+                $exam->setFinished(true);
+                $em->merge($exam);
+                $em->flush();
+            } catch (\Exception $e) {
+                $response->setData(array(
+                    'error' => "Erreur : " . $e->getMessage()
+                ));
+            }
             return $response;
         }
     }
-    
+
     public function getLoggedStudentsAction(Request $request, $examName)
     {
         if (!$request->isXmlHttpRequest()) {
@@ -187,37 +209,27 @@ class StaticController extends Controller
         } else {
             $response = new JsonResponse();
 
-            $serializer = $this->container->get('fos_js_routing.serializer');
+
+
+            $encoder = new JsonEncoder();
+$normalizer = new ObjectNormalizer();
+
+$normalizer->setCircularReferenceHandler(function ($object) {
+    return 'circular_ref';
+});
+
+$serializer = new Serializer(array($normalizer), array($encoder));
 
             /** @var \AppBundle\Services\VideoService $videoService */
             $videoService = $this->get('app.video_service');
             $students = $videoService->getLoggedStudents($examName);
-            $students = array();
-            //for($i = 0; $i < 30; $i++)
-            if (rand(0, 1))
+            $serialized = array();
+            foreach($students as $student)
             {
-                $student = new Student();
-                $student->setConnected(true);
-                $student->setUsername("kguiougou");
-                $students[] = $serializer->serialize($student, 'json');
-                $student2 = new Student();
-                $student2->setConnected(true);
-                $student2->setUsername("echavallier");
-                $students[] = $serializer->serialize($student2, 'json');
-            }
-            else
-            {
-                $student = new Student();
-                $student->setConnected(false);
-                $student->setUsername("kguiougou");
-                $students[] = $serializer->serialize($student, 'json');
-                $student2 = new Student();
-                $student2->setConnected(false);
-                $student2->setUsername("echavallier");
-                $students[] = $serializer->serialize($student2, 'json');
+                $serialized[] = $serializer->serialize($student, 'json');
             }
             $response->setData(array(
-                'students' => $students
+                'students' => $serialized
             ));
             return $response;
         }
@@ -233,15 +245,138 @@ class StaticController extends Controller
             $videoService = $this->get('app.video_service');
             try {
                 $videoService->deleteExam($examName);
+                $em = $this->getDoctrine()->getManager();
+                /** @var \AppBundle\Entity\Exam $exam */
+                $exam = $this->container->get('doctrine')->getRepository('AppBundle:Exam')->findOneBy(
+                    array(
+                        'name' => $examName
+                    )
+                );
+                $em->remove($exam);
+                $em->flush();
             } catch (\Exception $e) {
                 $response->setData(array(
                     'error' => $e->getMessage()
                 ));
             }
-            $response->setData(array(
-                'error' => 'toto'
-            ));
+
             return $response;
         }
+    }
+
+    public function shareExamAction(Request $request, $examName)
+    {
+        $errors = array();
+        /** @var \AppBundle\Entity\Exam $exam */
+        $exam = $this->getDoctrine()
+            ->getRepository('AppBundle:Exam')
+            ->findOneByName($examName);
+
+        if (!$exam) {
+            $errors[] = "Pas d'examen trouvé pour le nom: " . $examName;
+        }
+
+        $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+        if($exam->getCreator() != $currentUser)
+        {
+            if(!$currentUser->hasRole('ROLE_ADMIN'))
+            {
+                $errors[] = "Vous n'êtes pas autorisé à gérer les droits de cet examen";
+            }
+        }
+
+
+        $admins = array();
+        $allowed = array();
+        $not_allowed = array();
+        $users = $this->getDoctrine()
+            ->getRepository('AppBundle:User')
+            ->findAll();
+        foreach($users as $user)
+        {
+            if($user != $exam->getCreator())
+            {
+                if($user->hasRole('ROLE_ADMIN'))
+                {
+                    $admins[] = $user;
+                }
+                else if($user->isAllowedToWatchExam($exam))
+                {
+                    $allowed[] = $user;
+                }
+                else
+                {
+                    $not_allowed[] = $user;
+                }
+            }
+        }
+        if(!empty($errors))
+        {
+            return $this->render('AppBundle:Static:share_exam_forbidden.html.twig', array(
+                'exam' => $exam,
+                'errors' => $errors
+            ));
+        }
+        else
+        {
+            return $this->render('AppBundle:Static:share_exam.html.twig', array(
+                'exam' => $exam,
+                'users' => $users,
+                'allowed' => $allowed,
+                'not_allowed' => $not_allowed,
+                'admins' => $admins
+            ));
+        }
+    }
+
+    public function allowUserAction($examName, $userId)
+    {
+
+        /** @var \AppBundle\Entity\User $user */
+        $user = $this->getDoctrine()
+            ->getRepository('AppBundle:User')
+            ->findOneById($userId);
+
+        /** @var \AppBundle\Entity\Exam $exam */
+        $exam = $this->getDoctrine()
+            ->getRepository('AppBundle:Exam')
+            ->findOneBy(
+                array(
+                    'name' => $examName
+                )
+            );
+        $user->addSharedExam($exam);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($user);
+        $em->flush();
+
+        return $this->redirectToRoute('app_share_exam', array('examName' => $examName));
+    }
+
+    public function disallowUserAction($examName, $userId)
+    {
+
+        /** @var \AppBundle\Entity\User $user */
+        $user = $this->getDoctrine()
+            ->getRepository('AppBundle:User')
+            ->findOneById($userId);
+
+        /** @var \AppBundle\Entity\Exam $exam */
+        $exam = $this->getDoctrine()
+            ->getRepository('AppBundle:Exam')
+            ->findOneBy(
+                array(
+                    'name' => $examName
+                )
+            );
+        $user->removeSharedExam($exam);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($user);
+        $em->flush();
+
+        return $this->redirectToRoute('app_share_exam', array('examName' => $examName));
     }
 }
