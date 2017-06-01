@@ -20,7 +20,7 @@ var arrayOfEvents = [];
 var arrayServers = [];
 var isConnectedToServer = false;
 var timeStampStart = 0;
-var process_ffmpeg = null;
+var process_ffmpeg;
 
 var socket;
 var watcher;
@@ -349,7 +349,7 @@ function connectTo(ipServer, btn = null) {
         log("Disconnect : Kill du ffmpeg");
         var exec = child_process.exec;
         //exec("killall ffmpeg");
-        process_ffmpeg.kill();
+        if (process_ffmpeg != null) process_ffmpeg.kill();
         hideYouAreListening();
     });
 
@@ -421,7 +421,7 @@ document.getElementById('windowControlClose').onclick = function()
 /**********************************************/
 win.on('close', function() {
     var exec = child_process.exec;
-    process_ffmpeg.kill();
+    if (process_ffmpeg != null) process_ffmpeg.kill();
     //exec("killall ffmpeg");
     if (watcher != null) watcher.close();
     alert('En quittant, une alerte sera envoyée au serveur');
