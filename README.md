@@ -2,7 +2,7 @@
 
 ### Compilation de la solution client
 ```sh
-$ npm install nw-builder
+$ npm install nw-builder -g
 ```
 - Se rendre dans le dossier nodejs_client
 ```sh
