@@ -1,0 +1,3092 @@
+-> Server listening for connections on 6969
+
+etudiant connected !!
+stderr: ffmpeg version 2.8.11-0ubuntu0.16.04.1 Copyright (c) 2000-2017 the FFmpeg developers
+  built with gcc 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.4) 20160609
+  configuration: --prefix=/usr --extra-version=0ubuntu0.16.04.1 --build-suffix=-ffmpeg --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --cc=cc --cxx=g++ --enable-gpl --enable-shared --disable-stripping --disable-decoder=libopenjpeg --disable-decoder=libschroedinger --enable-avresample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libmodplug --enable-libmp3lame --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-librtmp --enable-libschroedinger --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxvid --enable-libzvbi --enable-openal --enable-opengl --enable-x11grab --enable-libdc1394 --enable-libiec61883 --enable-libzmq --enable-frei0r --enable-libx264 --enable-libopencv
+
+stderr:   libavutil      54. 31.100 / 54. 31.100
+  libavcodec     56. 60.100 / 56. 60.100
+  libavformat    56. 40.101 / 56. 40.101
+  libavdevice    56.  4.100 / 56.  4.100
+  libavfilter     5. 40.101 /  5. 40.101
+  libavresample   2.  1.  0 /  2.  1.  0
+  libswscale      3.  1.101 /  3.  1.101
+  libswresample   1.  2.101 /  1.  2.101
+  libpostproc    53.  3.100 / 53.  3.100
+
+stderr: Input #0, matroska,webm, from 'udp://localhost:7000':
+  Metadata:
+    encoder         : Lavf56.40.101
+  Duration: N/A, start: 0.000000, bitrate: N/A
+
+stderr:     Stream #0:0: Video: vp8, yuv420p, 960x540, SAR 1:1 DAR 16:9, 2 fps, 2 tbr, 1k tbn, 1k tbc (default)
+[webm @ 0x886c60] Codec for stream 0 does not use global headers but container format requires global headers
+Output #0, webm, to 'bundles/app/uploads/test/etudiant.webm':
+  Metadata:
+    encoder         : Lavf56.40.101
+    Stream #0:0: Video: vp8, yuv420p, 960x540 [SAR 1:1 DAR 16:9], q=2-31, 2 fps, 2 tbr, 1k tbn, 1k tbc (default)
+Stream mapping:
+  Stream #0:0 -> #0:0 (copy)
+Press [q] to stop, [?] for help
+
+stderr: frame=   15 fps=9.8 q=-1.0 size=     190kB time=00:00:07.50 bitrate= 207.8kbits/s    
+stderr: frame=   18 fps=6.1 q=-1.0 size=     199kB time=00:00:09.00 bitrate= 181.0kbits/s    
+stderr: frame=   21 fps=4.7 q=-1.0 size=     205kB time=00:00:10.50 bitrate= 159.9kbits/s    
+stderr: frame=   24 fps=4.0 q=-1.0 size=     209kB time=00:00:12.00 bitrate= 143.0kbits/s    
+stderr: frame=   27 fps=3.6 q=-1.0 size=     233kB time=00:00:13.50 bitrate= 141.4kbits/s    
+stderr: frame=   30 fps=3.4 q=-1.0 size=     251kB time=00:00:15.00 bitrate= 136.8kbits/s    
+stderr: frame=   33 fps=3.2 q=-1.0 size=     288kB time=00:00:16.50 bitrate= 142.8kbits/s    
+stderr: frame=   36 fps=3.0 q=-1.0 size=     299kB time=00:00:18.00 bitrate= 136.0kbits/s    
+stderr: frame=   39 fps=2.9 q=-1.0 size=     304kB time=00:00:19.50 bitrate= 127.5kbits/s    
+stderr: frame=   42 fps=2.8 q=-1.0 size=     312kB time=00:00:21.00 bitrate= 121.7kbits/s    
+stderr: frame=   45 fps=2.7 q=-1.0 size=     316kB time=00:00:22.50 bitrate= 115.1kbits/s    
+stderr: frame=   48 fps=2.7 q=-1.0 size=     321kB time=00:00:24.00 bitrate= 109.5kbits/s    
+stderr: frame=   51 fps=2.6 q=-1.0 size=     325kB time=00:00:25.50 bitrate= 104.4kbits/s    
+stderr: frame=   54 fps=2.6 q=-1.0 size=     330kB time=00:00:27.00 bitrate= 100.0kbits/s    
+{ time: 29403,
+  action: 'Create',
+  file: '/home/etudiant/fichier_pour_tricher.txt',
+  size: 0 }
+stderr: frame=   57 fps=2.5 q=-1.0 size=     334kB time=00:00:28.50 bitrate=  96.0kbits/s    
+stderr: frame=   60 fps=2.5 q=-1.0 size=     339kB time=00:00:30.00 bitrate=  92.5kbits/s    
+stderr: frame=   63 fps=2.5 q=-1.0 size=     343kB time=00:00:31.50 bitrate=  89.3kbits/s    
+stderr: frame=   66 fps=2.4 q=-1.0 size=     354kB time=00:00:33.00 bitrate=  87.8kbits/s    
+stderr: frame=   69 fps=2.4 q=-1.0 size=     372kB time=00:00:34.50 bitrate=  88.2kbits/s    
+stderr: frame=   72 fps=2.4 q=-1.0 size=     377kB time=00:00:36.00 bitrate=  85.7kbits/s    
+{ time: 37420,
+  action: 'Modify',
+  file: '/home/etudiant/fichier_pour_tricher.txt',
+  size: 10 }
+stderr: frame=   75 fps=2.4 q=-1.0 size=     381kB time=00:00:37.50 bitrate=  83.3kbits/s    
+stderr: frame=   78 fps=2.4 q=-1.0 size=     415kB time=00:00:39.00 bitrate=  87.1kbits/s    
+stderr: frame=   81 fps=2.4 q=-1.0 size=     421kB time=00:00:40.50 bitrate=  85.2kbits/s    
+{ time: 42347,
+  action: 'Delete',
+  file: '/home/etudiant/fichier_pour_tricher.txt' }
+stderr: frame=   84 fps=2.3 q=-1.0 size=     426kB time=00:00:42.00 bitrate=  83.1kbits/s    
+stderr: frame=   87 fps=2.3 q=-1.0 size=     430kB time=00:00:43.50 bitrate=  81.0kbits/s    
+stderr: frame=   90 fps=2.3 q=-1.0 size=     433kB time=00:00:45.00 bitrate=  78.9kbits/s    
+stderr: frame=   93 fps=2.3 q=-1.0 size=     436kB time=00:00:46.50 bitrate=  76.9kbits/s    
+stderr: frame=   96 fps=2.3 q=-1.0 size=     439kB time=00:00:48.00 bitrate=  75.0kbits/s    
+stderr: frame=   99 fps=2.3 q=-1.0 size=     443kB time=00:00:49.50 bitrate=  73.2kbits/s    
+stderr: frame=  102 fps=2.3 q=-1.0 size=     446kB time=00:00:51.00 bitrate=  71.6kbits/s    
+stderr: frame=  105 fps=2.3 q=-1.0 size=     449kB time=00:00:52.50 bitrate=  70.0kbits/s    
+stderr: frame=  108 fps=2.3 q=-1.0 size=     452kB time=00:00:54.00 bitrate=  68.6kbits/s    
+stderr: frame=  111 fps=2.2 q=-1.0 size=     481kB time=00:00:55.50 bitrate=  71.0kbits/s    
+stderr: frame=  114 fps=2.2 q=-1.0 size=     487kB time=00:00:57.00 bitrate=  69.9kbits/s    
+etudiant disconnected
+etudiant connected !!
+stderr: ffmpeg version 2.8.11-0ubuntu0.16.04.1 Copyright (c) 2000-2017 the FFmpeg developers
+  built with gcc 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.4) 20160609
+  configuration: --prefix=/usr --extra-version=0ubuntu0.16.04.1 --build-suffix=-ffmpeg --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --cc=cc --cxx=g++ --enable-gpl --enable-shared --disable-stripping --disable-decoder=libopenjpeg --disable-decoder=libschroedinger --enable-avresample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libmodplug --enable-libmp3lame --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-librtmp --enable-libschroedinger --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxvid --enable-libzvbi --enable-openal --enable-opengl --enable-x11grab --enable-libdc1394 --enable-libiec61883 --enable-libzmq --enable-frei0r --enable-libx264 --enable-libopencv
+
+stderr:   libavutil      54. 31.100 / 54. 31.100
+  libavcodec     56. 60.100 / 56. 60.100
+  libavformat    56. 40.101 / 56. 40.101
+  libavdevice    56.  4.100 / 56.  4.100
+  libavfilter     5. 40.101 /  5. 40.101
+  libavresample   2.  1.  0 /  2.  1.  0
+  libswscale      3.  1.101 /  3.  1.101
+  libswresample   1.  2.101 /  1.  2.101
+  libpostproc    53.  3.100 / 53.  3.100
+
+stderr: Input #0, matroska,webm, from 'udp://localhost:7001':
+  Metadata:
+    encoder         : Lavf56.40.101
+  Duration: N/A
+stderr: , start: 0.000000, bitrate: N/A
+    Stream #0:0: Video: vp8, yuv420p, 960x540, SAR 1:1 DAR 16:9, 2 fps, 2 tbr, 1k tbn, 1k tbc (default)
+
+stderr: [webm @ 0x138b080] Codec for stream 0 does not use global headers but container format requires global headers
+
+stderr: Output #0, webm, to 'bundles/app/uploads/test/etudiant.webm':
+  Metadata:
+    encoder         : Lavf56.40.101
+
+stderr:     Stream #0:0: Video: vp8, yuv420p, 960x540 [SAR 1:1 DAR 16:9], q=2-31, 2 fps, 2 tbr, 1k tbn, 1k tbc (default)
+Stream mapping:
+  Stream #0:0 -> #0:0 (copy)
+Press [q] to stop, [?] for help
+
+stderr: frame=   14 fps= 10 q=-1.0 size=     173kB time=00:00:06.50 bitrate= 217.9kbits/s    
+stderr: frame=   17 fps=5.9 q=-1.0 size=     198kB time=00:00:08.00 bitrate= 202.7kbits/s    
+stderr: frame=   20 fps=4.6 q=-1.0 size=     228kB time=00:00:09.50 bitrate= 196.8kbits/s    
+stderr: frame=   23 fps=3.9 q=-1.0 size=     235kB time=00:00:11.00 bitrate= 175.0kbits/s    
+stderr: frame=   26 fps=3.5 q=-1.0 size=     248kB time=00:00:12.50 bitrate= 162.6kbits/s    
+stderr: frame=   29 fps=3.3 q=-1.0 size=     280kB time=00:00:14.00 bitrate= 163.6kbits/s    
+stderr: frame=   32 fps=3.1 q=-1.0 size=     286kB time=00:00:15.50 bitrate= 150.9kbits/s    
+stderr: frame=   35 fps=2.9 q=-1.0 size=     307kB time=00:00:17.00 bitrate= 148.0kbits/s    
+stderr: frame=   38 fps=2.8 q=-1.0 size=     319kB time=00:00:18.50 bitrate= 141.2kbits/s    
+stderr: frame=   41 fps=2.8 q=-1.0 size=     329kB time=00:00:20.00 bitrate= 134.8kbits/s    
+stderr: frame=   44 fps=2.7 q=-1.0 size=     346kB time=00:00:21.50 bitrate= 131.8kbits/s    
+stderr: frame=   47 fps=2.6 q=-1.0 size=     365kB time=00:00:23.00 bitrate= 129.9kbits/s    
+stderr: frame=   50 fps=2.6 q=-1.0 size=     376kB time=00:00:24.50 bitrate= 125.9kbits/s    
+{ time: 26447,
+  action: 'Create',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 0 }
+{ time: 26458,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 61440 }
+{ time: 26490,
+  action: 'Delete',
+  file: '/home/etudiant/Bureau/linux64.tar.gz' }
+{ time: 26524,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 491520 }
+{ time: 26583,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 860160 }
+{ time: 26640,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 1228800 }
+{ time: 26694,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 1597440 }
+{ time: 26754,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 1966080 }
+{ time: 26841,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 2457600 }
+{ time: 26893,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 2826240 }
+{ time: 26950,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 3256320 }
+{ time: 26999,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 3624960 }
+{ time: 27049,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 3993600 }
+{ time: 27102,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 4423680 }
+{ time: 27154,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 4730880 }
+{ time: 27205,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 5160960 }
+{ time: 27258,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 5591040 }
+{ time: 27310,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 6021120 }
+{ time: 27369,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 6512640 }
+{ time: 27424,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 7004160 }
+{ time: 27474,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 7434240 }
+{ time: 27526,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 7925760 }
+{ time: 27584,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 8417280 }
+{ time: 27642,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 8908800 }
+stderr: frame=   53 fps=2.5 q=-1.0 size=     396kB time=00:00:26.00 bitrate= 124.6kbits/s    
+{ time: 27702,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 9277440 }
+{ time: 27754,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 9768960 }
+{ time: 27804,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 10199040 }
+{ time: 27856,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 10629120 }
+{ time: 27913,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 11120640 }
+{ time: 27967,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 11489280 }
+{ time: 28017,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 11980800 }
+{ time: 28068,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 12410880 }
+{ time: 28122,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 12902400 }
+{ time: 28172,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 13271040 }
+{ time: 28223,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 13701120 }
+{ time: 28276,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 14192640 }
+{ time: 28329,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 14684160 }
+{ time: 28384,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 15237120 }
+{ time: 28435,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 15728640 }
+{ time: 28492,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 16281600 }
+{ time: 28550,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 16834560 }
+{ time: 28608,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 17326080 }
+{ time: 28661,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 17817600 }
+{ time: 28716,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 18309120 }
+{ time: 28769,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 18800640 }
+{ time: 28819,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 19292160 }
+{ time: 28871,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 19722240 }
+{ time: 28921,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 20152320 }
+{ time: 28983,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 20705280 }
+{ time: 29038,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 21135360 }
+{ time: 29088,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 21565440 }
+{ time: 29144,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 22056960 }
+stderr: frame=   56 fps=2.5 q=-1.0 size=     400kB time=00:00:27.50 bitrate= 119.1kbits/s    
+{ time: 29194,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 22425600 }
+{ time: 29252,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 22917120 }
+{ time: 29306,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 23347200 }
+{ time: 29365,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 23777280 }
+{ time: 29415,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 24207360 }
+{ time: 29534,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 25190400 }
+{ time: 29586,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 25620480 }
+{ time: 29645,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 26112000 }
+{ time: 29703,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 26603520 }
+{ time: 29754,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 27033600 }
+{ time: 29811,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 27525120 }
+{ time: 29867,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 28016640 }
+{ time: 29922,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 28508160 }
+{ time: 29978,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 28999680 }
+{ time: 30031,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 29491200 }
+{ time: 30084,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 29982720 }
+{ time: 30134,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 30412800 }
+{ time: 30190,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 30842880 }
+{ time: 30246,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 31334400 }
+{ time: 30298,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 31825920 }
+{ time: 30351,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 32317440 }
+{ time: 30411,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 32747520 }
+{ time: 30462,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 33300480 }
+{ time: 30512,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 33730560 }
+{ time: 30641,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 34836480 }
+stderr: frame=   59 fps=2.5 q=-1.0 size=     404kB time=00:00:29.00 bitrate= 114.0kbits/s    
+{ time: 30691,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 35266560 }
+{ time: 30748,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 35696640 }
+{ time: 30804,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 36188160 }
+{ time: 30860,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 36679680 }
+{ time: 30911,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 37109760 }
+{ time: 30968,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 37601280 }
+{ time: 31026,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 38092800 }
+{ time: 31080,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 38584320 }
+{ time: 31133,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 39075840 }
+{ time: 31186,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 39505920 }
+{ time: 31237,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 39936000 }
+{ time: 31288,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 40488960 }
+{ time: 31340,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 41103360 }
+{ time: 31391,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 41656320 }
+{ time: 31443,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 42700800 }
+{ time: 31504,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 43069440 }
+{ time: 31555,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 43376640 }
+{ time: 31613,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz',
+  size: 44175360 }
+{ time: 31867,
+  action: 'Delete',
+  file: '/home/etudiant/Bureau/i4hRdsZgRUE1VzHi.linux64.tar.gz' }
+stderr: frame=   62 fps=2.4 q=-1.0 size=     407kB time=00:00:30.50 bitrate= 109.4kbits/s    
+stderr: frame=   65 fps=2.4 q=-1.0 size=     420kB time=00:00:32.00 bitrate= 107.6kbits/s    
+stderr: frame=   68 fps=2.4 q=-1.0 size=     429kB time=00:00:33.50 bitrate= 104.8kbits/s    
+stderr: frame=   71 fps=2.4 q=-1.0 size=     448kB time=00:00:35.00 bitrate= 104.8kbits/s    
+stderr: frame=   74 fps=2.4 q=-1.0 size=     460kB time=00:00:36.50 bitrate= 103.3kbits/s    
+stderr: frame=   77 fps=2.3 q=-1.0 size=     464kB time=00:00:38.00 bitrate= 100.1kbits/s    
+stderr: frame=   80 fps=2.3 q=-1.0 size=     468kB time=00:00:39.50 bitrate=  97.2kbits/s    
+stderr: frame=   83 fps=2.3 q=-1.0 size=     473kB time=00:00:41.00 bitrate=  94.4kbits/s    
+stderr: frame=   86 fps=2.3 q=-1.0 size=     478kB time=00:00:42.50 bitrate=  92.1kbits/s    
+stderr: frame=   89 fps=2.3 q=-1.0 size=     482kB time=00:00:44.00 bitrate=  89.6kbits/s    
+{ time: 46241,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/Client',
+  size: 305525114 }
+{ time: 46241,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/nw_200_percent.pak',
+  size: 804216 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/nacl_irt_x86_64.nexe',
+  size: 3737136 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/resources.pak',
+  size: 18245204 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/lib/libnw.so',
+  size: 110776376 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/lib/libnode.so',
+  size: 20237224 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/lib/libffmpeg.so',
+  size: 1543584 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/icudtl.dat',
+  size: 10130560 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/nacl_helper_bootstrap',
+  size: 14974 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/payload',
+  size: 219448 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/zh-TW.pak',
+  size: 227953 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/kn.pak',
+  size: 627541 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/ko.pak',
+  size: 276498 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/zh-CN.pak',
+  size: 226382 }
+{ time: 46242,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/uk.pak',
+  size: 432642 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/hu.pak',
+  size: 288617 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/da.pak',
+  size: 249325 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/fi.pak',
+  size: 255940 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/pl.pak',
+  size: 269778 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/he.pak',
+  size: 320276 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/et.pak',
+  size: 241354 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/hr.pak',
+  size: 260734 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/en-GB.pak',
+  size: 223036 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/tr.pak',
+  size: 267966 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/nl.pak',
+  size: 260942 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/bg.pak',
+  size: 452841 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/fil.pak',
+  size: 277825 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/am.pak',
+  size: 381423 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/ja.pak',
+  size: 325732 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/en-US.pak',
+  size: 223000 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/ar.pak',
+  size: 377062 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/lv.pak',
+  size: 279926 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/sl.pak',
+  size: 260828 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/pt-BR.pak',
+  size: 266292 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/sw.pak',
+  size: 251512 }
+{ time: 46243,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/es.pak',
+  size: 276784 }
+{ time: 46244,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/ml.pak',
+  size: 686429 }
+{ time: 46244,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/te.pak',
+  size: 609023 }
+{ time: 46244,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/gu.pak',
+  size: 543796 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/lt.pak',
+  size: 280303 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/ms.pak',
+  size: 248845 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/mr.pak',
+  size: 550183 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/fr.pak',
+  size: 293579 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/el.pak',
+  size: 486491 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/nb.pak',
+  size: 246856 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/it.pak',
+  size: 266459 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/ta.pak',
+  size: 637199 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/ru.pak',
+  size: 423238 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/pt-PT.pak',
+  size: 269555 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/vi.pak',
+  size: 304673 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/ca.pak',
+  size: 275097 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/cs.pak',
+  size: 277657 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/es-419.pak',
+  size: 271692 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/th.pak',
+  size: 530799 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/fa.pak',
+  size: 387621 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/sv.pak',
+  size: 248663 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/bn.pak',
+  size: 579606 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/sk.pak',
+  size: 284391 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/de.pak',
+  size: 271114 }
+stderr: frame=   92 fps=2.3 q=-1.0 size=     485kB time=00:00:45.50 bitrate=  87.3kbits/s    
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/ro.pak',
+  size: 277187 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/id.pak',
+  size: 241290 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/sr.pak',
+  size: 415514 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/locales/hi.pak',
+  size: 555692 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/pnacl/pnacl_public_x86_64_libpnacl_irt_shim_a',
+  size: 8570 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/pnacl/pnacl_public_pnacl_json',
+  size: 507 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/snapshot_blob.bin',
+  size: 1448208 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/nw_100_percent.pak',
+  size: 511673 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/nacl_helper',
+  size: 14030904 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/minidump_stackwalk',
+  size: 1643440 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/nwjc',
+  size: 10057288 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/chromedriver',
+  size: 6947608 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/credits.html',
+  size: 1867617 }
+{ time: 46245,
+  action: 'Modify',
+  file: '/home/etudiant/client/projet_annuel/nodejs_client/build/Client/linux64/natives_blob.bin',
+  size: 262947 }
+stderr: frame=   95 fps=2.3 q=-1.0 size=     491kB time=00:00:47.00 bitrate=  85.5kbits/s    
+stderr: frame=   98 fps=2.3 q=-1.0 size=     524kB time=00:00:48.50 bitrate=  88.6kbits/s    
+stderr: frame=  100 fps=2.3 q=-1.0 size=     536kB time=00:00:49.50 bitrate=  88.8kbits/s    
+stderr: frame=  103 fps=2.2 q=-1.0 size=     554kB time=00:00:51.00 bitrate=  88.9kbits/s    
+stderr: frame=  106 fps=2.2 q=-1.0 size=     565kB time=00:00:52.50 bitrate=  88.2kbits/s    
+{ time: 55506,
+  action: 'Create',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 0 }
+{ time: 55516,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 61440 }
+{ time: 55565,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 430080 }
+{ time: 55622,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 798720 }
+{ time: 55673,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 1105920 }
+stderr: frame=  109 fps=2.2 q=-1.0 size=     577kB time=00:00:54.00 bitrate=  87.6kbits/s    
+{ time: 55726,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 1474560 }
+{ time: 55777,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 1843200 }
+{ time: 55838,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 2334720 }
+{ time: 55894,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 2764800 }
+{ time: 55947,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 3194880 }
+{ time: 56002,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 3624960 }
+{ time: 56055,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 4055040 }
+{ time: 56106,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 4485120 }
+{ time: 56158,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 4915200 }
+{ time: 56210,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 5345280 }
+{ time: 56267,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 5836800 }
+{ time: 56321,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 6266880 }
+{ time: 56371,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 6696960 }
+{ time: 56427,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 7188480 }
+{ time: 56482,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 7680000 }
+{ time: 56541,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 8232960 }
+{ time: 56599,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 8724480 }
+{ time: 56651,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 9216000 }
+{ time: 56704,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 9646080 }
+{ time: 56760,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 10137600 }
+{ time: 56811,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 10567680 }
+{ time: 56863,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 10997760 }
+{ time: 56913,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 11427840 }
+{ time: 56966,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 11857920 }
+{ time: 57018,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 12288000 }
+{ time: 57078,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 12840960 }
+{ time: 57128,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 13271040 }
+{ time: 57185,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 13762560 }
+stderr: frame=  112 fps=2.2 q=-1.0 size=     587kB time=00:00:55.50 bitrate=  86.6kbits/s    
+{ time: 57249,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 14254080 }
+{ time: 57305,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 14868480 }
+{ time: 57358,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 15298560 }
+{ time: 57408,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 15790080 }
+{ time: 57460,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 16281600 }
+{ time: 57515,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 16773120 }
+{ time: 57570,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 17264640 }
+{ time: 57633,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 17817600 }
+{ time: 57687,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 18309120 }
+{ time: 57744,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 18862080 }
+{ time: 57801,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 19353600 }
+{ time: 57851,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 19783680 }
+{ time: 57903,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 20213760 }
+{ time: 57960,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 20705280 }
+{ time: 58010,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 21135360 }
+{ time: 58061,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 21565440 }
+{ time: 58115,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 22056960 }
+{ time: 58165,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 22487040 }
+{ time: 58219,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 22917120 }
+{ time: 58273,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 23347200 }
+{ time: 58327,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 23777280 }
+{ time: 58378,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 24207360 }
+stderr: frame=  115 fps=2.2 q=-1.0 size=     591kB time=00:00:57.00 bitrate=  85.0kbits/s    
+{ time: 58439,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 24760320 }
+{ time: 58495,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 25251840 }
+{ time: 58553,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 25743360 }
+{ time: 58603,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 26173440 }
+{ time: 58656,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 26603520 }
+{ time: 58714,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 27095040 }
+{ time: 58765,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 27525120 }
+{ time: 58816,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 27955200 }
+{ time: 58871,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 28446720 }
+{ time: 58927,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 28938240 }
+{ time: 58982,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 29368320 }
+{ time: 59039,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 29982720 }
+{ time: 59094,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 30474240 }
+{ time: 59145,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 30904320 }
+{ time: 59196,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 31334400 }
+{ time: 59246,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 31825920 }
+{ time: 59299,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 32317440 }
+{ time: 59349,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 32747520 }
+{ time: 59403,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 33239040 }
+{ time: 59454,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 33669120 }
+{ time: 59510,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 34222080 }
+{ time: 59568,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 34775040 }
+{ time: 59623,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 35266560 }
+{ time: 59678,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 35696640 }
+{ time: 59734,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 36188160 }
+{ time: 59790,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 36679680 }
+{ time: 59841,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 37109760 }
+{ time: 59892,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 37478400 }
+{ time: 59942,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 37969920 }
+{ time: 60003,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 38522880 }
+{ time: 60058,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 39014400 }
+{ time: 60108,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 39444480 }
+{ time: 60163,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 39874560 }
+stderr: frame=  118 fps=2.2 q=-1.0 size=     595kB time=00:00:58.50 bitrate=  83.4kbits/s    
+{ time: 60214,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 40304640 }
+{ time: 60264,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 40919040 }
+{ time: 60318,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 41410560 }
+{ time: 60372,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 42147840 }
+{ time: 60427,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 42885120 }
+{ time: 60478,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 43192320 }
+{ time: 60532,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 43499520 }
+{ time: 60587,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 44298240 }
+{ time: 60643,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 44728320 }
+{ time: 60695,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 45158400 }
+{ time: 60753,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 45588480 }
+{ time: 60805,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 46018560 }
+{ time: 60859,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 46448640 }
+{ time: 60911,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 46878720 }
+{ time: 60972,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 47370240 }
+{ time: 61025,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 47861760 }
+{ time: 61077,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 48291840 }
+{ time: 61130,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 48721920 }
+{ time: 61184,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 49152000 }
+{ time: 61235,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 49582080 }
+{ time: 61285,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 50012160 }
+{ time: 61343,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 50380800 }
+{ time: 61400,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 50688000 }
+{ time: 61461,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 50995200 }
+{ time: 61519,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 51425280 }
+{ time: 61569,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 51732480 }
+{ time: 61623,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 52101120 }
+stderr: frame=  121 fps=2.2 q=-1.0 size=     599kB time=00:01:00.00 bitrate=  81.8kbits/s    
+{ time: 61681,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 52469760 }
+{ time: 61733,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 52776960 }
+{ time: 61785,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 53084160 }
+{ time: 61837,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 53329920 }
+{ time: 61889,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 53698560 }
+{ time: 61940,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 54128640 }
+{ time: 61992,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 54497280 }
+{ time: 62058,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 54865920 }
+{ time: 62112,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 55121920 }
+{ time: 62188,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 55244800 }
+{ time: 62248,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 55480320 }
+{ time: 62306,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 55787520 }
+{ time: 62357,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 56033280 }
+{ time: 62411,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 56401920 }
+{ time: 62463,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 56709120 }
+{ time: 62523,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 57016320 }
+{ time: 62592,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 57384960 }
+{ time: 62648,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 57579520 }
+{ time: 62710,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 57763840 }
+{ time: 62780,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 57999360 }
+{ time: 62877,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 58109952 }
+{ time: 62946,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 58306560 }
+{ time: 63012,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 58439680 }
+{ time: 63111,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 58593280 }
+{ time: 63211,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 58675200 }
+{ time: 63280,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 58859520 }
+{ time: 63344,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 58982400 }
+{ time: 63420,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 59043840 }
+{ time: 63520,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 59166720 }
+{ time: 63622,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 59351040 }
+{ time: 63676,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 59473920 }
+stderr: frame=  124 fps=2.2 q=-1.0 size=     606kB time=00:01:01.50 bitrate=  80.7kbits/s    
+{ time: 63750,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 59535360 }
+{ time: 63824,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 59607040 }
+{ time: 63893,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 59781120 }
+{ time: 63968,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 59852800 }
+{ time: 64028,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 60026880 }
+{ time: 64080,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 60174336 }
+{ time: 64182,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 60456960 }
+{ time: 64242,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 60641280 }
+{ time: 64296,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 60887040 }
+{ time: 64361,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 61009920 }
+{ time: 64439,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 61255680 }
+{ time: 64517,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 61440000 }
+{ time: 64568,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 61685760 }
+{ time: 64619,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 61870080 }
+{ time: 64679,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 62177280 }
+stderr: frame=  127 fps=2.2 q=-1.0 size=     633kB time=00:01:03.00 bitrate=  82.3kbits/s    
+{ time: 64735,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 62423040 }
+{ time: 64785,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 62791680 }
+{ time: 64840,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 63221760 }
+{ time: 64896,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 63590400 }
+{ time: 65076,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 63959040 }
+{ time: 65137,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 65372160 }
+{ time: 65189,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 66478080 }
+{ time: 65253,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 68198400 }
+{ time: 65306,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 69918720 }
+{ time: 65368,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 71761920 }
+{ time: 65425,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 72867840 }
+{ time: 65489,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 74403840 }
+{ time: 65548,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 76308480 }
+{ time: 65600,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 78151680 }
+{ time: 65652,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 79503360 }
+{ time: 65709,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 81223680 }
+{ time: 65764,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 82944000 }
+{ time: 65828,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 84234240 }
+{ time: 65886,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 85708800 }
+{ time: 65944,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 87142400 }
+{ time: 66009,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 88780800 }
+{ time: 66087,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 90193920 }
+{ time: 66164,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 90685440 }
+{ time: 66215,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 91361280 }
+stderr: frame=  130 fps=2.2 q=-1.0 size=     647kB time=00:01:04.50 bitrate=  82.1kbits/s    
+{ time: 66269,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 92098560 }
+{ time: 66331,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 92774400 }
+{ time: 66392,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 93265920 }
+{ time: 66445,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 93696000 }
+{ time: 66496,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 94187520 }
+{ time: 66557,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 95109120 }
+{ time: 66622,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 96706560 }
+{ time: 66704,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 98304000 }
+{ time: 66759,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 99778560 }
+{ time: 66810,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 100515840 }
+{ time: 66870,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 101201920 }
+{ time: 66941,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 101806080 }
+{ time: 67000,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 102973440 }
+{ time: 67068,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 104632320 }
+{ time: 67120,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 105861120 }
+{ time: 67179,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 107212800 }
+{ time: 67231,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 108625920 }
+{ time: 67283,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 109916160 }
+{ time: 67351,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 111636480 }
+{ time: 67414,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 113356800 }
+{ time: 67466,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 114892800 }
+{ time: 67518,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 116613120 }
+{ time: 67571,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 118210560 }
+{ time: 67625,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 119869440 }
+stderr: frame=  133 fps=2.2 q=-1.0 size=     656kB time=00:01:06.00 bitrate=  81.4kbits/s    
+{ time: 67682,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 121528320 }
+{ time: 67740,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 123187200 }
+{ time: 67792,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 124477440 }
+{ time: 67850,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 126136320 }
+{ time: 67901,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 127733760 }
+{ time: 67954,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 129515520 }
+{ time: 68007,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 131358720 }
+{ time: 68062,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 133263360 }
+{ time: 68117,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 135106560 }
+{ time: 68175,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 136704000 }
+{ time: 68230,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 138547200 }
+{ time: 68285,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 140451840 }
+{ time: 68339,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 142295040 }
+{ time: 68392,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 143708160 }
+{ time: 68445,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 145428480 }
+{ time: 68500,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 147394560 }
+{ time: 68553,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 149114880 }
+{ time: 68608,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 150736896 }
+{ time: 68665,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 152309760 }
+{ time: 68721,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 153784320 }
+{ time: 68800,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 155566080 }
+{ time: 68866,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 157347840 }
+{ time: 68919,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 158638080 }
+{ time: 68978,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 160051200 }
+{ time: 69031,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 161095680 }
+{ time: 69090,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 162816000 }
+{ time: 69146,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 164290560 }
+{ time: 69207,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 165949440 }
+{ time: 69264,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 167424000 }
+stderr: frame=  136 fps=2.2 q=-1.0 size=     661kB time=00:01:07.50 bitrate=  80.3kbits/s    
+{ time: 69322,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 168837120 }
+{ time: 69372,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 170004480 }
+{ time: 69449,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 171663360 }
+{ time: 69505,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 173015040 }
+{ time: 69562,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 173875200 }
+{ time: 69613,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 175472640 }
+{ time: 69667,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 177008640 }
+{ time: 69725,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 177991680 }
+{ time: 69790,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 179773440 }
+{ time: 69841,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 181248000 }
+{ time: 69893,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 181923840 }
+{ time: 69947,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 182906880 }
+{ time: 70001,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 184197120 }
+{ time: 70055,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 185548800 }
+{ time: 70105,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 186777600 }
+{ time: 70168,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 187760640 }
+{ time: 70227,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 188682240 }
+{ time: 70281,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 189972480 }
+{ time: 70334,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 191016960 }
+{ time: 70387,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 192430080 }
+{ time: 70443,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 193658880 }
+{ time: 70501,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 195215360 }
+{ time: 70560,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 196792320 }
+{ time: 70620,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 198635520 }
+{ time: 70681,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 200294400 }
+{ time: 70736,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 201523200 }
+stderr: frame=  140 fps=2.2 q=-1.0 size=     735kB time=00:01:09.50 bitrate=  86.6kbits/s    
+{ time: 70794,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 202936320 }
+{ time: 70847,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 204472320 }
+{ time: 70902,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 205946880 }
+{ time: 70960,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 207360000 }
+{ time: 71013,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 208588800 }
+{ time: 71083,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 210247680 }
+{ time: 71137,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 211537920 }
+{ time: 71203,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 213196800 }
+{ time: 71256,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 214487040 }
+{ time: 71308,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 215777280 }
+{ time: 71394,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 217559040 }
+{ time: 71452,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 219156480 }
+{ time: 71510,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 220508160 }
+{ time: 71569,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 222044160 }
+{ time: 71627,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 223887360 }
+{ time: 71678,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 225116160 }
+{ time: 71733,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 226529280 }
+{ time: 71790,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 227758080 }
+{ time: 71843,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 228925440 }
+{ time: 71897,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 230338560 }
+{ time: 71948,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 231024640 }
+{ time: 72003,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 231567360 }
+{ time: 72062,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 232181760 }
+{ time: 72116,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 233226240 }
+{ time: 72169,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 234147840 }
+{ time: 72222,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 235315200 }
+{ time: 72278,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 236609536 }
+{ time: 72338,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 238080000 }
+stderr: frame=  142 fps=2.2 q=-1.0 size=     750kB time=00:01:10.50 bitrate=  87.2kbits/s    
+{ time: 72394,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 239677440 }
+{ time: 72456,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 241704960 }
+{ time: 72508,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 243425280 }
+{ time: 72562,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 244899840 }
+{ time: 72614,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 246435840 }
+{ time: 72680,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 247848960 }
+{ time: 72732,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 248893440 }
+{ time: 72787,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 249384960 }
+{ time: 72859,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 250368000 }
+{ time: 72910,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 251719680 }
+{ time: 72965,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 252887040 }
+{ time: 73015,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 253931520 }
+{ time: 73080,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 255160320 }
+{ time: 73139,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 256389120 }
+{ time: 73194,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 257679360 }
+{ time: 73271,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 258969600 }
+{ time: 73326,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 259891200 }
+{ time: 73387,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 260935680 }
+{ time: 73438,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 261734400 }
+stderr: frame=  145 fps=2.2 q=-1.0 size=     802kB time=00:01:12.00 bitrate=  91.3kbits/s    
+{ time: 73523,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 263516160 }
+{ time: 73576,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 265062400 }
+{ time: 73626,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 266035200 }
+{ time: 73677,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 267448320 }
+{ time: 73726,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 268492800 }
+{ time: 73783,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 269783040 }
+{ time: 73842,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 270827520 }
+{ time: 73894,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 271933440 }
+{ time: 73948,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 273592320 }
+{ time: 74022,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 275435520 }
+{ time: 74081,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 276725760 }
+{ time: 74146,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 277708800 }
+{ time: 74207,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 278937600 }
+{ time: 74264,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 280104960 }
+{ time: 74323,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 280473600 }
+{ time: 74392,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 281640960 }
+{ time: 74446,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 282992640 }
+{ time: 74496,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 284467200 }
+{ time: 74558,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 286064640 }
+{ time: 74611,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 287354880 }
+{ time: 74668,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 288890880 }
+{ time: 74722,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 290304000 }
+stderr: frame=  147 fps=2.2 q=-1.0 size=     826kB time=00:01:13.00 bitrate=  92.7kbits/s    
+{ time: 74813,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 292147200 }
+{ time: 74878,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 293990400 }
+{ time: 74936,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 295710720 }
+{ time: 74997,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 297246720 }
+{ time: 75052,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 298598400 }
+{ time: 75111,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 300072960 }
+{ time: 75189,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 301977600 }
+{ time: 75256,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 303656960 }
+{ time: 75312,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 304926720 }
+{ time: 75370,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 306094080 }
+{ time: 75444,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 308183040 }
+{ time: 75495,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 309596160 }
+{ time: 75550,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 311070720 }
+{ time: 75601,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 312248320 }
+stderr: frame=  150 fps=2.2 q=-1.0 size=     856kB time=00:01:14.50 bitrate=  94.1kbits/s    
+{ time: 76327,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 313651200 }
+{ time: 76378,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 330915840 }
+{ time: 76433,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 332206080 }
+{ time: 76484,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 333434880 }
+{ time: 76535,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 334663680 }
+{ time: 76597,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 335953920 }
+{ time: 76653,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 337612800 }
+{ time: 76708,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 339025920 }
+{ time: 76758,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 340131840 }
+{ time: 76815,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 341422080 }
+{ time: 76870,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 342589440 }
+{ time: 76924,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 343941120 }
+{ time: 76976,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 344924160 }
+stderr: frame=  153 fps=2.2 q=-1.0 size=     903kB time=00:01:16.00 bitrate=  97.3kbits/s    
+{ time: 77028,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 346705920 }
+{ time: 77078,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 348364800 }
+{ time: 77140,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 350085120 }
+{ time: 77198,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 351375360 }
+{ time: 77259,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 352788480 }
+{ time: 77318,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 354017280 }
+{ time: 77378,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 355307520 }
+{ time: 77439,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 356597760 }
+{ time: 77494,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 358133760 }
+{ time: 77545,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 359731200 }
+{ time: 77595,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 361082880 }
+{ time: 77657,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 362864640 }
+{ time: 77710,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 364093440 }
+{ time: 77764,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 365076480 }
+{ time: 77826,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 366489600 }
+{ time: 77889,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 368025600 }
+{ time: 77945,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 368394240 }
+{ time: 77995,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 368824320 }
+{ time: 78049,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 369315840 }
+{ time: 78099,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 369868800 }
+{ time: 78187,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 370421760 }
+{ time: 78243,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 371097600 }
+{ time: 78294,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 371466240 }
+{ time: 78360,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 371896320 }
+stderr: frame=  156 fps=2.2 q=-1.0 size=     941kB time=00:01:17.50 bitrate=  99.5kbits/s    
+{ time: 78417,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 372572160 }
+{ time: 78484,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 372940800 }
+{ time: 78541,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 373309440 }
+{ time: 78592,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 373616640 }
+{ time: 78656,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 373985280 }
+{ time: 78715,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 374231040 }
+{ time: 78773,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 374661120 }
+{ time: 78825,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 375029760 }
+{ time: 78879,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 375398400 }
+{ time: 78934,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 375889920 }
+{ time: 78988,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 376381440 }
+{ time: 79048,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 376934400 }
+{ time: 79112,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 377425920 }
+{ time: 79167,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 377917440 }
+{ time: 79217,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 378593280 }
+{ time: 79268,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 379392000 }
+{ time: 79320,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 379944960 }
+{ time: 79379,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 380436480 }
+{ time: 79436,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 380743680 }
+{ time: 79493,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 381235200 }
+{ time: 79545,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 381665280 }
+{ time: 79599,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 382218240 }
+{ time: 79656,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 382648320 }
+{ time: 79710,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 383016960 }
+{ time: 79765,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 383447040 }
+{ time: 79822,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 384000000 }
+{ time: 79874,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 384491520 }
+{ time: 79928,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 385167360 }
+stderr: frame=  159 fps=2.2 q=-1.0 size=     951kB time=00:01:19.00 bitrate=  98.7kbits/s    
+{ time: 79986,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 386027520 }
+{ time: 80051,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 386519040 }
+{ time: 80109,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 386887680 }
+{ time: 80175,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 387440640 }
+{ time: 80226,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 387932160 }
+{ time: 80285,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 388423680 }
+{ time: 80346,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 388853760 }
+{ time: 80403,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 389160960 }
+{ time: 80457,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 389468160 }
+{ time: 80510,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 389836800 }
+{ time: 80563,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 390266880 }
+{ time: 80620,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 390696960 }
+{ time: 80678,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 391004160 }
+{ time: 80736,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz',
+  size: 391372800 }
+{ time: 80764,
+  action: 'Create',
+  file: '/home/etudiant/Bureau/linux64.tar.gz',
+  size: 391472011 }
+{ time: 80856,
+  action: 'Delete',
+  file: '/home/etudiant/Bureau/UftpKm7Dnf3MOclk.linux64.tar.gz' }
+stderr: frame=  162 fps=2.1 q=-1.0 size=     960kB time=00:01:20.50 bitrate=  97.7kbits/s    
+stderr: frame=  165 fps=2.1 q=-1.0 size=     967kB time=00:01:22.00 bitrate=  96.6kbits/s    
+stderr: frame=  168 fps=2.1 q=-1.0 size=     972kB time=00:01:23.50 bitrate=  95.4kbits/s    
+stderr: frame=  171 fps=2.1 q=-1.0 size=     977kB time=00:01:25.00 bitrate=  94.2kbits/s    
+stderr: frame=  175 fps=2.1 q=-1.0 size=    1027kB time=00:01:27.00 bitrate=  96.7kbits/s    
+stderr: frame=  178 fps=2.1 q=-1.0 size=    1046kB time=00:01:28.50 bitrate=  96.8kbits/s    
+stderr: frame=  181 fps=2.1 q=-1.0 size=    1054kB time=00:01:30.00 bitrate=  95.9kbits/s    
+stderr: frame=  184 fps=2.1 q=-1.0 size=    1061kB time=00:01:31.50 bitrate=  95.0kbits/s    
+stderr: frame=  187 fps=2.1 q=-1.0 size=    1098kB time=00:01:33.00 bitrate=  96.7kbits/s    
+stderr: frame=  189 fps=2.1 q=-1.0 size=    1115kB time=00:01:34.00 bitrate=  97.2kbits/s    
+stderr: frame=  192 fps=2.1 q=-1.0 size=    1119kB time=00:01:35.50 bitrate=  96.0kbits/s    
+stderr: frame=  195 fps=2.1 q=-1.0 size=    1124kB time=00:01:37.00 bitrate=  94.9kbits/s    
+stderr: frame=  198 fps=2.1 q=-1.0 size=    1128kB time=00:01:38.50 bitrate=  93.8kbits/s    
+stderr: frame=  201 fps=2.1 q=-1.0 size=    1133kB time=00:01:40.00 bitrate=  92.8kbits/s    
+stderr: frame=  204 fps=2.1 q=-1.0 size=    1138kB time=00:01:41.50 bitrate=  91.8kbits/s    
+stderr: frame=  207 fps=2.1 q=-1.0 size=    1141kB time=00:01:43.00 bitrate=  90.7kbits/s    
+stderr: frame=  210 fps=2.1 q=-1.0 size=    1144kB time=00:01:44.50 bitrate=  89.7kbits/s    
+stderr: frame=  213 fps=2.1 q=-1.0 size=    1148kB time=00:01:46.00 bitrate=  88.7kbits/s    
+stderr: frame=  216 fps=2.1 q=-1.0 size=    1153kB time=00:01:47.50 bitrate=  87.8kbits/s    
+stderr: frame=  219 fps=2.1 q=-1.0 size=    1157kB time=00:01:49.00 bitrate=  87.0kbits/s    
+stderr: frame=  222 fps=2.1 q=-1.0 size=    1161kB time=00:01:50.50 bitrate=  86.0kbits/s    
+stderr: frame=  225 fps=2.1 q=-1.0 size=    1165kB time=00:01:52.00 bitrate=  85.2kbits/s    
+stderr: frame=  228 fps=2.1 q=-1.0 size=    1169kB time=00:01:53.50 bitrate=  84.4kbits/s    
+stderr: frame=  231 fps=2.1 q=-1.0 size=    1172kB time=00:01:55.00 bitrate=  83.5kbits/s    
+stderr: frame=  234 fps=2.1 q=-1.0 size=    1177kB time=00:01:56.50 bitrate=  82.7kbits/s    
+stderr: frame=  237 fps=2.1 q=-1.0 size=    1181kB time=00:01:58.00 bitrate=  82.0kbits/s    
+stderr: frame=  240 fps=2.1 q=-1.0 size=    1186kB time=00:01:59.50 bitrate=  81.3kbits/s    
+stderr: frame=  243 fps=2.1 q=-1.0 size=    1191kB time=00:02:01.00 bitrate=  80.6kbits/s    
+stderr: frame=  246 fps=2.1 q=-1.0 size=    1195kB time=00:02:02.50 bitrate=  79.9kbits/s    
+stderr: frame=  249 fps=2.1 q=-1.0 size=    1200kB time=00:02:04.00 bitrate=  79.3kbits/s    
+stderr: frame=  252 fps=2.1 q=-1.0 size=    1210kB time=00:02:05.50 bitrate=  79.0kbits/s    
+stderr: frame=  255 fps=2.1 q=-1.0 size=    1218kB time=00:02:07.00 bitrate=  78.5kbits/s    
+stderr: frame=  258 fps=2.1 q=-1.0 size=    1222kB time=00:02:08.50 bitrate=  77.9kbits/s    
+stderr: frame=  261 fps=2.1 q=-1.0 size=    1227kB time=00:02:10.00 bitrate=  77.3kbits/s    
+stderr: frame=  265 fps=2.1 q=-1.0 size=    1361kB time=00:02:12.00 bitrate=  84.5kbits/s    
+stderr: frame=  268 fps=2.1 q=-1.0 size=    1373kB time=00:02:13.50 bitrate=  84.2kbits/s    
+stderr: frame=  271 fps=2.1 q=-1.0 size=    1379kB time=00:02:15.00 bitrate=  83.7kbits/s    
+stderr: frame=  274 fps=2.1 q=-1.0 size=    1423kB time=00:02:16.50 bitrate=  85.4kbits/s    
+stderr: frame=  277 fps=2.1 q=-1.0 size=    1481kB time=00:02:18.00 bitrate=  87.9kbits/s    
+stderr: frame=  280 fps=2.1 q=-1.0 size=    1591kB time=00:02:19.50 bitrate=  93.4kbits/s    
+stderr: frame=  283 fps=2.1 q=-1.0 size=    1598kB time=00:02:21.00 bitrate=  92.8kbits/s    
+stderr: frame=  287 fps=2.1 q=-1.0 size=    1696kB time=00:02:23.00 bitrate=  97.1kbits/s    
+stderr: frame=  288 fps=2.1 q=-1.0 size=    1708kB time=00:02:23.50 bitrate=  97.5kbits/s    
+stderr: frame=  291 fps=2.1 q=-1.0 size=    1731kB time=00:02:25.00 bitrate=  97.8kbits/s    
+{ time: 147253,
+  action: 'Create',
+  file: '/home/etudiant/Bureau/Nouveau dossier',
+  size: 4096 }
+stderr: frame=  294 fps=2.1 q=-1.0 size=    1737kB time=00:02:26.50 bitrate=  97.2kbits/s    
+stderr: frame=  297 fps=2.1 q=-1.0 size=    1745kB time=00:02:28.00 bitrate=  96.6kbits/s    
+{ time: 149985,
+  action: 'Delete',
+  file: '/home/etudiant/Bureau/Nouveau dossier' }
+{ time: 149985,
+  action: 'Create',
+  file: '/home/etudiant/Bureau/dossier de test',
+  size: 4096 }
+stderr: frame=  300 fps=2.1 q=-1.0 size=    1751kB time=00:02:29.50 bitrate=  96.0kbits/s    
+stderr: frame=  303 fps=2.1 q=-1.0 size=    1768kB time=00:02:31.00 bitrate=  95.9kbits/s    
+stderr: frame=  306 fps=2.1 q=-1.0 size=    1777kB time=00:02:32.50 bitrate=  95.4kbits/s    
+stderr: frame=  309 fps=2.1 q=-1.0 size=    1791kB time=00:02:34.00 bitrate=  95.2kbits/s    
+stderr: frame=  312 fps=2.1 q=-1.0 size=    1794kB time=00:02:35.50 bitrate=  94.5kbits/s    
+stderr: frame=  315 fps=2.1 q=-1.0 size=    1798kB time=00:02:37.00 bitrate=  93.8kbits/s    
+stderr: frame=  318 fps=2.1 q=-1.0 size=    1801kB time=00:02:38.50 bitrate=  93.1kbits/s    
+{ time: 161595,
+  action: 'Create',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_vide',
+  size: 0 }
+stderr: frame=  321 fps=2.1 q=-1.0 size=    1814kB time=00:02:40.00 bitrate=  92.9kbits/s    
+stderr: frame=  324 fps=2.1 q=-1.0 size=    1819kB time=00:02:41.50 bitrate=  92.3kbits/s    
+stderr: frame=  327 fps=2.1 q=-1.0 size=    1823kB time=00:02:43.00 bitrate=  91.6kbits/s    
+stderr: frame=  330 fps=2.1 q=-1.0 size=    1827kB time=00:02:44.50 bitrate=  91.0kbits/s    
+stderr: frame=  333 fps=2.1 q=-1.0 size=    1830kB time=00:02:46.00 bitrate=  90.3kbits/s    
+stderr: frame=  336 fps=2.1 q=-1.0 size=    1833kB time=00:02:47.50 bitrate=  89.7kbits/s    
+stderr: frame=  339 fps=2.1 q=-1.0 size=    1837kB time=00:02:49.00 bitrate=  89.0kbits/s    
+stderr: frame=  342 fps=2.1 q=-1.0 size=    1840kB time=00:02:50.50 bitrate=  88.4kbits/s    
+stderr: frame=  345 fps=2.1 q=-1.0 size=    1843kB time=00:02:52.00 bitrate=  87.8kbits/s    
+stderr: frame=  348 fps=2.1 q=-1.0 size=    1856kB time=00:02:53.50 bitrate=  87.6kbits/s    
+stderr: frame=  351 fps=2.1 q=-1.0 size=    1860kB time=00:02:55.00 bitrate=  87.1kbits/s    
+stderr: frame=  354 fps=2.1 q=-1.0 size=    1865kB time=00:02:56.50 bitrate=  86.5kbits/s    
+stderr: frame=  357 fps=2.1 q=-1.0 size=    1868kB time=00:02:58.00 bitrate=  86.0kbits/s    
+stderr: frame=  360 fps=2.1 q=-1.0 size=    1873kB time=00:02:59.50 bitrate=  85.5kbits/s    
+{ time: 181424,
+  action: 'Create',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_code',
+  size: 0 }
+{ time: 181425,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_code',
+  size: 39 }
+stderr: frame=  363 fps=2.1 q=-1.0 size=    1878kB time=00:03:01.00 bitrate=  85.0kbits/s    
+stderr: frame=  366 fps=2.1 q=-1.0 size=    1882kB time=00:03:02.50 bitrate=  84.5kbits/s    
+stderr: frame=  369 fps=2.1 q=-1.0 size=    1895kB time=00:03:04.00 bitrate=  84.4kbits/s    
+stderr: frame=  372 fps=2.1 q=-1.0 size=    1899kB time=00:03:05.50 bitrate=  83.8kbits/s    
+stderr: frame=  375 fps=2.1 q=-1.0 size=    1903kB time=00:03:07.00 bitrate=  83.3kbits/s    
+stderr: frame=  378 fps=2.1 q=-1.0 size=    1906kB time=00:03:08.50 bitrate=  82.8kbits/s    
+stderr: frame=  381 fps=2.1 q=-1.0 size=    1912kB time=00:03:10.00 bitrate=  82.4kbits/s    
+stderr: frame=  384 fps=2.1 q=-1.0 size=    1916kB time=00:03:11.50 bitrate=  81.9kbits/s    
+stderr: frame=  387 fps=2.1 q=-1.0 size=    1921kB time=00:03:13.00 bitrate=  81.5kbits/s    
+stderr: frame=  390 fps=2.1 q=-1.0 size=    1927kB time=00:03:14.50 bitrate=  81.2kbits/s    
+stderr: frame=  393 fps=2.1 q=-1.0 size=    1938kB time=00:03:16.00 bitrate=  81.0kbits/s    
+stderr: frame=  396 fps=2.1 q=-1.0 size=    1947kB time=00:03:17.50 bitrate=  80.8kbits/s    
+stderr: frame=  399 fps=2.1 q=-1.0 size=    1955kB time=00:03:19.00 bitrate=  80.5kbits/s    
+stderr: frame=  402 fps=2.1 q=-1.0 size=    1962kB time=00:03:20.50 bitrate=  80.2kbits/s    
+stderr: frame=  405 fps=2.1 q=-1.0 size=    1965kB time=00:03:22.00 bitrate=  79.7kbits/s    
+stderr: frame=  408 fps=2.1 q=-1.0 size=    1968kB time=00:03:23.50 bitrate=  79.2kbits/s    
+stderr: frame=  411 fps=2.1 q=-1.0 size=    1985kB time=00:03:25.00 bitrate=  79.3kbits/s    
+stderr: frame=  414 fps=2.1 q=-1.0 size=    2052kB time=00:03:26.50 bitrate=  81.4kbits/s    
+stderr: frame=  416 fps=2.1 q=-1.0 size=    2076kB time=00:03:27.50 bitrate=  82.0kbits/s    
+stderr: frame=  419 fps=2.1 q=-1.0 size=    2098kB time=00:03:29.00 bitrate=  82.2kbits/s    
+stderr: frame=  422 fps=2.1 q=-1.0 size=    2107kB time=00:03:30.50 bitrate=  82.0kbits/s    
+stderr: frame=  425 fps=2.1 q=-1.0 size=    2129kB time=00:03:32.00 bitrate=  82.3kbits/s    
+{ time: 214460,
+  action: 'Create',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 0 }
+{ time: 214461,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 8192 }
+stderr: frame=  428 fps=2.1 q=-1.0 size=    2134kB time=00:03:33.50 bitrate=  81.9kbits/s    
+{ time: 215220,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 57344 }
+{ time: 215274,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 131072 }
+{ time: 215331,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 253952 }
+{ time: 215389,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 303104 }
+{ time: 215448,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 352256 }
+{ time: 215508,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 401408 }
+{ time: 215557,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 442368 }
+{ time: 215608,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 483328 }
+{ time: 215660,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 524288 }
+{ time: 215714,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 565248 }
+{ time: 215766,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 606208 }
+{ time: 215820,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 647168 }
+{ time: 215873,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 688128 }
+{ time: 215928,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 729088 }
+{ time: 215982,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 770048 }
+{ time: 216038,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 811008 }
+{ time: 216094,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 851968 }
+{ time: 216152,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 892928 }
+{ time: 216209,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 933888 }
+{ time: 216267,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 974848 }
+{ time: 216322,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1007616 }
+{ time: 216383,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1056768 }
+{ time: 216442,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1097728 }
+{ time: 216503,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1138688 }
+{ time: 216552,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1171456 }
+{ time: 216613,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1212416 }
+{ time: 216663,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1245184 }
+stderr: frame=  431 fps=2.1 q=-1.0 size=    2145kB time=00:03:35.00 bitrate=  81.7kbits/s    
+{ time: 216713,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1277952 }
+{ time: 216764,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1310720 }
+{ time: 216815,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1343488 }
+{ time: 216866,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1376256 }
+{ time: 216918,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1409024 }
+{ time: 216970,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1441792 }
+{ time: 217022,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1474560 }
+{ time: 217075,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1507328 }
+{ time: 217128,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1540096 }
+{ time: 217182,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1572864 }
+{ time: 217236,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1605632 }
+{ time: 217303,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1646592 }
+{ time: 217357,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1679360 }
+{ time: 217412,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1712128 }
+{ time: 217468,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1744896 }
+{ time: 217524,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1777664 }
+{ time: 217580,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1810432 }
+{ time: 217637,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1843200 }
+stderr: frame=  434 fps=2.1 q=-1.0 size=    2151kB time=00:03:36.50 bitrate=  81.4kbits/s    
+{ time: 217694,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1875968 }
+{ time: 217751,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1908736 }
+{ time: 217808,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1941504 }
+{ time: 217867,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 1974272 }
+{ time: 217921,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2015232 }
+{ time: 217974,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2056192 }
+{ time: 218027,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2097152 }
+{ time: 218079,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2138112 }
+{ time: 218130,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2179072 }
+{ time: 218182,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2220032 }
+{ time: 218233,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2260992 }
+{ time: 218292,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2310144 }
+{ time: 218351,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2359296 }
+{ time: 218409,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2408448 }
+{ time: 218465,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2457600 }
+{ time: 218521,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2506752 }
+{ time: 218575,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 2555904 }
+stderr: frame=  437 fps=2.1 q=-1.0 size=    2157kB time=00:03:38.00 bitrate=  81.1kbits/s    
+stderr: frame=  440 fps=2.1 q=-1.0 size=    2166kB time=00:03:39.50 bitrate=  80.8kbits/s    
+stderr: frame=  443 fps=2.1 q=-1.0 size=    2177kB time=00:03:41.00 bitrate=  80.7kbits/s    
+stderr: frame=  446 fps=2.1 q=-1.0 size=    2181kB time=00:03:42.50 bitrate=  80.3kbits/s    
+stderr: frame=  449 fps=2.1 q=-1.0 size=    2195kB time=00:03:44.00 bitrate=  80.3kbits/s    
+stderr: frame=  452 fps=2.1 q=-1.0 size=    2199kB time=00:03:45.50 bitrate=  79.9kbits/s    
+stderr: frame=  455 fps=2.1 q=-1.0 size=    2202kB time=00:03:47.00 bitrate=  79.5kbits/s    
+stderr: frame=  458 fps=2.1 q=-1.0 size=    2206kB time=00:03:48.50 bitrate=  79.1kbits/s    
+stderr: frame=  461 fps=2.1 q=-1.0 size=    2209kB time=00:03:50.00 bitrate=  78.7kbits/s    
+stderr: frame=  464 fps=2.0 q=-1.0 size=    2213kB time=00:03:51.50 bitrate=  78.3kbits/s    
+stderr: frame=  467 fps=2.0 q=-1.0 size=    2216kB time=00:03:53.00 bitrate=  77.9kbits/s    
+{ time: 235075,
+  action: 'Delete',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_vide' }
+stderr: frame=  470 fps=2.0 q=-1.0 size=    2221kB time=00:03:54.50 bitrate=  77.6kbits/s    
+stderr: frame=  473 fps=2.0 q=-1.0 size=    2224kB time=00:03:56.00 bitrate=  77.2kbits/s    
+stderr: frame=  476 fps=2.0 q=-1.0 size=    2227kB time=00:03:57.50 bitrate=  76.8kbits/s    
+stderr: frame=  479 fps=2.0 q=-1.0 size=    2231kB time=00:03:59.00 bitrate=  76.5kbits/s    
+stderr: frame=  482 fps=2.0 q=-1.0 size=    2235kB time=00:04:00.50 bitrate=  76.1kbits/s    
+stderr: frame=  485 fps=2.0 q=-1.0 size=    2247kB time=00:04:02.00 bitrate=  76.1kbits/s    
+stderr: frame=  488 fps=2.0 q=-1.0 size=    2268kB time=00:04:03.50 bitrate=  76.3kbits/s    
+stderr: frame=  491 fps=2.0 q=-1.0 size=    2280kB time=00:04:05.00 bitrate=  76.2kbits/s    
+stderr: frame=  494 fps=2.0 q=-1.0 size=    2286kB time=00:04:06.50 bitrate=  76.0kbits/s    
+stderr: frame=  497 fps=2.0 q=-1.0 size=    2290kB time=00:04:08.00 bitrate=  75.6kbits/s    
+stderr: frame=  500 fps=2.1 q=-1.0 size=    2294kB time=00:04:09.50 bitrate=  75.3kbits/s    
+etudiant disconnected
+root connected !!
+stderr: ffmpeg version 2.8.11-0ubuntu0.16.04.1 Copyright (c) 2000-2017 the FFmpeg developers
+  built with gcc 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.4) 20160609
+  configuration: --prefix=/usr --extra-version=0ubuntu0.16.04.1 --build-suffix=-ffmpeg --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --cc=cc --cxx=g++ --enable-gpl --enable-shared --disable-stripping --disable-decoder=libopenjpeg --disable-decoder=libschroedinger --enable-avresample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libmodplug --enable-libmp3lame --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-librtmp --enable-libschroedinger --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxvid --enable-libzvbi --enable-openal --enable-opengl --enable-x11grab --enable-libdc1394 --enable-libiec61883 --enable-libzmq --enable-frei0r --enable-libx264 --enable-libopencv
+
+stderr:   libavutil      54. 31.100 / 54. 31.100
+  libavcodec     56. 60.100 / 56. 60.100
+  libavformat    56. 40.101 / 56. 40.101
+  libavdevice    56.  4.100 / 56.  4.100
+  libavfilter     5. 40.101 /  5. 40.101
+  libavresample   2.  1.  0 /  2.  1.  0
+  libswscale      3.  1.101 /  3.  1.101
+  libswresample   1.  2.101 /  1.  2.101
+  libpostproc    53.  3.100 / 53.  3.100
+
+stderr: Input #0, matroska,webm, from 'udp://localhost:7002':
+  Metadata:
+    encoder         : Lavf56.40.101
+  Duration: N/A, start: 0.000000, bitrate: N/A
+
+stderr:     Stream #0:0: Video: vp8, yuv420p, 960x540, SAR 1:1 DAR 16:9, 2 fps, 2 tbr, 1k tbn, 1k tbc (default)
+
+stderr: [webm @ 0x1082e80] Codec for stream 0 does not use global headers but container format requires global headers
+Output #0, webm, to 'bundles/app/uploads/test/root.webm':
+  Metadata:
+    encoder         : Lavf56.40.101
+    Stream #0:0: Video: vp8, yuv420p, 960x540 [SAR 1:1 DAR 16:9], q=2-31, 2 fps, 2 tbr, 1k tbn, 1k tbc (default)
+Stream mapping:
+  Stream #0:0 -> #0:0 (copy)
+Press [q] to stop, [?] for help
+
+stderr: frame=   14 fps=9.4 q=-1.0 size=     156kB time=00:00:06.50 bitrate= 197.1kbits/s    
+stderr: frame=   17 fps=5.7 q=-1.0 size=     170kB time=00:00:08.00 bitrate= 174.3kbits/s    
+stderr: frame=   20 fps=4.4 q=-1.0 size=     175kB time=00:00:09.50 bitrate= 151.3kbits/s    
+stderr: frame=   23 fps=3.8 q=-1.0 size=     179kB time=00:00:11.00 bitrate= 133.4kbits/s    
+stderr: frame=   26 fps=3.5 q=-1.0 size=     184kB time=00:00:12.50 bitrate= 120.4kbits/s    
+stderr: frame=   29 fps=3.2 q=-1.0 size=     188kB time=00:00:14.00 bitrate= 109.8kbits/s    
+stderr: frame=   32 fps=3.0 q=-1.0 size=     191kB time=00:00:15.50 bitrate= 101.0kbits/s    
+stderr: frame=   35 fps=2.9 q=-1.0 size=     211kB time=00:00:17.00 bitrate= 101.6kbits/s    
+stderr: frame=   38 fps=2.8 q=-1.0 size=     216kB time=00:00:18.50 bitrate=  95.6kbits/s    
+stderr: frame=   41 fps=2.7 q=-1.0 size=     222kB time=00:00:20.00 bitrate=  90.9kbits/s    
+stderr: frame=   44 fps=2.7 q=-1.0 size=     226kB time=00:00:21.50 bitrate=  86.2kbits/s    
+stderr: frame=   47 fps=2.6 q=-1.0 size=     230kB time=00:00:23.00 bitrate=  82.1kbits/s    
+{ time: 25342,
+  action: 'Create',
+  file: '/home/etudiant/Bureau/dossier de test/.goutputstream-VE5A1Y',
+  size: 41 }
+{ time: 25348,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_code',
+  size: 41 }
+{ time: 25455,
+  action: 'Delete',
+  file: '/home/etudiant/Bureau/dossier de test/.goutputstream-VE5A1Y' }
+stderr: frame=   50 fps=2.6 q=-1.0 size=     235kB time=00:00:24.50 bitrate=  78.4kbits/s    
+stderr: frame=   53 fps=2.5 q=-1.0 size=     250kB time=00:00:26.00 bitrate=  78.7kbits/s    
+stderr: frame=   56 fps=2.5 q=-1.0 size=     253kB time=00:00:27.50 bitrate=  75.5kbits/s    
+stderr: frame=   59 fps=2.5 q=-1.0 size=     257kB time=00:00:29.00 bitrate=  72.5kbits/s    
+stderr: frame=   62 fps=2.4 q=-1.0 size=     288kB time=00:00:30.50 bitrate=  77.4kbits/s    
+stderr: frame=   65 fps=2.4 q=-1.0 size=     312kB time=00:00:32.00 bitrate=  79.9kbits/s    
+stderr: frame=   68 fps=2.4 q=-1.0 size=     318kB time=00:00:33.50 bitrate=  77.8kbits/s    
+stderr: frame=   71 fps=2.4 q=-1.0 size=     323kB time=00:00:35.00 bitrate=  75.6kbits/s    
+stderr: frame=   74 fps=2.3 q=-1.0 size=     350kB time=00:00:36.50 bitrate=  78.7kbits/s    
+stderr: frame=   77 fps=2.3 q=-1.0 size=     392kB time=00:00:38.00 bitrate=  84.4kbits/s    
+stderr: frame=   80 fps=2.3 q=-1.0 size=     453kB time=00:00:39.50 bitrate=  93.9kbits/s    
+stderr: frame=   82 fps=2.3 q=-1.0 size=     486kB time=00:00:40.50 bitrate=  98.3kbits/s    
+stderr: frame=   84 fps=2.3 q=-1.0 size=     491kB time=00:00:41.50 bitrate=  96.9kbits/s    
+stderr: frame=   87 fps=2.3 q=-1.0 size=     505kB time=00:00:43.00 bitrate=  96.3kbits/s    
+stderr: frame=   90 fps=2.3 q=-1.0 size=     525kB time=00:00:44.50 bitrate=  96.6kbits/s    
+stderr: frame=   93 fps=2.3 q=-1.0 size=     533kB time=00:00:46.00 bitrate=  94.9kbits/s    
+stderr: frame=   96 fps=2.3 q=-1.0 size=     561kB time=00:00:47.50 bitrate=  96.8kbits/s    
+stderr: frame=   99 fps=2.3 q=-1.0 size=     565kB time=00:00:49.00 bitrate=  94.4kbits/s    
+stderr: frame=  102 fps=2.2 q=-1.0 size=     568kB time=00:00:50.50 bitrate=  92.1kbits/s    
+stderr: frame=  105 fps=2.2 q=-1.0 size=     570kB time=00:00:52.00 bitrate=  89.9kbits/s    
+stderr: frame=  108 fps=2.2 q=-1.0 size=     581kB time=00:00:53.50 bitrate=  89.0kbits/s    
+stderr: frame=  111 fps=2.2 q=-1.0 size=     584kB time=00:00:55.00 bitrate=  87.0kbits/s    
+stderr: frame=  114 fps=2.2 q=-1.0 size=     587kB time=00:00:56.50 bitrate=  85.1kbits/s    
+stderr: frame=  117 fps=2.2 q=-1.0 size=     590kB time=00:00:58.00 bitrate=  83.3kbits/s    
+stderr: frame=  120 fps=2.2 q=-1.0 size=     592kB time=00:00:59.50 bitrate=  81.6kbits/s    
+stderr: frame=  123 fps=2.2 q=-1.0 size=     595kB time=00:01:01.00 bitrate=  79.9kbits/s    
+stderr: frame=  126 fps=2.2 q=-1.0 size=     598kB time=00:01:02.50 bitrate=  78.4kbits/s    
+stderr: frame=  129 fps=2.2 q=-1.0 size=     651kB time=00:01:04.00 bitrate=  83.3kbits/s    
+stderr: frame=  131 fps=2.2 q=-1.0 size=     656kB time=00:01:05.00 bitrate=  82.7kbits/s    
+stderr: frame=  134 fps=2.2 q=-1.0 size=     661kB time=00:01:06.50 bitrate=  81.4kbits/s    
+stderr: frame=  137 fps=2.2 q=-1.0 size=     665kB time=00:01:08.00 bitrate=  80.2kbits/s    
+stderr: frame=  140 fps=2.2 q=-1.0 size=     678kB time=00:01:09.50 bitrate=  80.0kbits/s    
+stderr: frame=  143 fps=2.2 q=-1.0 size=     682kB time=00:01:11.00 bitrate=  78.7kbits/s    
+stderr: frame=  146 fps=2.2 q=-1.0 size=     685kB time=00:01:12.50 bitrate=  77.4kbits/s    
+stderr: frame=  149 fps=2.2 q=-1.0 size=     688kB time=00:01:14.00 bitrate=  76.1kbits/s    
+stderr: frame=  152 fps=2.2 q=-1.0 size=     691kB time=00:01:15.50 bitrate=  74.9kbits/s    
+stderr: frame=  155 fps=2.2 q=-1.0 size=     693kB time=00:01:17.00 bitrate=  73.8kbits/s    
+stderr: frame=  158 fps=2.1 q=-1.0 size=     696kB time=00:01:18.50 bitrate=  72.6kbits/s    
+stderr: frame=  161 fps=2.1 q=-1.0 size=     699kB time=00:01:20.00 bitrate=  71.6kbits/s    
+stderr: frame=  164 fps=2.1 q=-1.0 size=     722kB time=00:01:21.50 bitrate=  72.6kbits/s    
+stderr: frame=  167 fps=2.1 q=-1.0 size=     731kB time=00:01:23.00 bitrate=  72.2kbits/s    
+stderr: frame=  170 fps=2.1 q=-1.0 size=     735kB time=00:01:24.50 bitrate=  71.3kbits/s    
+stderr: frame=  173 fps=2.1 q=-1.0 size=     742kB time=00:01:26.00 bitrate=  70.7kbits/s    
+stderr: frame=  176 fps=2.1 q=-1.0 size=     759kB time=00:01:27.50 bitrate=  71.1kbits/s    
+stderr: frame=  179 fps=2.1 q=-1.0 size=     766kB time=00:01:29.00 bitrate=  70.5kbits/s    
+stderr: frame=  182 fps=2.1 q=-1.0 size=     772kB time=00:01:30.50 bitrate=  69.9kbits/s    
+stderr: frame=  185 fps=2.1 q=-1.0 size=     775kB time=00:01:32.00 bitrate=  69.0kbits/s    
+stderr: frame=  188 fps=2.1 q=-1.0 size=     784kB time=00:01:33.50 bitrate=  68.7kbits/s    
+stderr: frame=  191 fps=2.1 q=-1.0 size=     802kB time=00:01:35.00 bitrate=  69.1kbits/s    
+stderr: frame=  194 fps=2.1 q=-1.0 size=     830kB time=00:01:36.50 bitrate=  70.5kbits/s    
+stderr: frame=  197 fps=2.1 q=-1.0 size=     859kB time=00:01:38.00 bitrate=  71.8kbits/s    
+stderr: frame=  200 fps=2.1 q=-1.0 size=     869kB time=00:01:39.50 bitrate=  71.5kbits/s    
+stderr: frame=  203 fps=2.1 q=-1.0 size=     889kB time=00:01:41.00 bitrate=  72.1kbits/s    
+stderr: frame=  206 fps=2.1 q=-1.0 size=     894kB time=00:01:42.50 bitrate=  71.5kbits/s    
+stderr: frame=  209 fps=2.1 q=-1.0 size=     902kB time=00:01:44.00 bitrate=  71.1kbits/s    
+stderr: frame=  212 fps=2.1 q=-1.0 size=     908kB time=00:01:45.50 bitrate=  70.5kbits/s    
+stderr: frame=  215 fps=2.1 q=-1.0 size=     910kB time=00:01:47.00 bitrate=  69.7kbits/s    
+stderr: frame=  218 fps=2.1 q=-1.0 size=     913kB time=00:01:48.50 bitrate=  68.9kbits/s    
+stderr: frame=  221 fps=2.1 q=-1.0 size=     915kB time=00:01:50.00 bitrate=  68.1kbits/s    
+stderr: frame=  224 fps=2.1 q=-1.0 size=     917kB time=00:01:51.50 bitrate=  67.4kbits/s    
+stderr: frame=  227 fps=2.1 q=-1.0 size=     919kB time=00:01:53.00 bitrate=  66.6kbits/s    
+stderr: frame=  230 fps=2.1 q=-1.0 size=     921kB time=00:01:54.50 bitrate=  65.9kbits/s    
+stderr: frame=  233 fps=2.1 q=-1.0 size=     923kB time=00:01:56.00 bitrate=  65.2kbits/s    
+stderr: frame=  236 fps=2.1 q=-1.0 size=     926kB time=00:01:57.50 bitrate=  64.6kbits/s    
+stderr: frame=  239 fps=2.1 q=-1.0 size=     938kB time=00:01:59.00 bitrate=  64.5kbits/s    
+stderr: frame=  242 fps=2.1 q=-1.0 size=     943kB time=00:02:00.50 bitrate=  64.1kbits/s    
+stderr: frame=  245 fps=2.1 q=-1.0 size=     946kB time=00:02:02.00 bitrate=  63.5kbits/s    
+stderr: frame=  248 fps=2.1 q=-1.0 size=     951kB time=00:02:03.50 bitrate=  63.1kbits/s    
+stderr: frame=  251 fps=2.1 q=-1.0 size=     954kB time=00:02:05.00 bitrate=  62.5kbits/s    
+stderr: frame=  254 fps=2.1 q=-1.0 size=     956kB time=00:02:06.50 bitrate=  61.9kbits/s    
+stderr: frame=  257 fps=2.1 q=-1.0 size=     959kB time=00:02:08.00 bitrate=  61.4kbits/s    
+stderr: frame=  260 fps=2.1 q=-1.0 size=     966kB time=00:02:09.50 bitrate=  61.1kbits/s    
+{ time: 132508,
+  action: 'Modify',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche',
+  size: 448 }
+stderr: frame=  263 fps=2.1 q=-1.0 size=     973kB time=00:02:11.00 bitrate=  60.8kbits/s    
+stderr: frame=  266 fps=2.1 q=-1.0 size=     976kB time=00:02:12.50 bitrate=  60.3kbits/s    
+stderr: frame=  269 fps=2.1 q=-1.0 size=    1016kB time=00:02:14.00 bitrate=  62.1kbits/s    
+stderr: frame=  271 fps=2.1 q=-1.0 size=    1033kB time=00:02:15.00 bitrate=  62.7kbits/s    
+stderr: frame=  274 fps=2.1 q=-1.0 size=    1060kB time=00:02:16.50 bitrate=  63.6kbits/s    
+stderr: frame=  277 fps=2.1 q=-1.0 size=    1073kB time=00:02:18.00 bitrate=  63.7kbits/s    
+stderr: frame=  280 fps=2.1 q=-1.0 size=    1077kB time=00:02:19.50 bitrate=  63.3kbits/s    
+stderr: frame=  283 fps=2.1 q=-1.0 size=    1080kB time=00:02:21.00 bitrate=  62.8kbits/s    
+stderr: frame=  286 fps=2.1 q=-1.0 size=    1084kB time=00:02:22.50 bitrate=  62.3kbits/s    
+stderr: frame=  289 fps=2.1 q=-1.0 size=    1087kB time=00:02:24.00 bitrate=  61.8kbits/s    
+{ time: 147076,
+  action: 'Delete',
+  file: '/home/etudiant/Bureau/dossier de test/fichier_triche' }
+stderr: frame=  292 fps=2.1 q=-1.0 size=    1090kB time=00:02:25.50 bitrate=  61.4kbits/s    
+stderr: frame=  295 fps=2.1 q=-1.0 size=    1094kB time=00:02:27.00 bitrate=  61.0kbits/s    
+stderr: frame=  298 fps=2.1 q=-1.0 size=    1098kB time=00:02:28.50 bitrate=  60.6kbits/s    
+stderr: frame=  301 fps=2.1 q=-1.0 size=    1101kB time=00:02:30.00 bitrate=  60.1kbits/s    
+stderr: frame=  304 fps=2.1 q=-1.0 size=    1104kB time=00:02:31.50 bitrate=  59.7kbits/s    
+root disconnected
