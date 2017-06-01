@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 class VideoService
 {
 
-    const VIDEO_FORMAT = 'mp4';
+    const VIDEO_FORMAT = 'webm';
 
     /**
      * @var \Monolog\Logger
