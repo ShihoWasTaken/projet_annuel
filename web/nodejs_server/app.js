@@ -149,6 +149,9 @@ function main(){
           var stmt = db.prepare("INSERT INTO students(username,connected,port,disconnect_on) VALUES (?,?,?,?)");
           stmt.run(user, 1, PORT_FFMPEG, 0);
           runs[COUNT_EXEC] = spawn('ffmpeg', ['-i', 'udp://localhost:'+PORT_FFMPEG, '-c', 'copy', user+'.avi']);
+          runs[COUNT_EXEC].stderr.on('data', (data) => {
+            console.log(`stderr: ${data}`);
+          });
           config.video.port = PORT_FFMPEG;
           config.time = 0;
           PORT_FFMPEG++;
