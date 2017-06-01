@@ -1,4 +1,7 @@
 # projet_annuel
+
+L'installation a été testée sur une machine vierge sous Ubuntu 16.04, bien que nous avons essayés d'avoir la liste la plus exhaustive possible, des paquets déjà présent dans cette release d'Ubuntu peuvent donc manquer dans les pré-requis.
+
 ### Pré-requis
 #### Serveur
 Il est nécessaire d'installer les paquets suivants:
