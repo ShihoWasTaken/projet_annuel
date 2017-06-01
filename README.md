@@ -9,7 +9,7 @@ Il est nécessaire d'installer les paquets suivants:
 - La dernière version de npm
 - Apache
 - Version 5.5.9 de PHP minimum
-- Extensions PHP: JSON, ctype, PDO, PDO_sqlite, XM, Apache
+- Extensions PHP: JSON, ctype, PDO, PDO_sqlite, XML, Apache
 
 Il faut également:
 - Renseigner le paramètre date.timezone dans le fichier php.ini
