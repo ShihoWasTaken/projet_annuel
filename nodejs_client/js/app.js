@@ -178,9 +178,10 @@ function captureScreen() {
 
     var spawn = child_process.spawn;
     function puts(error, stdout, stderr) { console.log(stdout) }
-    var command = "ffmpeg -video_size "+screen.width+"x"+screen.height+" -framerate "+ips+" -f x11grab -i :0.0+0,0 -vcodec "+CONFIG.video.encoding+" -vf scale="+_width+":"+_height+" -f avi -pix_fmt yuv420p 'udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port+"'";
+    //ffmpeg -video_size 1920x1080 -framerate 5 -f x11grab -i :0.0+0,0 -vf scale=960:540 -f webm -c:v libvpx -pix_fmt yuv420p 'udp://192.168.99.138:7005'
+    var command = "ffmpeg -video_size "+screen.width+"x"+screen.height+" -framerate "+ips+" -f x11grab -i :0.0+0,0 -vcodec "+CONFIG.video.encoding+" -vf scale="+_width+":"+_height+" -f webm -pix_fmt yuv420p 'udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port+"'";
     log(command);
-    process_ffmpeg = spawn("ffmpeg", ["-video_size", screen.width+"x"+screen.height, "-framerate", ips, "-f", "x11grab", "-i", ":0.0+0,0", "-vcodec", CONFIG.video.encoding, "-vf", "scale="+_width+":"+_height, "-f", "avi", "-pix_fmt", "yuv420p", "udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port]);
+    process_ffmpeg = spawn("ffmpeg", ["-video_size", screen.width+"x"+screen.height, "-framerate", ips, "-f", "x11grab", "-i", ":0.0+0,0", "-c:v", CONFIG.video.encoding, "-vf", "scale="+_width+":"+_height, "-f", "webm", "-pix_fmt", "yuv420p", "udp://"+SERVER_IP_ADDRESS+":"+CONFIG.video.port]);
 }
 /***************************************************/
 /******************* END CAPTURE *******************/
