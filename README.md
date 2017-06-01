@@ -1,5 +1,11 @@
 # projet_annuel
 
+### Compilation de la solution client
+- npm install nw-builder
+- Se rendre dans le dossier nodejs_client
+- nwbuild -p linux64 .
+- L'exécutable sera build/Client/linux64/Client
+
 ### Création de la base de données pour les utilisateurs
 ```sh
 # Suppresion de l'ancienne base si elle existe
